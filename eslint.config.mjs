@@ -16,7 +16,7 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
-    {
+  {
     languageOptions: {
       globals: globals.browser,
     },
