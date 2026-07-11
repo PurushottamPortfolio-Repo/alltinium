@@ -1,7 +1,12 @@
-export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <h1>Welcome to the Home Page</h1>
-    </div>
-  );
+import dynamic from "next/dynamic";
+
+const HeroSection = dynamic(
+  () => import("@/components/sections/HeroSection").then((module) => module.HeroSection),
+  {
+    loading: () => <div className="min-h-[40vh]" />,
+  },
+);
+
+export default function HomePage() {
+  return <HeroSection />;
 }

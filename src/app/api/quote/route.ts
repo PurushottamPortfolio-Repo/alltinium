@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { contactFormSchema } from "@/lib/forms";
+import { quoteFormSchema } from "@/lib/forms";
 import { verifyOtp } from "@/lib/otp";
 
 const TO_EMAIL = "purushottam.portfolio@gmail.com";
@@ -7,7 +7,7 @@ const TO_EMAIL = "purushottam.portfolio@gmail.com";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const parsed = contactFormSchema.safeParse(body);
+    const parsed = quoteFormSchema.safeParse(body);
 
     if (!parsed.success) {
       return NextResponse.json(
@@ -19,7 +19,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const { name, email, company, phone, message } = parsed.data;
+    const { projectName, industry, features, stack, budget, timeline, email, phone } = parsed.data;
     const otpCode = typeof body.otpCode === "string" ? body.otpCode : "";
 
     if (!verifyOtp(email, otpCode)) {
@@ -27,11 +27,14 @@ export async function POST(request: Request) {
     }
 
     const text = [
-      `Name: ${name}`,
+      `Project Name: ${projectName}`,
+      `Industry: ${industry}`,
+      `Features: ${features}`,
+      `Stack: ${stack}`,
+      `Budget: ${budget}`,
+      `Timeline: ${timeline}`,
       `Email: ${email}`,
-      company ? `Company: ${company}` : null,
       phone ? `Phone: ${phone}` : null,
-      `Message: ${message}`,
     ]
       .filter(Boolean)
       .join("\n");
@@ -45,7 +48,7 @@ export async function POST(request: Request) {
       body: JSON.stringify({
         from: process.env.RESEND_FROM_EMAIL ?? "Alltinium <onboarding@resend.dev>",
         to: [TO_EMAIL],
-        subject: `New contact request from ${name}`,
+        subject: `New quote request from ${projectName}`,
         text,
       }),
     });
