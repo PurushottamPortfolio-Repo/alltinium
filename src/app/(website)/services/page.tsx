@@ -1,7 +1,10 @@
+"use client";
+import { ServicesHero } from "@/components/services/srevices-hero";
+
 export default function Services() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <h1>Welcome to the Service Page</h1>
-    </div>
+    <main className="bg-background">
+      <ServicesHero />
+    </main>
   );
 }
