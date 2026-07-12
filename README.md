@@ -1,36 +1,198 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Alltinium
 
-## Getting Started
+A modern, responsive, and high-performance full-stack portfolio/business website built with **Next.js**, **TypeScript**, **Tailwind CSS**, **shadcn/ui**, and **pnpm**.
 
-First, run the development server:
+---
+
+## Tech Stack
+
+- Next.js (App Router)
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+- pnpm
+- ESLint
+- Prettier
+- Husky
+- lint-staged
+- Resend (Email)
+- Cloudinary (Media)
+- MongoDB
+
+---
+
+## Requirements
+
+- Node.js 20+
+- pnpm 10+
+
+Check versions:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+node -v
+pnpm -v
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Clone the repository:
 
-## Learn More
+```bash
+git clone <repository-url>
+```
 
-To learn more about Next.js, take a look at the following resources:
+Move into the project:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+cd alltinium
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Install dependencies:
 
-## Deploy on Vercel
+```bash
+pnpm install
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Environment Variables
+
+Create a `.env.local` file in the project root.
+
+Example:
+
+```env
+RESEND_API_KEY=
+MONGODB_URI=
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
+
+> Never commit `.env.local` to Git.
+
+---
+
+## Running the Project
+
+Development:
+
+```bash
+pnpm dev
+```
+
+Open:
+
+```
+http://localhost:3000
+```
+
+---
+
+## Available Scripts
+
+Start development server:
+
+```bash
+pnpm dev
+```
+
+Build production:
+
+```bash
+pnpm build
+```
+
+Run production build:
+
+```bash
+pnpm start
+```
+
+Lint:
+
+```bash
+pnpm lint
+```
+
+Format:
+
+```bash
+pnpm format
+```
+
+Type check:
+
+```bash
+pnpm type-check
+```
+
+---
+
+## Code Quality
+
+This project uses:
+
+- ESLint
+- Prettier
+- Husky
+- lint-staged
+
+Every commit automatically:
+
+- Checks ESLint
+- Formats code
+- Prevents committing invalid code
+
+---
+
+## Project Structure
+
+```
+src/
+│
+├── app/
+├── components/
+├── constants/
+├── hooks/
+├── lib/
+├── providers/
+├── styles/
+├── types/
+└── utils/
+```
+
+---
+
+## Deployment
+
+Build:
+
+```bash
+pnpm build
+```
+
+Production:
+
+```bash
+pnpm start
+```
+
+Recommended platforms:
+
+- Vercel
+- Cloudflare
+- Netlify
+
+---
+
+## License
+
+MIT License.
+
+---
+
+Developed with ❤️ using Next.js and pnpm.
