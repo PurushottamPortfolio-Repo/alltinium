@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
+import { assets } from "@/assets";
 
 const QuoteModal = dynamic(
   () => import("@/components/quote/QuoteModal").then((module) => module.QuoteModal),
@@ -13,8 +15,23 @@ const QuoteModal = dynamic(
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-background via-background to-muted/20">
-      <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+    <section className="relative min-h-[70vh] overflow-hidden bg-gradient-to-b from-background via-background to-muted/20">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={assets.heroBg}
+          alt="Hero background"
+          fill
+          priority
+          quality={100}
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+      </div>
+
+      <div className="absolute inset-0 z-0 bg-black/60" />
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/40 via-black/20 to-black/80" />
+
+      <div className="relative z-10 mx-auto flex max-w-7xl flex-col gap-8 px-4 py-20 text-white sm:px-6 lg:px-8 lg:py-28">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
