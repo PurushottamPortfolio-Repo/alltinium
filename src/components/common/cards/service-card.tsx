@@ -25,7 +25,7 @@ export function ServiceCard({ service, index }: Props) {
       whileHover={{
         y: -10,
       }}
-      className="group relative overflow-hidden rounded-3xl border bg-card p-8 transition-all duration-500 hover:border-primary/40 hover:shadow-[var(--shadow-soft)]"
+      className="group relative overflow-hidden rounded-3xl border bg-card p-4 transition-all duration-500 hover:border-primary/40 hover:shadow-[var(--shadow-soft)]"
     >
       <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-primary/10 blur-3xl opacity-0 transition duration-500 group-hover:opacity-100" />
 

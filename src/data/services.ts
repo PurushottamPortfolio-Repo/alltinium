@@ -1,38 +1,38 @@
-import { Code2, MonitorSmartphone, Database, ShieldCheck } from "lucide-react";
+import { Hammer, Microscope, Network, Cog } from "lucide-react";
 
 import { Service } from "@/types/service";
 
 export const services: Service[] = [
   {
     id: 1,
-    title: "Web Development",
+    title: "Distribution",
     description:
-      "Fast, scalable and SEO-friendly websites built using Next.js, React and TypeScript.",
-    href: "/services/web-development",
-    icon: Code2,
+      "Aluminium, Titanium, Nickel, Superalloys, Special Steels. Mill-direct sourcing with full MTC chain.",
+    href: "/services/distribution",
+    icon: Cog,
   },
   {
     id: 2,
-    title: "UI / UX Design",
+    title: "Cut-to-Size",
     description:
-      "Beautiful interfaces focused on accessibility, usability and modern user experience.",
-    href: "/services/ui-ux",
-    icon: MonitorSmartphone,
+      "Precision sawing and waterjet cutting to your part print — reducing inventory and scrap. Best size supply.",
+    href: "/services/cut-to-size",
+    icon: Hammer,
   },
   {
     id: 3,
-    title: "Backend Development",
+    title: "NABL-Accredited Testing",
     description:
-      "Secure APIs, authentication, databases and cloud integrations for modern applications.",
+      "Chemical (PMI/OES), mechanical, and metallurgical and dimentional inspection. Open to third-party testing.",
     href: "/services/backend",
-    icon: Database,
+    icon: Microscope,
   },
   {
     id: 4,
-    title: "Application Security",
+    title: "Manufacturing Network",
     description:
-      "Security-first architecture with authentication, authorization and best practices.",
+      "Pre-qualified AS9100/9120, EN9120 and NADCAP partners for machining, forming, treatments, and assemblies.",
     href: "/services/security",
-    icon: ShieldCheck,
+    icon: Network,
   },
 ];

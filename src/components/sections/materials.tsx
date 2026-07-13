@@ -1,11 +1,44 @@
+"use client";
+
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+
 export function MaterialsSection() {
   return (
-    <section className="py-20">
+    <section className="relative py-10">
       <div className="container">
-        <h2 className="text-3xl font-bold text-center">Our Materials</h2>
-        <p className="text-muted-foreground text-center max-w-2xl mx-auto mt-4">
-          Explore our high-quality materials designed to meet your needs.
-        </p>
+        {/* Heading */}
+
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
+        >
+          <div>
+            <span className="mb-3 inline-block rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary font-heading">
+              Catalogue
+            </span>
+
+            <h2 className="mt-3 text-4xl font-bold tracking-tight">Materials we stock</h2>
+
+            <p className="mt-5 max-w-2xl text-muted-foreground">
+              Aerospace-grade families with mill-traceable specifications.
+            </p>
+          </div>
+
+          <Link
+            href="/materials"
+            className="group inline-flex items-center gap-2 font-semibold text-primary"
+          >
+            Browse full catalogue
+            <ArrowRight size={18} className="transition group-hover:translate-x-2" />
+          </Link>
+        </motion.div>
+
+        {/* Cards */}
       </div>
     </section>
   );

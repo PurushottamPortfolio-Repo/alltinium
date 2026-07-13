@@ -9,7 +9,7 @@ import { ServiceCard } from "@/components/common/cards/service-card";
 
 export function ServicesSection() {
   return (
-    <section className="relative ">
+    <section className="relative PY-10">
       <div className="container">
         {/* Heading */}
 
@@ -21,19 +21,19 @@ export function ServicesSection() {
           className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
         >
           <div>
-            <span className="mb-3 inline-block rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
-              All Services
+            <span className="mb-3 inline-block rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary font-heading">
+              FOUR PILLARS
             </span>
 
             <h2 className="mt-3 text-4xl font-bold tracking-tight">
-              Building Modern Digital
+              One supply chain.
               <br />
-              Experiences
+              Four critical capabilities.
             </h2>
 
             <p className="mt-5 max-w-2xl text-muted-foreground">
-              From beautiful interfaces to secure backend systems, I build complete digital products
-              that are scalable, maintainable and user-focused.
+              From the mill to the machined part — we close the loop so your QA, procurement and
+              engineering teams talk to a single partner.
             </p>
           </div>
 
@@ -57,16 +57,3 @@ export function ServicesSection() {
     </section>
   );
 }
-
-// export function ServicesSection() {
-//   return (
-//     <section className="py-20">
-//       <div className="container">
-//         <h2 className="text-3xl font-bold text-center">Our Services</h2>
-//         <p className="text-muted-foreground text-center max-w-2xl mx-auto mt-4">
-//           We offer a wide range of services to help you achieve your goals.
-//         </p>
-//       </div>
-//     </section>
-//   );
-// }

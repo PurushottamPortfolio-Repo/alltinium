@@ -15,7 +15,7 @@ const QuoteModal = dynamic(
 
 export function HeroSection() {
   return (
-    <section className="border border-red-600  relative min-h-[70vh] overflow-hidden bg-gradient-to-b from-background via-background to-muted/20">
+    <section className="relative min-h-[70vh] overflow-hidden bg-gradient-to-b from-background via-background to-muted/20">
       <div className="absolute inset-0 z-0">
         <Image
           src={assets.heroBg}
@@ -63,6 +63,51 @@ export function HeroSection() {
           >
             Explore Services
           </a>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-8 flex justify-center"
+        >
+          <div className="w-full max-w-5xl rounded-3xl border border-white/10 bg-white/10 p-4 backdrop-blur-xl shadow-2xl">
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+              {[
+                {
+                  alloy: "Ti-6Al-4V",
+                  grade: "Grade 5",
+                },
+                {
+                  alloy: "Inconel 718",
+                  grade: "AMS 5662",
+                },
+                {
+                  alloy: "Al 7075-T651",
+                  grade: "AMS 4045",
+                },
+                {
+                  alloy: "300M Steel",
+                  grade: "AMS 6257",
+                },
+              ].map((item) => (
+                <motion.div
+                  key={item.alloy}
+                  whileHover={{
+                    y: -6,
+                    scale: 1.03,
+                  }}
+                  className="rounded-2xl border border-white/10 bg-background/80 p-5 text-center transition"
+                >
+                  <h3 className="font-heading text-lg font-semibold text-foreground">
+                    {item.alloy}
+                  </h3>
+
+                  <p className="font-body mt-2 text-sm text-muted-foreground">{item.grade}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

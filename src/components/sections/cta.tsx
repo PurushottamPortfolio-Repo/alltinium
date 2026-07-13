@@ -1,38 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, FileText, Clock3, BadgeCheck, ShieldCheck } from "lucide-react";
-
-const features = [
-  {
-    icon: FileText,
-    title: "MTC EN 10204",
-    value: "3.1 / 3.2",
-    description: "Included on request",
-  },
-  {
-    icon: Clock3,
-    title: "Lead Time",
-    value: "48 Hrs",
-    description: "Structured quotation",
-  },
-  {
-    icon: BadgeCheck,
-    title: "Landed Cost",
-    value: "Accurate",
-    description: "Transparent pricing",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Sample Retention",
-    value: "Available",
-    description: "Quality assurance",
-  },
-];
+import { ArrowRight } from "lucide-react";
+import { CtaSectionData } from "@/data/mock";
 
 export function CTASection() {
   return (
-    <section className="py-24">
+    <section className="py-10">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -84,7 +58,7 @@ export function CTASection() {
               viewport={{ once: true }}
               className="grid grid-cols-1 gap-5 sm:grid-cols-2"
             >
-              {features.map((item, index) => {
+              {CtaSectionData.map((item, index) => {
                 const Icon = item.icon;
 
                 return (
