@@ -4,11 +4,13 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Sparkles } from "lucide-react";
-
+import { Menu } from "lucide-react";
+import Image from "next/image";
+import { assets } from "@/assets";
 import { ThemeToggle } from "@/components/common/theme-toggle";
 import { NAV_LINKS } from "@/constants/navigation";
 import { cn } from "@/lib/utils";
+import MobileMenu from "@/components/common/mobile-menu";
 
 const QuoteModal = dynamic(
   () => import("@/components/quote/QuoteModal").then((module) => module.QuoteModal),
@@ -18,15 +20,21 @@ const QuoteModal = dynamic(
 export default function Navbar() {
   const pathname = usePathname();
   const [quoteOpen, setQuoteOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <>
       <header className="sticky top-0 z-50 border-b border-border/70 bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           <Link href="/" className="flex items-center gap-3">
-            <div className="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm">
-              <Sparkles size={18} />
-            </div>
+            <Image
+              src={assets.logo}
+              alt="Alltinium Logo"
+              width={42}
+              height={42}
+              priority
+              className="h-10 w-10 object-contain"
+            />
             <div className="flex flex-col">
               <span className="text-sm font-semibold uppercase tracking-[0.24em] text-foreground">
                 Alltinium
@@ -65,7 +73,8 @@ export default function Navbar() {
             </button>
             <button
               type="button"
-              className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-background text-foreground md:hidden"
+              onClick={() => setMobileOpen(true)}
+              className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-background md:hidden"
               aria-label="Open menu"
             >
               <Menu size={18} />
@@ -73,6 +82,7 @@ export default function Navbar() {
           </div>
         </div>
       </header>
+      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
       <QuoteModal open={quoteOpen} onOpenChange={setQuoteOpen} />
     </>
   );
