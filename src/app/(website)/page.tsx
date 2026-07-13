@@ -16,7 +16,7 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <div className="p-5 md:p-10 lg:p-20">
+      <div className="p-5  border border-red-600">
         <ServicesSection />
         <MaterialsSection />
         <CTASection />

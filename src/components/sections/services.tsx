@@ -9,7 +9,7 @@ import { ServiceCard } from "@/components/common/cards/service-card";
 
 export function ServicesSection() {
   return (
-    <section className="relative py-28">
+    <section className="relative ">
       <div className="container">
         {/* Heading */}
 

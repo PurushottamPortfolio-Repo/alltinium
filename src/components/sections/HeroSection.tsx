@@ -15,7 +15,7 @@ const QuoteModal = dynamic(
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-[70vh] overflow-hidden bg-gradient-to-b from-background via-background to-muted/20">
+    <section className="border border-red-600  relative min-h-[70vh] overflow-hidden bg-gradient-to-b from-background via-background to-muted/20">
       <div className="absolute inset-0 z-0">
         <Image
           src={assets.heroBg}
