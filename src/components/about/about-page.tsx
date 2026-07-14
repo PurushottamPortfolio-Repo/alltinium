@@ -5,8 +5,9 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Rocket, ShieldCheck, Target, Building2, CalendarClock } from "lucide-react";
 import { assets } from "@/assets";
-import dynamic from "next/dynamic";
+// dynamic import removed — using global QuoteProvider and QuoteButton
 import { PageHero } from "@/components/ui/page-hero";
+import QuoteButton from "@/components/quote/QuoteButton";
 
 const values = [
   {
@@ -75,12 +76,6 @@ const fadeUp = {
     },
   },
 };
-const QuoteModal = dynamic(
-  () => import("@/components/quote/QuoteModal").then((module) => module.QuoteModal),
-  {
-    ssr: false,
-  },
-);
 
 export function AboutPage() {
   return (
@@ -453,7 +448,7 @@ export function AboutPage() {
                     transition={{ duration: 0.45, delay: 0.1 }}
                     className="flex flex-wrap gap-3"
                   >
-                    <QuoteModalTrigger />
+                    <QuoteButton className="inline-flex items-center rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90" />
                   </motion.div>
                 </div>
               </motion.div>
@@ -461,23 +456,6 @@ export function AboutPage() {
           </motion.div>
         </div>
       </section>
-    </>
-  );
-}
-
-function QuoteModalTrigger() {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        className="inline-flex items-center rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
-      >
-        Request a Quote
-      </button>
-      <QuoteModal open={open} onOpenChange={setOpen} />
     </>
   );
 }

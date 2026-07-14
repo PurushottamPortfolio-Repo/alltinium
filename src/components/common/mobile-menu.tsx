@@ -9,6 +9,7 @@ import { X } from "lucide-react";
 import { assets } from "@/assets";
 import { NAV_LINKS } from "@/constants/navigation";
 import { ThemeToggle } from "@/components/common/theme-toggle";
+import { useQuote } from "@/providers/QuoteProvider";
 import { cn } from "@/lib/utils";
 
 type MobileMenuProps = {
@@ -115,16 +116,30 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
                 <ThemeToggle />
               </div>
 
-              <button
-                onClick={onClose}
-                className="w-full rounded-xl bg-primary px-4 py-3 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-              >
-                Request a Quote
-              </button>
+              <QuoteButtonMobile onClose={onClose} />
             </div>
           </motion.aside>
         </>
       )}
     </AnimatePresence>
+  );
+}
+
+function QuoteButtonMobile({ onClose }: { onClose: () => void }) {
+  const { openModal } = useQuote();
+
+  function handleClick() {
+    onClose();
+    // give drawer time to animate closed
+    setTimeout(() => openModal(), 160);
+  }
+
+  return (
+    <button
+      onClick={handleClick}
+      className="w-full rounded-xl bg-primary px-4 py-3 font-body font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+    >
+      Request a Quote
+    </button>
   );
 }

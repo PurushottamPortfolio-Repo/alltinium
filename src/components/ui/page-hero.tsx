@@ -4,6 +4,7 @@ import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronRight, Home } from "lucide-react";
+import QuoteButton from "@/components/quote/QuoteButton";
 
 interface BreadcrumbItem {
   label: string;
@@ -119,14 +120,18 @@ export function PageHero({
               }}
               className="mt-10"
             >
-              <Link
-                href={buttonHref}
-                className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3 font-body font-semibold text-primary-foreground transition-all duration-300 hover:-translate-y-1 hover:bg-primary/90 hover:shadow-xl"
-              >
-                {buttonText}
+              {buttonText === "Request a Quote" ? (
+                <QuoteButton className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3 font-body font-semibold text-primary-foreground transition-all duration-300 hover:-translate-y-1 hover:bg-primary/90 hover:shadow-xl" />
+              ) : (
+                <Link
+                  href={buttonHref}
+                  className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3 font-body font-semibold text-primary-foreground transition-all duration-300 hover:-translate-y-1 hover:bg-primary/90 hover:shadow-xl"
+                >
+                  {buttonText}
 
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              )}
             </motion.div>
           )}
         </motion.div>

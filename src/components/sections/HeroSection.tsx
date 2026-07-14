@@ -1,17 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-import dynamic from "next/dynamic";
+import QuoteButton from "@/components/quote/QuoteButton";
 import { motion } from "framer-motion";
 import { assets } from "@/assets";
-
-const QuoteModal = dynamic(
-  () => import("@/components/quote/QuoteModal").then((module) => module.QuoteModal),
-  {
-    ssr: false,
-  },
-);
 
 export function HeroSection() {
   return (
@@ -56,7 +48,7 @@ export function HeroSection() {
           transition={{ duration: 0.45, delay: 0.1 }}
           className="flex flex-wrap gap-3"
         >
-          <QuoteModalTrigger />
+          <QuoteButton className="inline-flex items-center rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90" />
           <a
             href="/about"
             className="inline-flex items-center rounded-full border border-border bg-background px-5 py-3 text-sm font-semibold text-foreground transition hover:border-primary/30 hover:text-primary"
@@ -111,22 +103,5 @@ export function HeroSection() {
         </motion.div>
       </div>
     </section>
-  );
-}
-
-function QuoteModalTrigger() {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        className="inline-flex items-center rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
-      >
-        Request a Quote
-      </button>
-      <QuoteModal open={open} onOpenChange={setOpen} />
-    </>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import dynamic from "next/dynamic";
+import QuoteButton from "@/components/quote/QuoteButton";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
@@ -12,14 +12,9 @@ import { NAV_LINKS } from "@/constants/navigation";
 import { cn } from "@/lib/utils";
 import MobileMenu from "@/components/common/mobile-menu";
 
-const QuoteModal = dynamic(
-  () => import("@/components/quote/QuoteModal").then((module) => module.QuoteModal),
-  { ssr: false },
-);
-
 export default function Navbar() {
   const pathname = usePathname();
-  const [quoteOpen, setQuoteOpen] = useState(false);
+
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -64,13 +59,7 @@ export default function Navbar() {
 
           <div className="flex items-center gap-2">
             <ThemeToggle />
-            <button
-              type="button"
-              onClick={() => setQuoteOpen(true)}
-              className="hidden rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 sm:inline-flex"
-            >
-              Request a Quote
-            </button>
+            <QuoteButton className="hidden rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 sm:inline-flex" />
             <button
               type="button"
               onClick={() => setMobileOpen(true)}
@@ -83,7 +72,6 @@ export default function Navbar() {
         </div>
       </header>
       <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
-      <QuoteModal open={quoteOpen} onOpenChange={setQuoteOpen} />
     </>
   );
 }
