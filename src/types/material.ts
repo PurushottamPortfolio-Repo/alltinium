@@ -10,6 +10,8 @@ export interface MaterialForm {
   description?: string;
 }
 
+import { StaticImageData } from "next/image";
+
 export interface MaterialSpecification {
   id: string;
   code: string; // ASTM B221, AMS 4928, etc.
@@ -23,7 +25,7 @@ export interface MaterialApplication {
 
 export interface MaterialImage {
   id: string;
-  src: string;
+  src: string | StaticImageData;
   alt: string;
   isPrimary?: boolean;
 }

@@ -4,7 +4,7 @@ interface BadgeProps {
   children: React.ReactNode;
   dot?: boolean;
   className?: string;
-  variant?: "default" | "secondary" | "outline" | "success";
+  variant?: "default" | "secondary" | "outline" | "success" | "custom";
 }
 
 export function Badge({ children, dot = false, className, variant = "default" }: BadgeProps) {
@@ -16,6 +16,9 @@ export function Badge({ children, dot = false, className, variant = "default" }:
         {
           // Primary
           "border border-primary/20 bg-primary/10 text-primary": variant === "default",
+
+          // Custom
+          "border border-border bg-muted text-muted-foreground text-white": variant === "custom",
 
           // Neutral
           "border border-border bg-muted text-muted-foreground": variant === "secondary",
