@@ -1,10 +1,10 @@
 "use client";
-import { ServicesHero } from "@/components/services/srevices-hero";
+import { ServicePage } from "@/components/services/service-page";
 
 export default function Services() {
   return (
     <main className="bg-background">
-      <ServicesHero />
+      <ServicePage />
     </main>
   );
 }
