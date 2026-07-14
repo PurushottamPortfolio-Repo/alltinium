@@ -1,7 +1,7 @@
 import heroBg from "./images/hero-bg.jpg";
 import b1 from "./images/blog/b1.jpg";
 import logo from "./logo/logo.png";
-
+import { profileImages } from "./profiles";
 import { materialImages } from "./materials";
 
 export const assets = {
@@ -12,6 +12,6 @@ export const assets = {
   blog: {
     b1,
   },
-
+  profiles: profileImages,
   materials: materialImages,
 } as const;
