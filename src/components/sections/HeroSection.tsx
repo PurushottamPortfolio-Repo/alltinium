@@ -30,13 +30,13 @@ export function HeroSection() {
           transition={{ duration: 0.4 }}
           className="max-w-3xl"
         >
-          <span className="mb-4 inline-flex rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
+          <span className="mb-4 inline-flex rounded-full border border-primary bg-background px-3 py-1 text-sm font-medium text-foreground">
             Industrial-grade digital experiences
           </span>
-          <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+          <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
             Precision engineering for modern aerospace and manufacturing brands.
           </h1>
-          <p className="mt-5 max-w-2xl text-lg text-muted-foreground">
+          <p className="mt-5 max-w-2xl text-lg">
             We design high-performing websites, portals, and product stories that help ambitious
             teams move faster and win trust.
           </p>
@@ -46,15 +46,30 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.1 }}
+
           className="flex flex-wrap gap-3"
         >
-          <QuoteButton className="inline-flex items-center rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90" />
-          <a
-            href="/about"
-            className="inline-flex items-center rounded-full border border-border bg-background px-5 py-3 text-sm font-semibold text-foreground transition hover:border-primary/30 hover:text-primary"
+          <motion.div
+            whileHover={{
+              y: -6,
+              scale: 1.03,
+            }}
           >
-            Explore Services
-          </a>
+            <QuoteButton className="inline-flex items-center rounded-sm ring-1 px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:cursor-pointer" />
+          </motion.div>
+          <motion.div
+            whileHover={{
+              y: -6,
+              scale: 1.03,
+            }}
+          >
+            <a
+              href="/about"
+              className="inline-flex items-center rounded-sm border border-border ring-1 bg-background px-5 py-3 text-sm font-semibold text-foreground transition"
+            >
+              Explore Services
+            </a>
+          </motion.div>
         </motion.div>
 
         <motion.div
