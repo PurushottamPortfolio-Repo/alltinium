@@ -20,8 +20,8 @@ export function HeroSection() {
         />
       </div>
 
-      <div className="absolute inset-0 z-0 bg-black/60" />
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/40 via-black/20 to-black/80" />
+      {/* <div className="absolute inset-0 z-0 bg-" /> */}
+      {/* <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/40 via-black/20 to-black/80" /> */}
 
       <div className="relative z-10 mx-auto flex max-w-7xl flex-col gap-8 px-4 py-20 text-white sm:px-6 lg:px-8 lg:py-28">
         <motion.div
@@ -78,7 +78,7 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-8 flex justify-center"
         >
-          <div className="w-full max-w-5xl rounded-3xl border border-white/10 bg-white/10 p-4 backdrop-blur-xl shadow-2xl">
+          <div className="w-full max-w-6xl rounded-md ring p-4 backdrop-blur-xl shadow-2xl">
             <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
               {[
                 {
@@ -104,7 +104,7 @@ export function HeroSection() {
                     y: -6,
                     scale: 1.03,
                   }}
-                  className="rounded-2xl border border-white/10 bg-background/80 p-5 text-center transition"
+                  className="rounded-xl border border-white/10 bg-background/80 p-5 text-center transition"
                 >
                   <h3 className="font-heading text-lg font-semibold text-foreground">
                     {item.alloy}
