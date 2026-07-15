@@ -30,7 +30,7 @@ export function HeroSection() {
           transition={{ duration: 0.4 }}
           className="max-w-3xl"
         >
-          <span className="mb-4 inline-flex rounded-full border border-primary bg-background px-3 py-1 text-sm font-medium text-foreground">
+          <span className="mb-4 inline-flex rounded-full border-border bg-background px-3 py-1 text-sm font-medium text-foreground">
             Industrial-grade digital experiences
           </span>
           <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
@@ -55,7 +55,7 @@ export function HeroSection() {
               scale: 1.03,
             }}
           >
-            <QuoteButton className="inline-flex items-center rounded-sm ring-1 px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:cursor-pointer" />
+            <QuoteButton className="inline-flex items-center rounded-sm px-5 py-3 text-sm font-semibold text-primary ring bg-background transition hover:cursor-pointer" />
           </motion.div>
           <motion.div
             whileHover={{
