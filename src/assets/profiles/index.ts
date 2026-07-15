@@ -1,5 +1,5 @@
-import founder1 from "./founder1.jpg";
-import founder2 from "./founder2.jpg";
+import founder1 from "./founder1.png";
+import founder2 from "./founder2.png";
 
 export const profileImages = {
   profile1: founder1,

@@ -75,21 +75,25 @@ export const IndustriesSectionData = [
     id: 1,
     icon: "Building2",
     title: "Civil Aerospace",
+    href: "",
   },
   {
     id: 2,
     icon: "Building2",
     title: "Defence",
+    href: "",
   },
   {
     id: 3,
     icon: "Building2",
     title: "Space",
+    href: "",
   },
   {
     id: 4,
     icon: "Building2",
     title: "MRO",
+    href: "",
   },
 ];
 

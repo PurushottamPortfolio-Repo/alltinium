@@ -6,7 +6,7 @@ import { TechMarquee } from "@/components/sections/marquee";
 import { WhyChooseMe } from "@/components/sections/why-choose-me";
 import { NetworkSection } from "@/components/sections/network";
 import { IndustriesSection } from "@/components/sections/industries";
-import { TrustSection } from "@/components/sections/trust";
+// import { TrustSection } from "@/components/sections/trust";
 import { LatestBlogs } from "@/components/sections/latest-blogs";
 
 const HeroSection = dynamic(
@@ -21,13 +21,13 @@ export default function HomePage() {
     <>
       <HeroSection />
       <TechMarquee />
-      <div className="p-5">
-        <MaterialsSection />
+      <div className="flex flex-col item-center justify-center p-10 gap-5">
         <ServicesSection />
+        <MaterialsSection />
         <WhyChooseMe />
         <NetworkSection />
         <IndustriesSection />
-        <TrustSection />
+        {/* <TrustSection /> */}
         <CTASection />
         <LatestBlogs />
       </div>

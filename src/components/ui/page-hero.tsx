@@ -39,12 +39,6 @@ export function PageHero({
 
       <div className="absolute inset-0">
         <Image src={image} alt={title} fill priority className="object-cover" />
-
-        {/* Overlay */}
-
-        <div className="absolute inset-0 bg-black/65" />
-
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/55 to-background" />
       </div>
 
       <div className="relative container mx-auto flex min-h-[520px] max-w-7xl items-center px-6 py-28">
@@ -64,12 +58,12 @@ export function PageHero({
             <nav className="mb-8 flex flex-wrap items-center gap-2 text-sm text-white/75">
               <Home className="h-4 w-4" />
 
-              {breadcrumbs.map((item, index) => (
+              {breadcrumbs.map((item) => (
                 <div key={item.label} className="flex items-center gap-2">
                   <ChevronRight className="h-4 w-4" />
 
                   {item.href ? (
-                    <Link href={item.href} className="font-body transition hover:text-primary">
+                    <Link href={item.href} className="font-body transition  hover:text-primary">
                       {item.label}
                     </Link>
                   ) : (
@@ -121,7 +115,7 @@ export function PageHero({
               className="mt-10"
             >
               {buttonText === "Request a Quote" ? (
-                <QuoteButton className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3 font-body font-semibold text-primary-foreground transition-all duration-300 hover:-translate-y-1 hover:bg-primary/90 hover:shadow-xl" />
+                <QuoteButton className="group inline-flex items-center gap-2 rounded-sm bg-primary px-7 py-3 font-body font-semibold text-primary-foreground transition-all duration-300 hover:-translate-y-1 hover:bg-primary/90 hover:shadow-xl hover:cursor-pointer" />
               ) : (
                 <Link
                   href={buttonHref}

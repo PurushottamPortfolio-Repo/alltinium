@@ -15,7 +15,7 @@ export function TechMarquee() {
             key={`${tech}-${i}`}
             className="flex font-mono text-sm tracking-wide text-[var(--ink-faint)] whitespace-nowrap"
           >
-            <Dot className="text-green-700" />
+            <Dot className="text-primary" />
             {tech}
           </span>
         ))}

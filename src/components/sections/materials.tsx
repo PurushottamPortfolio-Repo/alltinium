@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-
 import { MaterialGrid } from "@/components/material/material-grid";
 import { loadFeaturedMaterials } from "@/data/materials/loader";
 import type { Material } from "@/types/material";
@@ -27,8 +26,8 @@ export function MaterialsSection() {
   }, []);
 
   return (
-    <section className="relative py-10">
-      <div className="container">
+    <section className="relative p-4">
+      <div className="">
         {/* Heading */}
 
         <motion.div

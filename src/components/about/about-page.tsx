@@ -1,13 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Rocket, ShieldCheck, Target, Building2, CalendarClock } from "lucide-react";
 import { assets } from "@/assets";
 // dynamic import removed — using global QuoteProvider and QuoteButton
 import { PageHero } from "@/components/ui/page-hero";
 import QuoteButton from "@/components/quote/QuoteButton";
+import { Check, X } from "lucide-react";
+import { FaLinkedin } from "react-icons/fa";
+
+import { founders } from "@/data/about";
 
 const values = [
   {
@@ -96,9 +100,9 @@ export function AboutPage() {
           },
         ]}
       />
-      {/* Company Story */}
-      <section className="bg-background py-24">
-        <div className="container mx-auto px-6">
+      <div className="flex flex-col item-center justify-center px-8">
+        {/* Company Story */}
+        <section className="bg-background py-24">
           <div className="grid items-center gap-16 lg:grid-cols-2">
             <motion.div
               variants={fadeUp}
@@ -166,11 +170,10 @@ export function AboutPage() {
               </div>
             </motion.div>
           </div>
-        </div>
-      </section>
-      {/* Values */}
-      <section className="bg-muted/30 py-24">
-        <div className="container mx-auto px-6">
+        </section>
+
+        {/* Values */}
+        <section className="bg-muted/30 py-24">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -214,156 +217,79 @@ export function AboutPage() {
               );
             })}
           </div>
-        </div>
-      </section>
-      {/* Founder1 */}
-      <section className="bg-background py-24">
-        <div className="container mx-auto px-6">
-          <div className="grid items-center gap-16 lg:grid-cols-2">
+        </section>
+
+        {/* Founders */}
+        <div className="mt-20 grid gap-10 lg:grid-cols-2">
+          {founders.map((founder) => (
             <motion.div
+              key={founder.id}
               variants={fadeUp}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="relative"
+              className="group overflow-hidden rounded-3xl border bg-card shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
             >
-              <div className="absolute -left-8 -top-8 h-40 w-40 rounded-full bg-primary/10 blur-3xl" />
-              <div className="absolute -bottom-8 -right-8 h-48 w-48 rounded-full bg-amber-400/10 blur-3xl" />
-              <div>
-                <span className="rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
-                  Founder & Managing Director
-                </span>
-                <div className="overflow-hidden mt-4 rounded-3xl border border-border bg-card shadow-[var(--shadow-soft)]">
-                  <Image
-                    src={assets.profiles.profile1}
-                    alt="Founder of Alltinium Aerometrix"
-                    className="h-[500px] w-full object-cover"
-                  />
-                </div>
-                <div>
-                  <h2 className="mt-5 text-4xl font-heading font-bold lg:text-5xl">
-                    [Founder&apos;s Name]
-                  </h2>
+              <div className="relative">
+                <Image
+                  src={founder.image}
+                  alt={founder.name}
+                  className="h-[420px] w-full object-cover"
+                />
 
-                  <p className="mt-2 text-lg font-medium text-primary">
-                    Founder, Alltinium Aerometrix Pvt. Ltd.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
+                {/* Social Icons */}
+                <div className="absolute right-5 top-5 flex gap-3">
+                  <Link
+                    href={founder.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-full bg-white/90 p-3 backdrop-blur transition hover:bg-primary hover:text-white"
+                  >
+                    <FaLinkedin className="h-5 w-5" />
+                  </Link>
 
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="space-y-6"
-            >
-              <p className="text-lg leading-8 text-muted-foreground">
-                With years of experience supporting aerospace, defence and high-performance
-                manufacturing supply chains,
-                <strong className="text-foreground"> [Founder&apos;s Name] </strong>
-                established Alltinium Aerometrix to solve one of the industry&apos;s biggest
-                challenges—obtaining certified engineering metals with complete traceability,
-                dependable sourcing and uncompromising quality assurance.
-              </p>
-
-              <p className="text-lg leading-8 text-muted-foreground">
-                Having worked closely with OEMs, procurement teams and precision manufacturers, the
-                founder recognized that inconsistent supplier documentation, uncertain material
-                origins and delayed deliveries created unnecessary operational risks. This insight
-                became the foundation of Alltinium&apos;s customer-first sourcing model.
-              </p>
-
-              <p className="text-lg leading-8 text-muted-foreground">
-                Today, the founder personally oversees supplier qualification, quality systems,
-                strategic partnerships and long-term business development, ensuring every shipment
-                reflects the same engineering discipline expected by the aerospace and defence
-                industries.
-              </p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-      {/* Founder2 */}
-      <section className="bg-background">
-        <div className="container mx-auto px-6">
-          <div className="grid items-center gap-16 lg:grid-cols-2">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="absolute -left-8 -top-8 h-40 w-40 rounded-full bg-primary/10 blur-3xl" />
-              <div className="absolute -bottom-8 -right-8 h-48 w-48 rounded-full bg-amber-400/10 blur-3xl" />
-              <div>
-                <span className="rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
-                  Founder & Managing Director
-                </span>
-                <div className="overflow-hidden mt-4 rounded-3xl border border-border bg-card shadow-[var(--shadow-soft)]">
-                  <Image
-                    src={assets.profiles.profile2}
-                    alt="Founder of Alltinium Aerometrix"
-                    className="h-[500px] w-full object-cover"
-                  />
-                </div>
-                <div>
-                  <h2 className="mt-5 text-4xl font-heading font-bold lg:text-5xl">
-                    [Founder&apos;s Name]
-                  </h2>
-
-                  <p className="mt-2 text-lg font-medium text-primary">
-                    Founder, Alltinium Aerometrix Pvt. Ltd.
-                  </p>
+                  <Link
+                    href={founder.twitter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-full bg-white/90 p-3 backdrop-blur transition hover:bg-primary hover:text-white"
+                  >
+                    <X className="h-5 w-5" />
+                  </Link>
                 </div>
               </div>
+
+              <div className="p-8">
+                <span className="text-sm font-semibold uppercase tracking-wider text-primary">
+                  {founder.role}
+                </span>
+
+                <h3 className="mt-3 text-3xl font-bold">{founder.name}</h3>
+
+                <p className="mt-6 leading-8 text-muted-foreground">{founder.description}</p>
+
+                <ul className="mt-8 space-y-3">
+                  {founder.expertise.map((item) => (
+                    <li key={item} className="flex items-center gap-3">
+                      <div className="rounded-full bg-primary/10 p-1 text-primary">
+                        <Check className="h-4 w-4" />
+                      </div>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </motion.div>
-
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="space-y-6"
-            >
-              <p className="text-lg leading-8 text-muted-foreground">
-                With years of experience supporting aerospace, defence and high-performance
-                manufacturing supply chains,
-                <strong className="text-foreground"> [Founder&apos;s Name] </strong>
-                established Alltinium Aerometrix to solve one of the industry&apos;s biggest
-                challenges—obtaining certified engineering metals with complete traceability,
-                dependable sourcing and uncompromising quality assurance.
-              </p>
-
-              <p className="text-lg leading-8 text-muted-foreground">
-                Having worked closely with OEMs, procurement teams and precision manufacturers, the
-                founder recognized that inconsistent supplier documentation, uncertain material
-                origins and delayed deliveries created unnecessary operational risks. This insight
-                became the foundation of Alltinium&apos;s customer-first sourcing model.
-              </p>
-
-              <p className="text-lg leading-8 text-muted-foreground">
-                Today, the founder personally oversees supplier qualification, quality systems,
-                strategic partnerships and long-term business development, ensuring every shipment
-                reflects the same engineering discipline expected by the aerospace and defence
-                industries.
-              </p>
-            </motion.div>
-          </div>
+          ))}
         </div>
-      </section>
-
-      {/* Timeline */}
-      <section className="mt-10">
-        <div className="container mx-auto px-6">
+        {/* Timeline */}
+        <section className="mt-24">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="mb-16 text-center"
+            className="mb-20 text-center"
           >
             <Building2 className="mx-auto mb-6 h-10 w-10 text-primary" />
 
@@ -372,43 +298,59 @@ export function AboutPage() {
             <p className="text-muted-foreground">Milestones that define our growth.</p>
           </motion.div>
 
-          <div className="relative mx-auto max-w-4xl">
-            <div className="absolute left-6 top-0 h-full w-px bg-border lg:left-1/2" />
+          <div className="relative mx-auto max-w-6xl">
+            {/* Center Line */}
+            <div className="absolute left-6 top-0 h-full w-px bg-border lg:left-1/2 lg:-translate-x-1/2" />
 
-            <div className="space-y-12">
-              {timeline.map((item, index) => (
-                <motion.div
-                  key={item.year}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.08 }}
-                  className="relative flex items-start gap-8 lg:items-center"
-                >
-                  <div className="z-10 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg">
-                    <CalendarClock className="h-5 w-5" />
-                  </div>
+            <div className="space-y-20">
+              {timeline.map((item, index) => {
+                const isLeft = index % 2 === 0;
 
-                  <div className="rounded-xl border border-border bg-card p-6 shadow-[var(--shadow-soft)] lg:w-1/2">
-                    <span className="text-sm font-semibold uppercase tracking-wider text-primary">
-                      {item.year}
-                    </span>
+                return (
+                  <motion.div
+                    key={item.year}
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.08 }}
+                    className="relative grid grid-cols-1 lg:grid-cols-2"
+                  >
+                    {/* LEFT CARD */}
+                    <div className={`${isLeft ? "lg:pr-14" : "lg:pr-14 lg:order-2"}`}>
+                      <div
+                        className={`rounded-2xl border border-border bg-card p-8 shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
+                          isLeft ? "" : "lg:ml-14"
+                        }`}
+                      >
+                        <span className="text-sm font-semibold uppercase tracking-[0.25em] text-primary">
+                          {item.year}
+                        </span>
 
-                    <h3 className="mt-2 text-2xl font-heading font-semibold">{item.title}</h3>
+                        <h3 className="mt-3 text-2xl font-heading font-semibold">{item.title}</h3>
 
-                    <p className="mt-3 leading-7 text-muted-foreground">{item.description}</p>
-                  </div>
-                </motion.div>
-              ))}
+                        <p className="mt-4 leading-8 text-muted-foreground">{item.description}</p>
+                      </div>
+                    </div>
+
+                    {/* EMPTY COLUMN */}
+                    <div className={`${isLeft ? "" : "lg:order-1"}`} />
+
+                    {/* TIMELINE DOT */}
+                    <div className="absolute left-6 top-10 -translate-x-1/2 lg:left-1/2">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-full border-4 border-background bg-primary shadow-xl">
+                        <CalendarClock className="h-6 w-6 text-primary-foreground" />
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Memberships & affiliations */}
-      <section className="py-10 px-20">
-        <div className="container">
+        {/* Memberships & affiliations */}
+        <section className="py-10 px-20">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -454,8 +396,8 @@ export function AboutPage() {
               </motion.div>
             </div>
           </motion.div>
-        </div>
-      </section>
+        </section>
+      </div>
     </>
   );
 }

@@ -6,15 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "eslint . --quiet",
+    "lint:fix": "eslint . --fix --quiet",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "husky"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix"
+      "eslint --fix --quiet"
     ],
     "*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --write"
@@ -32,6 +32,7 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-hook-form": "^7.81.0",
+    "react-icons": "^5.7.0",
     "resend": "^6.17.2",
     "shadcn": "^4.13.0",
     "sonner": "^2.0.7",

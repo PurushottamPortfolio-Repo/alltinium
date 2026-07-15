@@ -1,102 +1,120 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Mail } from "lucide-react";
+import { FaLinkedin } from "react-icons/fa";
 
 const quickLinks = [
-  {
-    title: "About",
-    href: "/about",
-  },
-  {
-    title: "Materials",
-    href: "/materials",
-  },
-  {
-    title: "Projects",
-    href: "/projects",
-  },
-  {
-    title: "Contact",
-    href: "/contact",
-  },
+  { title: "About", href: "/about" },
+  { title: "Materials", href: "/materials" },
+  { title: "Projects", href: "/projects" },
+  { title: "Contact", href: "/contact" },
 ];
 
 export function Footer() {
   return (
-    <footer className="border-t border-[var(--surface-border)] bg-card">
-      <div className="mx-auto max-w-6xl px-5 py-16">
-        <div className="grid gap-12 md:grid-cols-[1.6fr_1fr]">
-          {/* Left */}
-          <div className="space-y-5">
+    <footer className="relative border-t border-[var(--surface-border)] bg-card">
+      {/* Top Accent */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+        <div className="grid gap-14 lg:grid-cols-[2fr_1fr_1fr]">
+          {/* Brand */}
+          <div className="space-y-6">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 text-xl font-semibold tracking-wide"
+              className="inline-flex items-center text-2xl font-bold tracking-wide text-[var(--ink)]"
             >
               Alltinium
             </Link>
 
-            <p className="max-w-md text-sm leading-7 text-[var(--ink-muted)]">
-              Building high-quality industrial solutions with precision, innovation, and long-term
-              reliability. Designed for modern manufacturing and engineering excellence.
+            <p className="max-w-lg leading-7 text-[15px] text-[var(--ink-muted)]">
+              Aerospace &ndash; grade metals, precision sourcing, and engineering solutions built
+              around complete material traceability, quality, and long &ndash; term manufacturing
+              partnerships.
             </p>
 
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 text-sm font-medium transition hover:text-[var(--ink)]"
+              className="group inline-flex items-center gap-2 font-medium text-primary transition-all duration-300 hover:gap-3"
             >
-              Let&#39;s work together
-              <ArrowUpRight className="h-4 w-4" />
+              Let&apos;s build together
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
             </Link>
           </div>
 
-          {/* Right */}
-          <div className="grid grid-cols-2 gap-10">
-            <div>
-              <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[var(--ink)]">
-                Navigation
-              </h3>
+          {/* Navigation */}
+          <div>
+            <h3 className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-[var(--ink)]">
+              Navigation
+            </h3>
 
-              <ul className="space-y-3">
-                {quickLinks.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className="text-sm text-[var(--ink-muted)] transition hover:text-[var(--ink)]"
-                    >
+            <ul className="space-y-3">
+              {quickLinks.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="group inline-flex items-center text-[15px] text-[var(--ink-muted)] transition-colors duration-300 hover:text-[var(--ink)]"
+                  >
+                    <span className="relative">
                       {item.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                      <span className="absolute bottom-0 left-0 h-px w-0 bg-primary transition-all duration-300 group-hover:w-full" />
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            <div>
-              <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[var(--ink)]">
-                Contact
-              </h3>
+          {/* Contact */}
+          <div>
+            <h3 className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-[var(--ink)]">
+              Contact
+            </h3>
 
-              <div className="space-y-3 text-sm text-[var(--ink-muted)]">
-                <p>info@alltinium.com</p>
-                <p>+91 XXX XX XXXX</p>
-                <p>Mon – Fri</p>
-                <p>09:00 – 18:00</p>
+            <div className="space-y-4 text-sm text-[var(--ink-muted)]">
+              <a
+                href="mailto:info@alltinium.com"
+                className="flex items-center gap-3 transition hover:text-[var(--ink)]"
+              >
+                <Mail className="h-4 w-4" />
+                info@alltinium.com
+              </a>
+
+              <p>+91 XXX XX XXXX</p>
+
+              <div>
+                <p>Mon &ndash; Fri</p>
+                <p>09:00 &ndash; 18:00 IST</p>
+              </div>
+
+              <div className="pt-2">
+                <a
+                  href="#"
+                  className="inline-flex items-center gap-2 transition hover:text-primary"
+                >
+                  <FaLinkedin className="h-4 w-4" />
+                  LinkedIn
+                </a>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-[var(--surface-border)] pt-6 text-sm text-[var(--ink-muted)] md:flex-row md:items-center md:justify-between">
-          <p>© {new Date().getFullYear()} Alltinium. All rights reserved.</p>
+        {/* Bottom */}
+        <div className="mt-14 border-t border-[var(--surface-border)] pt-6">
+          <div className="flex flex-col items-center justify-between gap-5 text-sm text-[var(--ink-muted)] md:flex-row">
+            <p>&copy; {new Date().getFullYear()} Alltinium Aerometrix. All rights reserved.</p>
 
-          <div className="flex gap-6">
-            <Link href="/privacy" className="transition hover:text-[var(--ink)]">
-              Privacy
-            </Link>
+            <div className="flex items-center gap-6">
+              <Link href="/privacy" className="transition hover:text-[var(--ink)]">
+                Privacy Policy
+              </Link>
 
-            <Link href="/terms" className="transition hover:text-[var(--ink)]">
-              Terms
-            </Link>
+              <Link href="/terms" className="transition hover:text-[var(--ink)]">
+                Terms &amp; Conditions
+              </Link>
+            </div>
           </div>
         </div>
       </div>

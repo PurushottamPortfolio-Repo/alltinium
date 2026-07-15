@@ -8,7 +8,7 @@ export const services: Service[] = [
     id: 1,
     title: "Distribution",
     description:
-      "Aluminium, Titanium, Nickel, Superalloys, Special Steels. Mill-direct sourcing with full MTC chain.",
+      "Aluminium, Titanium, Nickel, Superalloys, Special Steels. Sourcing with full MTC chain.",
     href: "/services/distribution",
     icon: Cog,
     image: Services.service1,
@@ -24,18 +24,16 @@ export const services: Service[] = [
   },
   {
     id: 3,
-    title: "NABL-Accredited Testing",
-    description:
-      "Chemical (PMI/OES), mechanical, metallurgical and dimensional inspection. Open to third-party testing.",
+    title: "Accredited Testing",
+    description: "Chemical (PMI/OES), mechanical, metallurgical and dimensional inspection.",
     href: "/services/testing",
     icon: Microscope,
     image: Services.service3,
   },
   {
     id: 4,
-    title: "Manufacturing Network",
-    description:
-      "Pre-qualified AS9100/9120, EN9120 and NADCAP partners for machining, forming, treatments, and assemblies.",
+    title: "Manufacturing",
+    description: "Pre-qualified AS9100/9120, EN9120 and NADCAP partners.",
     href: "/services/manufacturing",
     icon: Network,
     image: Services.service4,

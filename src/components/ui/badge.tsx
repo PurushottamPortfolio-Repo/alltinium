@@ -18,7 +18,7 @@ export function Badge({ children, dot = false, className, variant = "default" }:
           "border border-primary/20 bg-primary/10 text-primary": variant === "default",
 
           // Custom
-          "border border-border bg-muted text-muted-foreground text-white": variant === "custom",
+          "border border-border bg-primary text-foreground text-white": variant === "custom",
 
           // Neutral
           "border border-border bg-muted text-muted-foreground": variant === "secondary",
