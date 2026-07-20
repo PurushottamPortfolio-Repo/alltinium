@@ -50,12 +50,9 @@ export function MaterialCard({ material }: MaterialCardProps) {
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="space-y-2">
             <h3 className="font-heading text-lg font-semibold text-foreground sm:text-xl">
-              {material.title}
+              {material.grade}
             </h3>
-
-            <p className="font-body text-sm text-muted-foreground">Grade {material.grade}</p>
           </div>
-
           {/* Form */}
 
           <div className="flex flex-wrap items-center gap-2">

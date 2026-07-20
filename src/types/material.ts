@@ -41,7 +41,7 @@ export interface Material {
   title: string;
 
   category: string; // Category ID
-  form: string; // Form ID
+  form: string; // Forms ID
 
   specifications: string[]; // Specification IDs
   applications: string[]; // Application IDs
