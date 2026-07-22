@@ -1,7 +1,7 @@
-import Service1 from "./service1.jpg";
-import Service2 from "./service2.jpg";
-import Service3 from "./service3.jpg";
-import Service4 from "./service4.jpg";
+import Service1 from "./distribution.png";
+import Service2 from "./cut-to-size.png";
+import Service3 from "./accredited-testing.png";
+import Service4 from "./manufactoring.png";
 
 export const Services = {
   service1: Service1,

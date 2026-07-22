@@ -351,7 +351,7 @@ export function ContactForm() {
                     href="mailto:purushottam.portfolio@gmail.com"
                     className="text-sm text-muted-foreground"
                   >
-                    purushottam.portfolio@gmail.com
+                    info@alltinium.com
                   </a>
                 </div>
               </div>
@@ -365,25 +365,32 @@ export function ContactForm() {
                 <div>
                   <p className="text-sm font-semibold text-foreground">Phone</p>
                   <a href="tel:+919999999999" className="text-sm text-muted-foreground">
-                    +91 99999 99999
+                    +91 9289080696
                   </a>
                 </div>
               </div>
             </div>
 
             <div className="rounded-2xl border border-border/70 bg-background/70 p-4">
-              <div className="flex items-center gap-3">
-                <div className="rounded-full bg-primary/10 p-2 text-primary">
-                  <Building2 size={18} />
+              <div className="flex flex-col gap-2">
+                <div className="flex gap-x-2">
+                  <div className="rounded-full bg-primary/10 p-2 text-primary">
+                    <Building2 size={18} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-foreground mt-2">Office</p>
+                  </div>
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-foreground">Office</p>
-                  <p className="text-sm text-muted-foreground">Remote-first • Worldwide delivery</p>
+                  <p className="text-sm text-muted-foreground">
+                    ALLTINIUM AEROMETRIX PRIVATE LIMITED No. 2504/1, E Block, Kodigehalli Main Road,
+                    Sahakaranagar P.O, Bangalore North, Bangalore- 560092, Karnataka{" "}
+                  </p>
                 </div>
               </div>
             </div>
 
-            <div className="rounded-2xl border border-border/70 bg-background/70 p-4">
+            {/* <div className="rounded-2xl border border-border/70 bg-background/70 p-4">
               <div className="flex items-center gap-3">
                 <div className="rounded-full bg-primary/10 p-2 text-primary">
                   <CheckCircle2 size={18} />
@@ -395,7 +402,7 @@ export function ContactForm() {
                   </p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </motion.aside>
 

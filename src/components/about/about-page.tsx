@@ -8,7 +8,7 @@ import { assets } from "@/assets";
 // dynamic import removed — using global QuoteProvider and QuoteButton
 import { PageHero } from "@/components/ui/page-hero";
 import QuoteButton from "@/components/quote/QuoteButton";
-import { Check, X } from "lucide-react";
+import { Check } from "lucide-react";
 import { FaLinkedin } from "react-icons/fa";
 
 import { founders } from "@/data/about";
@@ -87,7 +87,7 @@ export function AboutPage() {
       <PageHero
         image={assets.heroBg}
         title="Engineering-led. Aerospace-grade."
-        description="Alltinium Aerometrix was founded to close a real, observable gap: India's aerospace OEMs were buying mission-critical metals through commodity traders with no traceability discipline."
+        description="Materials built to the standard the mission demands. India's Aerospace, Defence and Advanced Manufacturing sectors are entering their most ambitious phase."
         buttonText="Request a Quote"
         buttonHref="/contact"
         breadcrumbs={[
@@ -139,22 +139,23 @@ export function AboutPage() {
               </h2>
 
               <p className="text-lg leading-8 text-muted-foreground">
-                Alltinium Aerometrix was built by professionals with deep experience in aerospace
-                and defence supply chains, where mission outcomes depend on parts being exactly what
-                their paperwork claims. The question was simple: why does that discipline disappear
-                when the same metals are bought commercially?
+                Alltinium Aerometrix is a trusted supplier of aerospace-grade metals and
+                high-performance alloys for India&apos;s rapidly growing Aerospace, Defence, Space,
+                Energy, Automotive, and Advanced Manufacturing industries. We source certified
+                titanium, nickel superalloys, aluminium, stainless steel, and specialty alloys from
+                globally qualified mills, ensuring complete material traceability, certified
+                quality, and dependable supply for mission-critical applications.
               </p>
 
               <p className="leading-8 text-muted-foreground">
-                Alltinium Aerometrix is the answer. A serious aerospace materials hub — mill-direct
-                sourcing, full MTC chain, in-house NABL-accredited testing and a vetted
-                manufacturing network — built so OEM buyers, QA leads and design engineers can speak
-                to one partner who understands their language.
+                Built on aerospace standards, we deliver more than materials—we deliver confidence.
+                With ready buffer stock, precision cut-to-size solutions, fast nationwide delivery,
+                and rigorous quality assurance, we help manufacturers reduce lead times without
+                compromising performance.
               </p>
               <p className="leading-8 text-muted-foreground">
-                We are headquartered at KIADB Aerospace Park, Devanahalli — India&apos;s emerging
-                aerospace cluster — and serve OEMs, Tier-1s, defence PSUs and space-tech startups
-                across India and South-East Asia.
+                Engineering trust through certified materials, uncompromising quality, and on-time
+                delivery.
               </p>
 
               <div className="grid grid-cols-2 gap-6 pt-6">
@@ -228,13 +229,13 @@ export function AboutPage() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="group overflow-hidden rounded-3xl border bg-card shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+              className="group overflow-hidden rounded-md border bg-card shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
             >
               <div className="relative">
                 <Image
                   src={founder.image}
                   alt={founder.name}
-                  className="h-[420px] w-full object-cover"
+                  className="h-[600px] w-full object-cover"
                 />
 
                 {/* Social Icons */}
@@ -243,18 +244,9 @@ export function AboutPage() {
                     href={founder.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-full bg-white/90 p-3 backdrop-blur transition hover:bg-primary hover:text-white"
+                    className="rounded-full bg-white/90 p-3 backdrop-blur transition hover:bg-primary text-blue-700 hover:text-white"
                   >
                     <FaLinkedin className="h-5 w-5" />
-                  </Link>
-
-                  <Link
-                    href={founder.twitter}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rounded-full bg-white/90 p-3 backdrop-blur transition hover:bg-primary hover:text-white"
-                  >
-                    <X className="h-5 w-5" />
                   </Link>
                 </div>
               </div>

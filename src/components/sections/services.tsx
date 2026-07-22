@@ -9,7 +9,7 @@ import { ServiceCard } from "@/components/common/cards/service-card";
 
 export function ServicesSection() {
   return (
-    <section className="relative p-4 py-5 bg-primary/10 rounded-md PY-10 border-border">
+    <section className="relative p-4 py-5 bg-primary/5 rounded-md PY-10 border-border">
       {/* Heading */}
 
       <motion.div

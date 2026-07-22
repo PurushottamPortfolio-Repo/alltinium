@@ -1,5 +1,5 @@
 import heroBg from "./images/hero-bg.jpg";
-import b1 from "./images/blog/b1.jpg";
+import b1 from "./services/manufactoring.png";
 import logo from "./logo/logo.png";
 import { profileImages } from "./profiles";
 import { materialImages } from "./materials";

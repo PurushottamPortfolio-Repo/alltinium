@@ -7,7 +7,7 @@ import { NetworkSectionData } from "@/data/mock";
 
 export function NetworkSection() {
   return (
-    <section className="relative p-4 py-8 bg-primary/10 rounded-md border-border">
+    <section className="relative p-4 py-8 bg-primary/5 rounded-md border-border">
       {/* Heading */}
 
       <motion.div

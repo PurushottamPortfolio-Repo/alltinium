@@ -7,7 +7,7 @@ import { assets } from "@/assets";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-[70vh] overflow-hidden bg-gradient-to-b from-background via-background to-muted/20">
+    <section className="relative max-h-[90vh] overflow-hidden bg-gradient-to-b from-background via-background to-muted/20">
       <div className="absolute inset-0 z-0">
         <Image
           src={assets.heroBg}
@@ -31,14 +31,13 @@ export function HeroSection() {
           className="max-w-3xl"
         >
           <span className="mb-4 inline-flex rounded-full border-border bg-background px-3 py-1 text-sm font-medium text-foreground">
-            Industrial-grade digital experiences
+            Tailored solutions for Aerospace, Automo ve and Energy Industries.
           </span>
           <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
-            Precision engineering for modern aerospace and manufacturing brands.
+            India&apos;s integrated supply chain for aerospace-grade metals and alloys
           </h1>
           <p className="mt-5 max-w-2xl text-lg">
-            We design high-performing websites, portals, and product stories that help ambitious
-            teams move faster and win trust.
+            From mill to line, one integrated metal supply chain.
           </p>
         </motion.div>
 
@@ -78,19 +77,19 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-8 flex justify-center"
         >
-          <div className="w-full max-w-6xl rounded-md ring p-4 backdrop-blur-xl shadow-2xl">
+          {/* <div className="w-full max-w-6xl rounded-md ring p-4 backdrop-blur-xl shadow-2xl">
             <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
               {[
                 {
-                  alloy: "Ti-6Al-4V",
+                  alloy: "Aluminium",
                   grade: "Grade 5",
                 },
                 {
-                  alloy: "Inconel 718",
+                  alloy: "Titanium",
                   grade: "AMS 5662",
                 },
                 {
-                  alloy: "Al 7075-T651",
+                  alloy: "Nickel",
                   grade: "AMS 4045",
                 },
                 {
@@ -114,7 +113,7 @@ export function HeroSection() {
                 </motion.div>
               ))}
             </div>
-          </div>
+          </div> */}
         </motion.div>
       </div>
     </section>

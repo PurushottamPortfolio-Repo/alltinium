@@ -13,8 +13,6 @@ interface Props {
 }
 
 export function ServiceCard({ service, index }: Props) {
-  const Icon = service.icon;
-
   return (
     <motion.article
       initial={{ opacity: 0, y: 40 }}
@@ -42,20 +40,12 @@ export function ServiceCard({ service, index }: Props) {
           sizes="(max-width:768px)100vw,(max-width:1200px)50vw,33vw"
         />
 
-        {/* Dark Overlay */}
-        {/* <div className="absolute inset-0 bg-gradient-to-t from-bl via-black/10 to-transparent" /> */}
-
         {/* Shine Effect */}
         <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 p-6">
-        {/* Icon */}
-        {/* <div className="mb-5 inline-flex rounded-2xl bg-primary/10 p-4 text-primary transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">
-          <Icon size={32} />
-        </div> */}
-
         {/* Title */}
         <h3 className="mb--2 text-xl font-heading transition-colors duration-300 group-hover:text-primary">
           {service.title}
