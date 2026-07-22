@@ -52,12 +52,12 @@ export function ServiceCard({ service, index }: Props) {
         </h3>
 
         {/* Description */}
-        <p className="mb-4 text-muted-foreground">{service.description}</p>
+        {/* <p className="mb-4 text-muted-foreground">{service.description}</p> */}
 
         {/* Button */}
         <Link
           href="/services"
-          className="inline-flex items-center gap-2 font-medium text-primary transition-all duration-300 group-hover:gap-4"
+          className="inline-flex items-center gap-2 font-medium text-primary transition-all duration-300 group-hover:gap-4 text-[12px]"
         >
           Learn More
           <ArrowUpRight

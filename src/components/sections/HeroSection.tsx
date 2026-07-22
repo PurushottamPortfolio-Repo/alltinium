@@ -7,7 +7,7 @@ import { assets } from "@/assets";
 
 export function HeroSection() {
   return (
-    <section className="relative max-h-[90vh] overflow-hidden bg-gradient-to-b from-background via-background to-muted/20">
+    <section className="relative min-h-[75vh] overflow-hidden bg-gradient-to-b from-background via-background to-muted/20">
       <div className="absolute inset-0 z-0">
         <Image
           src={assets.heroBg}
@@ -36,7 +36,7 @@ export function HeroSection() {
           <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
             India&apos;s integrated supply chain for aerospace-grade metals and alloys
           </h1>
-          <p className="mt-5 max-w-2xl text-lg">
+          <p className="mt-5 max-w-2xl text-md">
             From mill to line, one integrated metal supply chain.
           </p>
         </motion.div>
@@ -63,7 +63,7 @@ export function HeroSection() {
             }}
           >
             <a
-              href="/about"
+              href="/services"
               className="inline-flex items-center rounded-sm border border-border ring-1 bg-background px-5 py-3 text-sm font-semibold text-foreground transition"
             >
               Explore Services
@@ -77,24 +77,32 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-8 flex justify-center"
         >
-          {/* <div className="w-full max-w-6xl rounded-md ring p-4 backdrop-blur-xl shadow-2xl">
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          <div className="w-full max-w-6xl rounded-md ring p-4 backdrop-blur-xl shadow-2xl">
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
               {[
                 {
                   alloy: "Aluminium",
-                  grade: "Grade 5",
+                  grade: "Series(2K, 5K, 6K, 7K)",
                 },
                 {
                   alloy: "Titanium",
-                  grade: "AMS 5662",
+                  grade: "(Pure, Alpha-Beta, Elevated-Temp, Beta)",
                 },
                 {
                   alloy: "Nickel",
-                  grade: "AMS 4045",
+                  grade: "(Inconel, Hastelloy, Waspaloy, Monel)",
                 },
                 {
-                  alloy: "300M Steel",
-                  grade: "AMS 6257",
+                  alloy: "Special Steel",
+                  grade: "(Stainless, Austenitic, HSLA, Maraging)",
+                },
+                {
+                  alloy: "Tungsten",
+                  grade: "(Heavy Alloy, Pure, Powder & Carbide)",
+                },
+                {
+                  alloy: "Critical & Strategic",
+                  grade: "(Refractory, Strategic, Superalloy Feedstock)",
                 },
               ].map((item) => (
                 <motion.div
@@ -113,7 +121,7 @@ export function HeroSection() {
                 </motion.div>
               ))}
             </div>
-          </div> */}
+          </div>
         </motion.div>
       </div>
     </section>

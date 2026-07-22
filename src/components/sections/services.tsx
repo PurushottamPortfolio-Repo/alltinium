@@ -46,12 +46,13 @@ export function ServicesSection() {
       </motion.div>
 
       {/* Cards */}
-
-      <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
-        {services.map((service, index) => (
-          <ServiceCard key={service.id} service={service} index={index} />
-        ))}
-      </div>
+      <Link href="/services">
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
+          {services.map((service, index) => (
+            <ServiceCard key={service.id} service={service} index={index} />
+          ))}
+        </div>
+      </Link>
     </section>
   );
 }
