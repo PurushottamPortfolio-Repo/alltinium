@@ -23,12 +23,12 @@ export const MATERIALS: MaterialCategory[] = [
         products: ["2014", "2024", "2219", "2099/2195 Al-Li"],
 
         forms: [
-          { name: "Plate" },
-          { name: "Sheet" },
-          { name: "Bar" },
-          { name: "Extrusion" },
-          { name: "Forging" },
-          { name: "Wire" },
+          { id: "plate", name: "Plate" },
+          { id: "sheet", name: "Sheet" },
+          { id: "bar", name: "Bar" },
+          { id: "extrusion", name: "Extrusion" },
+          { id: "forging", name: "Forging" },
+          { id: "wire", name: "Wire" },
         ],
       },
 
@@ -38,7 +38,11 @@ export const MATERIALS: MaterialCategory[] = [
 
         products: ["5083", "5086"],
 
-        forms: [{ name: "Plate" }, { name: "Sheet" }, { name: "Bar" }],
+        forms: [
+          { id: "plate", name: "Plate" },
+          { id: "sheet", name: "Sheet" },
+          { id: "bar", name: "Bar" },
+        ],
       },
 
       {
@@ -48,11 +52,11 @@ export const MATERIALS: MaterialCategory[] = [
         products: ["6061", "6082"],
 
         forms: [
-          { name: "Plate" },
-          { name: "Tube" },
-          { name: "Bar" },
-          { name: "Extrusion" },
-          { name: "Profile" },
+          { id: "plate", name: "Plate" },
+          { id: "tube", name: "Tube" },
+          { id: "bar", name: "Bar" },
+          { id: "extrusion", name: "Extrusion" },
+          { id: "profile", name: "Profile" },
         ],
       },
 
@@ -62,7 +66,12 @@ export const MATERIALS: MaterialCategory[] = [
 
         products: ["7050", "7075"],
 
-        forms: [{ name: "Plate" }, { name: "extrusion" }, { name: "Bar" }, { name: "Forging" }],
+        forms: [
+          { id: "plate", name: "Plate" },
+          { id: "extrusion", name: "extrusion" },
+          { id: "bar", name: "Bar" },
+          { id: "forging", name: "Forging" },
+        ],
       },
     ],
   },
@@ -88,7 +97,12 @@ export const MATERIALS: MaterialCategory[] = [
 
         products: ["CP Grade 2(1-4)"],
 
-        forms: [{ name: "Tube" }, { name: "Sheet" }, { name: "Bar" }, { name: "Wire" }],
+        forms: [
+          { id: "tube", name: "Tube" },
+          { id: "sheet", name: "Sheet" },
+          { id: "bar", name: "Bar" },
+          { id: "wire", name: "Wire" },
+        ],
       },
 
       {
@@ -97,7 +111,12 @@ export const MATERIALS: MaterialCategory[] = [
 
         products: ["Grade 5", "Grade 23", "Grade 9"],
 
-        forms: [{ name: "Plate" }, { name: "Sheet" }, { name: "Bar" }, { name: "Forging" }],
+        forms: [
+          { id: "plate", name: "Plate" },
+          { id: "sheet", name: "Sheet" },
+          { id: "bar", name: "Bar" },
+          { id: "forging", name: "Forging" },
+        ],
       },
 
       {
@@ -106,7 +125,10 @@ export const MATERIALS: MaterialCategory[] = [
 
         products: ["Ti-15-3", "Beta C"],
 
-        forms: [{ name: "Plate" }, { name: "Bar" }],
+        forms: [
+          { id: "plate", name: "Plate" },
+          { id: "bar", name: "Bar" },
+        ],
       },
 
       {
@@ -115,7 +137,11 @@ export const MATERIALS: MaterialCategory[] = [
 
         products: ["Ti-6242", "Ti-6246"],
 
-        forms: [{ name: "Plate" }, { name: "Bar" }, { name: "Forging" }],
+        forms: [
+          { id: "plate", name: "Plate" },
+          { id: "bar", name: "Bar" },
+          { id: "forging", name: "Forging" },
+        ],
       },
     ],
   },
