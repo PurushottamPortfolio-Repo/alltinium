@@ -7,136 +7,176 @@ import { ArrowRight, FileText } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { MATERIALS } from "./materials-data";
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+// const cardVariants = {
+//   hidden: {
+//     opacity: 0,
+//     y: 40,
+//   },
+//   visible: {
+//     opacity: 1,
+//     y: 0,
+//     transition: {
+//       duration: 0.55,
+//       ease: "easeOut",
+//     },
+//   },
+// };
+
 export default function MaterialGrid() {
   return (
-    <div className="grid gap-8 md:grid-cols-2">
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.15 }}
+      className="grid gap-8 lg:grid-cols-3"
+    >
       {MATERIALS.map((material) => (
         <motion.article
           key={material.id}
-          whileHover={{ y: -8 }}
-          transition={{
-            duration: 0.25,
-            ease: "easeOut",
+          // variants={cardVariants}
+          whileHover={{
+            y: -10,
+            scale: 1.015,
           }}
-          className="group overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition-shadow hover:shadow-xl"
+          transition={{
+            duration: 0.3,
+          }}
+          className="group relative overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition-all duration-500 hover:border-primary/40 hover:shadow-2xl"
         >
-          <div className="flex flex-col gap-6 p-6">
+          {/* Decorative Blur */}
+          <div className="absolute -right-24 -top-24 h-48 w-48 rounded-full bg-primary/10 blur-3xl transition-all duration-700 group-hover:scale-125" />
+
+          {/* Animated Top Border */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ duration: 0.8 }}
+            className="absolute left-0 top-0 h-1 w-full origin-left bg-primary"
+          />
+
+          <div className="relative flex h-full flex-col p-7">
             {/* Header */}
 
-            <div className="space-y-3">
-              <Badge variant="custom">{material.title}</Badge>
-
-              {/* <h2 className="font-heading text-2xl font-bold text-foreground">{material.title}</h2> */}
+            <div className="space-y-5">
+              <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
+                <Badge variant="custom">{material.title}</Badge>
+              </motion.div>
 
               <p className="text-sm leading-7 text-muted-foreground">{material.description}</p>
             </div>
 
             {/* Series */}
 
-            <div className="space-y-5">
-              {material.series.map((series) => (
-                <div
+            <div className="mt-8 flex-1 space-y-5">
+              {material.series.map((series, index) => (
+                <motion.div
                   key={series.id}
-                  className="rounded-2xl border border-border bg-background/40 p-4"
+                  initial={{ opacity: 0, x: -15 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{
+                    delay: index * 0.08,
+                    duration: 0.4,
+                  }}
+                  className="rounded-2xl border border-border/70 bg-background/60 p-5 backdrop-blur-sm transition-all duration-300 group-hover:border-primary/30"
                 >
-                  <h3 className="font-heading mb-4 text-lg font-semibold text-foreground">
-                    {series.title}
-                  </h3>
+                  <h3 className="mb-4 text-lg font-semibold text-foreground">{series.title}</h3>
 
-                  {/* Products */}
+                  {/* Grades */}
 
-                  <div className="mb-4">
-                    {/* <p className="mb-2 text-sm font-semibold lowercase tracking-wide">Grades</p> */}
-
+                  <div className="mb-5">
                     <div className="flex flex-wrap gap-2">
-                      {series.products.map((product) => (
-                        <Badge key={product} variant="secondary" className="text-[0.72rem]">
-                          {product}
-                        </Badge>
+                      {series.grades.map((grade) => (
+                        <motion.div
+                          key={grade}
+                          whileHover={{
+                            y: -2,
+                            scale: 1.05,
+                          }}
+                        >
+                          <Badge variant="secondary" className="rounded-full px-3 py-1 text-[11px]">
+                            {grade}
+                          </Badge>
+                        </motion.div>
                       ))}
                     </div>
                   </div>
 
                   {/* Forms */}
 
-                  <div>
-                    {/* <p className="mb-2 text-sm font-semibold lowercase tracking-wide">Forms</p> */}
-
-                    <div className="flex flex-wrap gap-2">
-                      {series.forms.map((form) => (
-                        <Badge key={form.id} variant="outline" className="text-[0.72rem]">
+                  <div className="flex flex-wrap gap-2">
+                    {series.forms.map((form) => (
+                      <motion.div
+                        key={form.id}
+                        whileHover={{
+                          scale: 1.05,
+                        }}
+                      >
+                        <Badge variant="outline" className="rounded-full px-3 py-1 text-[11px]">
                           {form.name}
                         </Badge>
-                      ))}
-                    </div>
+                      </motion.div>
+                    ))}
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
 
-            {/* Actions */}
+            {/* Divider */}
+
+            <div className="my-7 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+
+            {/* Buttons */}
 
             <div className="grid gap-3 sm:grid-cols-2">
-              <Link
-                href="/contact"
-                className="group/button inline-flex min-h-[44px] items-center justify-center gap-2 rounded-2xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:-translate-y-1 hover:bg-primary/90 hover:shadow-lg active:scale-95"
+              <motion.div
+                whileHover={{
+                  y: -3,
+                }}
+                whileTap={{
+                  scale: 0.97,
+                }}
               >
-                RFQ
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/button:translate-x-1" />
-              </Link>
+                <Link
+                  href="/contact"
+                  className="group/button flex h-12 items-center justify-center gap-2 rounded-xl bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-md transition-all hover:bg-primary/90"
+                >
+                  Request RFQ
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/button:translate-x-1" />
+                </Link>
+              </motion.div>
 
-              <Link
-                href={material.datasheet.file}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group/button inline-flex min-h-[44px] items-center justify-center gap-2 rounded-2xl border border-border bg-background px-4 py-3 text-sm font-semibold text-foreground transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:bg-primary/5 hover:text-primary hover:shadow-lg active:scale-95"
+              <motion.div
+                whileHover={{
+                  y: -3,
+                }}
+                whileTap={{
+                  scale: 0.97,
+                }}
               >
-                <FileText className="h-4 w-4 transition-transform duration-300 group-hover/button:rotate-6" />
-                Datasheet
-              </Link>
+                <Link
+                  href={material.datasheet.file}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/button flex h-12 items-center justify-center gap-2 rounded-xl border border-border bg-background text-sm font-semibold transition-all hover:border-primary hover:bg-primary/5 hover:text-primary"
+                >
+                  <FileText className="h-4 w-4 transition-transform duration-300 group-hover/button:rotate-6" />
+                  Datasheet
+                </Link>
+              </motion.div>
             </div>
           </div>
         </motion.article>
       ))}
-    </div>
+    </motion.div>
   );
 }
-
-// import { MATERIALS } from "./materials-data";
-
-// export default function MaterialGrid() {
-//   return (
-//     <div className="grid gap-6 md:grid-cols-2">
-//       {MATERIALS.map((material) => (
-//         <div key={material.id} className="rounded-xl border p-6">
-//           <h2 className="text-2xl font-bold">{material.title}</h2>
-
-//           <p className="mt-2 text-muted-foreground">{material.description}</p>
-
-//           <div className="mt-6 space-y-4">
-//             {material.series.map((series) => (
-//               <div key={series.id}>
-//                 <h3 className="font-semibold">{series.title}</h3>
-
-//                 <p className="text-sm">
-//                   <strong>Products:</strong> {series.products.join(", ")}
-//                 </p>
-
-//                 <p className="text-sm">
-//                   <strong>Forms:</strong> {series.forms.map((f) => f.name).join(", ")}
-//                 </p>
-//               </div>
-//             ))}
-//           </div>
-
-//           <a
-//             href={material.datasheet.file}
-//             className="mt-6 inline-flex rounded bg-primary px-4 py-2 text-white"
-//           >
-//             Download Datasheet
-//           </a>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// }

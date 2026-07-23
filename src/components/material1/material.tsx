@@ -27,7 +27,7 @@ export default function MaterialList() {
           <h1 className="flex item-center justify-center text-4xl font-heading">
             Following are the list of Materials
           </h1>
-          <div className="p-5">
+          <div>
             <MaterialGrid />
           </div>
         </div>

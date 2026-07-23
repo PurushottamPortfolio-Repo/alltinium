@@ -6,7 +6,7 @@ export interface MaterialForm {
 export interface MaterialSeries {
   id: string;
   title: string;
-  products: string[];
+  grades: string[];
   forms: MaterialForm[];
 }
 
