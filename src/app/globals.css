@@ -281,7 +281,18 @@
   }
 }
 
+/* Text selection */
+/* ::selection {
+  background-color: rgba(59, 130, 246, 0.25);
+ color: #ffffff;
+} 
+
+::-moz-selection {
+  background-color: rgba(59, 130, 246, 0.25);
+  color: #ffffff;
+} */
+
 ::selection {
-  background: var(--accent);
-  color: var(--primary);
+  background: rgba(249, 115, 22, 0.25);
+  color: white;
 }
