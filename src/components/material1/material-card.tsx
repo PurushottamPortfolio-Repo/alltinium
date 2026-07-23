@@ -38,7 +38,7 @@ export default function MaterialGrid() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.15 }}
-      className="grid gap-8 lg:grid-cols-3"
+      className="grid gap-4 lg:grid-cols-3"
     >
       {MATERIALS.map((material) => (
         <motion.article
@@ -51,7 +51,7 @@ export default function MaterialGrid() {
           transition={{
             duration: 0.3,
           }}
-          className="group relative overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition-all duration-500 hover:border-primary/40 hover:shadow-2xl"
+          className="group relative overflow-hidden rounded-md border border-border bg-card shadow-sm transition-all duration-500 hover:border-primary/40 hover:shadow-2xl"
         >
           {/* Decorative Blur */}
           <div className="absolute -right-24 -top-24 h-48 w-48 rounded-full bg-primary/10 blur-3xl transition-all duration-700 group-hover:scale-125" />
@@ -64,20 +64,20 @@ export default function MaterialGrid() {
             className="absolute left-0 top-0 h-1 w-full origin-left bg-primary"
           />
 
-          <div className="relative flex h-full flex-col p-7">
+          <div className="relative flex h-full flex-col p-4">
             {/* Header */}
 
-            <div className="space-y-5">
+            <div className="space-y-3">
               <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
                 <Badge variant="custom">{material.title}</Badge>
               </motion.div>
 
-              <p className="text-sm leading-7 text-muted-foreground">{material.description}</p>
+              <p className="text-sm leading-4 text-muted-foreground">{material.description}</p>
             </div>
 
             {/* Series */}
 
-            <div className="mt-8 flex-1 space-y-5">
+            <div className="mt-3 flex-1 space-y-2">
               {material.series.map((series, index) => (
                 <motion.div
                   key={series.id}
@@ -87,14 +87,14 @@ export default function MaterialGrid() {
                     delay: index * 0.08,
                     duration: 0.4,
                   }}
-                  className="rounded-2xl border border-border/70 bg-background/60 p-5 backdrop-blur-sm transition-all duration-300 group-hover:border-primary/30"
+                  className="rounded-md border border-border/70 bg-background/60 px-4 py-2 backdrop-blur-sm transition-all duration-300 group-hover:border-primary/30"
                 >
-                  <h3 className="mb-4 text-lg font-semibold text-foreground">{series.title}</h3>
+                  <h3 className="mb-1 text-lg font-semibold text-foreground">{series.title}</h3>
 
                   {/* Grades */}
 
-                  <div className="mb-5">
-                    <div className="flex flex-wrap gap-2">
+                  <div className="mb-2">
+                    <div className="flex flex-wrap gap-1">
                       {series.grades.map((grade) => (
                         <motion.div
                           key={grade}
@@ -103,7 +103,7 @@ export default function MaterialGrid() {
                             scale: 1.05,
                           }}
                         >
-                          <Badge variant="secondary" className="rounded-full px-3 py-1 text-[11px]">
+                          <Badge variant="secondary" className="rounded-md px-2 text-[11px]">
                             {grade}
                           </Badge>
                         </motion.div>
@@ -113,7 +113,7 @@ export default function MaterialGrid() {
 
                   {/* Forms */}
 
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1">
                     {series.forms.map((form) => (
                       <motion.div
                         key={form.id}
@@ -121,7 +121,7 @@ export default function MaterialGrid() {
                           scale: 1.05,
                         }}
                       >
-                        <Badge variant="outline" className="rounded-full px-3 py-1 text-[11px]">
+                        <Badge variant="outline" className="rounded-md px-2 text-[11px]">
                           {form.name}
                         </Badge>
                       </motion.div>
@@ -133,7 +133,7 @@ export default function MaterialGrid() {
 
             {/* Divider */}
 
-            <div className="my-7 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+            <div className="my-3 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
             {/* Buttons */}
 
@@ -148,7 +148,7 @@ export default function MaterialGrid() {
               >
                 <Link
                   href="/contact"
-                  className="group/button flex h-12 items-center justify-center gap-2 rounded-xl bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-md transition-all hover:bg-primary/90"
+                  className="group/button flex h-8 items-center justify-center gap-2 rounded-md bg-primary text-sm font-semibold text-primary-foreground shadow-md transition-all hover:bg-primary/90"
                 >
                   Request RFQ
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/button:translate-x-1" />
@@ -167,7 +167,7 @@ export default function MaterialGrid() {
                   href={material.datasheet.file}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/button flex h-12 items-center justify-center gap-2 rounded-xl border border-border bg-background text-sm font-semibold transition-all hover:border-primary hover:bg-primary/5 hover:text-primary"
+                  className="group/button flex h-8 items-center justify-center gap-2 rounded-md border border-border bg-background text-sm font-semibold transition-all hover:border-primary hover:bg-primary/5 hover:text-primary"
                 >
                   <FileText className="h-4 w-4 transition-transform duration-300 group-hover/button:rotate-6" />
                   Datasheet

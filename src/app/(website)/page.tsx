@@ -4,7 +4,7 @@ import { CTASection } from "@/components/sections/cta";
 import dynamic from "next/dynamic";
 import { TechMarquee } from "@/components/sections/marquee";
 import { WhyChooseMe } from "@/components/sections/why-choose-me";
-import { NetworkSection } from "@/components/sections/network";
+// import { NetworkSection } from "@/components/sections/network";
 import { IndustriesSection } from "@/components/sections/industries";
 // import { TrustSection } from "@/components/sections/trust";
 import { LatestBlogs } from "@/components/sections/latest-blogs";
@@ -21,11 +21,11 @@ export default function HomePage() {
     <>
       <HeroSection />
       <TechMarquee />
-      <div className="flex flex-col item-center justify-center p-10 gap-5">
+      <div className="flex flex-col item-center justify-center gap-5">
         <ServicesSection />
         <MaterialsSection />
         <WhyChooseMe />
-        <NetworkSection />
+        {/* <NetworkSection /> */}
         <IndustriesSection />
         {/* <TrustSection /> */}
         <CTASection />

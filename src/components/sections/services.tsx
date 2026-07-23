@@ -9,7 +9,7 @@ import { ServiceCard } from "@/components/common/cards/service-card";
 
 export function ServicesSection() {
   return (
-    <section className="relative p-4 py-5 bg-primary/5 rounded-md PY-10 border-border">
+    <section className="relative px-6 py-5 bg-servicebg rounded-md border-border">
       {/* Heading */}
 
       <motion.div
@@ -25,12 +25,11 @@ export function ServicesSection() {
           </span>
 
           <h2 className="mt-3 text-3xl font-bold font-heading tracking-tight">
-            One supply chain.
+            One four supply chain and critical capabilities.
             <br />
-            Four critical capabilities.
           </h2>
 
-          <p className="mt-5 max-w-2xl text-muted-foreground font-body">
+          <p className="mt-5 text-muted-foreground font-body">
             From the mill to the machined part — we close the loop so your QA, procurement and
             engineering teams talk to a single partner.
           </p>

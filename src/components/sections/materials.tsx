@@ -26,7 +26,7 @@ export function MaterialsSection() {
   }, []);
 
   return (
-    <section className="relative p-4">
+    <section className="relative px-6 py-5">
       <div className="">
         {/* Heading */}
 
