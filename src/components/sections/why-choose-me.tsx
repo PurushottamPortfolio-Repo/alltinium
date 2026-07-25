@@ -52,7 +52,7 @@ const cardVariants = {
 
 export function WhyChooseMe() {
   return (
-    <section className="p-4 py-10 border rounded-md">
+    <section className="relative px-6 py-10 rounded-md border">
       {/* Heading */}
 
       <motion.div
@@ -60,7 +60,7 @@ export function WhyChooseMe() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="mx-auto max-w-3xl text-center"
+        className="mx-auto text-center"
       >
         <span className="font-heading inline-flex rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
           Why Choose Us
@@ -83,7 +83,7 @@ export function WhyChooseMe() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="mt-16 grid gap-6 sm:grid-cols-2 xl:grid-cols-4"
+        className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-4"
       >
         {REASONS.map(({ icon: Icon, title, detail }) => (
           <motion.div

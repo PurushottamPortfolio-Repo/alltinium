@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export function LatestBlogs() {
   return (
-    <section className="p-4 py-10">
+    <section className="px-6 py-10">
       <Reveal className="mx-auto max-w-3xl text-center">
         <span className="font-heading inline-flex rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
           Wriitings

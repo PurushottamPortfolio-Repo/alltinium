@@ -6,13 +6,13 @@ import { CtaSectionData } from "@/data/mock";
 
 export function CTASection() {
   return (
-    <section className="py-10">
+    <section className="mt-5">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
         viewport={{ once: true }}
-        className="overflow-hidden rounded-3xl border border-border bg-card shadow-xl"
+        className="overflow-hidden border border-border bg-card shadow-xl"
       >
         <div className="grid gap-12 p-8 lg:grid-cols-[1.3fr_0.9fr] lg:p-14 bg-gradient-to-r from-background to-primary rounded-md">
           {/* Left */}
@@ -37,12 +37,12 @@ export function CTASection() {
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
-              <button className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-body font-semibold text-primary-foreground transition-all hover:scale-105 hover:bg-primary/90">
+              <button className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-body font-semibold text-primary-foreground transition-all hover:cursor-pointer hover:scale-105 hover:bg-primary/90">
                 Submit an RFQ
                 <ArrowRight className="h-4 w-4" />
               </button>
 
-              <button className="inline-flex items-center rounded-full border border-border px-6 py-3 font-body font-semibold transition hover:bg-muted">
+              <button className="inline-flex items-center rounded-full border border-border hover:cursor-pointer px-6 py-3 font-body font-semibold transition hover:bg-muted">
                 Talk to Engineering
               </button>
             </div>

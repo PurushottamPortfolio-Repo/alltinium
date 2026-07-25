@@ -7,9 +7,9 @@ import { IndustriesSectionData } from "@/data/mock";
 
 export function IndustriesSection() {
   return (
-    <section className="relative py-10  p-4">
+    <section className="relative py-10  px-6">
       {/* Background Glow */}
-      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none ">
         <div className="absolute -left-40 top-0 h-[500px] w-[500px] rounded-full bg-primary/6 blur-3xl" />
 
         <div className="absolute -right-40 bottom-0 h-[450px] w-[450px] rounded-full bg-accent/10 blur-3xl" />
@@ -76,44 +76,6 @@ export function IndustriesSection() {
       </motion.div>
 
       {/* Cards */}
-      {/* <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={{
-            hidden: {},
-            show: {
-              transition: {
-                staggerChildren: 0.08,
-              },
-            },
-          }}
-          className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6"
-        >
-          {IndustriesSectionData.map((item) => (
-            <motion.div
-              key={item.id}
-              variants={{
-                hidden: { opacity: 0, y: 30 },
-                show: { opacity: 1, y: 0 },
-              }}
-              whileHover={{
-                y: -8,
-                scale: 1.03,
-              }}
-              transition={{ duration: 0.3 }}
-              className="group rounded-2xl border border-white/10 bg-white/10 p-6 backdrop-blur-xl transition-all duration-300 hover:border-primary/40 hover:bg-white/15"
-            >
-              <div className="flex h-full items-center justify-center">
-                <h3 className="font-heading text-center text-lg font-semibold text-white transition-colors duration-300 group-hover:text-primary">
-                  {item.title}
-                </h3>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div> */}
-
-      {/* Cards */}
       <motion.div
         initial="hidden"
         whileInView="show"
@@ -126,7 +88,7 @@ export function IndustriesSection() {
             },
           },
         }}
-        className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
       >
         {IndustriesSectionData.map((item, index) => (
           <motion.div
@@ -137,10 +99,11 @@ export function IndustriesSection() {
             }}
             whileHover={{ y: -6 }}
             transition={{ duration: 0.3 }}
+            className=""
           >
             <Link
               href={item.href ?? "#"}
-              className="group relative flex h-52 overflow-hidden rounded-2xl border border-border bg-card p-7 transition-all duration-300 hover:border-accent hover:shadow-xl"
+              className="group relative flex h-24 overflow-hidden rounded-md border border-border bg-card p-7 transition-all duration-300 hover:border-accent hover:shadow-xl"
             >
               {/* Animated Background Particles */}
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -169,7 +132,7 @@ export function IndustriesSection() {
               </div>
 
               {/* Background Number */}
-              <span className="absolute right-5 top-4 text-7xl font-black text-primary/5 transition-all duration-300 group-hover:text-primary/10">
+              <span className=" absolute right-5 top-4 text-7xl font-black text-primary/5 transition-all duration-300 group-hover:text-primary/10">
                 {(index + 1).toString().padStart(2, "0")}
               </span>
 
@@ -185,14 +148,6 @@ export function IndustriesSection() {
                   <h3 className="font-heading text-2xl font-semibold text-foreground transition-colors group-hover:text-primary">
                     {item.title}
                   </h3>
-                </div>
-
-                <div className="flex items-center gap-2 text-sm font-medium text-accent">
-                  Explore
-                  <ArrowRight
-                    size={16}
-                    className="transition-transform duration-300 group-hover:translate-x-2"
-                  />
                 </div>
               </div>
             </Link>
