@@ -81,7 +81,7 @@ export function Footer() {
                 info@alltinium.com
               </a>
 
-              <p>+91 XXX XX XXXX</p>
+              <p>+91 9289080696</p>
 
               <div>
                 <p>Mon &ndash; Fri</p>

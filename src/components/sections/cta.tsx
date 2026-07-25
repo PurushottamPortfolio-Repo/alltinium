@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import QuoteButton from "@/components/quote/QuoteButton";
 import { ArrowRight } from "lucide-react";
 import { CtaSectionData } from "@/data/mock";
 
@@ -37,12 +38,9 @@ export function CTASection() {
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
-              <button className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-body font-semibold text-primary-foreground transition-all hover:cursor-pointer hover:scale-105 hover:bg-primary/90">
-                Submit an RFQ
-                <ArrowRight className="h-4 w-4" />
-              </button>
+              <QuoteButton className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-body font-semibold text-primary-foreground transition-all hover:cursor-pointer hover:scale-105 hover:bg-primary/90" />
 
-              <button className="inline-flex items-center rounded-full border border-border hover:cursor-pointer px-6 py-3 font-body font-semibold transition hover:bg-muted">
+              <button className="inline-flex items-center rounded-full border border-border hover:cursor-pointer px-6 py-3 font-body font-semibold transition hover:bg-muted hover:cursor-pointer hover:scale-105">
                 Talk to Engineering
               </button>
             </div>

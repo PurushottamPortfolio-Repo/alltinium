@@ -16,7 +16,7 @@ type QuoteModalProps = {
 
 const steps = [
   {
-    title: "Project Details",
+    title: "Material",
     description: "Tell us about the scope and timeline.",
   },
   {
@@ -276,11 +276,9 @@ export function QuoteModal({ open, onOpenChange }: QuoteModalProps) {
             <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.24em] text-primary">
-                  Request a Quote
+                  RFQ: Request a Quote
                 </p>
-                <h2 className="text-2xl font-semibold text-foreground">
-                  Let&apos;s shape your next build.
-                </h2>
+                <h2 className="text-2xl font-semibold text-foreground">48-hour response.</h2>
               </div>
               <div className="w-full sm:w-56">
                 <div className="mb-2 h-2 overflow-hidden rounded-full bg-muted">

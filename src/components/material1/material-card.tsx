@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, FileText } from "lucide-react";
+import { FileText } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { MATERIALS } from "./materials-data";
+import QuoteButton from "../quote/QuoteButton";
 
 const containerVariants = {
   hidden: {},
@@ -15,21 +16,6 @@ const containerVariants = {
     },
   },
 };
-
-// const cardVariants = {
-//   hidden: {
-//     opacity: 0,
-//     y: 40,
-//   },
-//   visible: {
-//     opacity: 1,
-//     y: 0,
-//     transition: {
-//       duration: 0.55,
-//       ease: "easeOut",
-//     },
-//   },
-// };
 
 export default function MaterialGrid() {
   return (
@@ -146,13 +132,7 @@ export default function MaterialGrid() {
                   scale: 0.97,
                 }}
               >
-                <Link
-                  href="/contact"
-                  className="group/button flex h-8 items-center justify-center gap-2 rounded-md bg-primary text-sm font-semibold text-primary-foreground shadow-md transition-all hover:bg-primary/90"
-                >
-                  Request RFQ
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/button:translate-x-1" />
-                </Link>
+                <QuoteButton className="group/button flex h-8 px-3 items-center justify-center gap-2 rounded-md bg-primary text-sm font-semibold text-primary-foreground shadow-md transition-all hover:bg-primary/90" />
               </motion.div>
 
               <motion.div

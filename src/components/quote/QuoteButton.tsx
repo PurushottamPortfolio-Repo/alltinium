@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useQuote } from "@/providers/QuoteProvider";
-
+import { ArrowRight, FileText } from "lucide-react";
 interface QuoteButtonProps {
   children?: React.ReactNode;
   className?: string;
@@ -14,6 +14,7 @@ export function QuoteButton({ children = "Request a Quote", className = "" }: Qu
   return (
     <button type="button" onClick={openModal} className={className}>
       {children}
+      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/button:translate-x-1" />
     </button>
   );
 }
