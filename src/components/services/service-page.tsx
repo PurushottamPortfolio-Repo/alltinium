@@ -23,8 +23,9 @@ export function ServicePage() {
           },
         ]}
       />
-      <section className="relative PY-10">
-        <div className="container px-4 mb-20">
+      <section className="relative PY-10 px-4">
+        <div className="container p-4">
+          {/* <h1 className="text-3xl ">One four supply chain and critical capabilities</h1> */}
           {/* Cards */}
           <ServiceStripe />
         </div>

@@ -16,19 +16,4 @@ export const founders = [
     ],
     linkedin: "https://www.linkedin.com/in/preetham-shetty-3a249735a/",
   },
-  {
-    id: 2,
-    name: "Roshan Shetty",
-    role: "Co-Founder",
-    image: assets.profiles.profile1,
-    description:
-      "Bringing expertise in engineering operations, business strategy, and customer engagement, Founder Name strengthens Alltinium's commitment to delivering reliable material solutions for critical industries.",
-    expertise: [
-      "Engineering Operations",
-      "Business Development",
-      "Customer Success",
-      "Global Partnerships",
-    ],
-    linkedin: "https://www.linkedin.com/in/roshan-shetty-08b78b134/",
-  },
 ];

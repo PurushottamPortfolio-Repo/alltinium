@@ -1,4 +1,4 @@
-import { Building2, FileText, Clock3, BadgeCheck, ShieldCheck } from "lucide-react";
+import { FileText, Clock3, BadgeCheck, ShieldCheck } from "lucide-react";
 import { assets } from "@/assets";
 
 export const CtaSectionData = [

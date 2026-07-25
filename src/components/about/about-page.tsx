@@ -274,8 +274,9 @@ export function AboutPage() {
             </motion.div>
           ))}
         </div>
+
         {/* Timeline */}
-        <section className="mt-24">
+        {/* <section className="mt-24">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -291,7 +292,7 @@ export function AboutPage() {
           </motion.div>
 
           <div className="relative mx-auto max-w-6xl">
-            {/* Center Line */}
+           
             <div className="absolute left-6 top-0 h-full w-px bg-border lg:left-1/2 lg:-translate-x-1/2" />
 
             <div className="space-y-20">
@@ -308,7 +309,7 @@ export function AboutPage() {
                     transition={{ delay: index * 0.08 }}
                     className="relative grid grid-cols-1 lg:grid-cols-2"
                   >
-                    {/* LEFT CARD */}
+                   
                     <div className={`${isLeft ? "lg:pr-14" : "lg:pr-14 lg:order-2"}`}>
                       <div
                         className={`rounded-2xl border border-border bg-card p-8 shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
@@ -325,10 +326,10 @@ export function AboutPage() {
                       </div>
                     </div>
 
-                    {/* EMPTY COLUMN */}
+                    
                     <div className={`${isLeft ? "" : "lg:order-1"}`} />
 
-                    {/* TIMELINE DOT */}
+                  
                     <div className="absolute left-6 top-10 -translate-x-1/2 lg:left-1/2">
                       <div className="flex h-14 w-14 items-center justify-center rounded-full border-4 border-background bg-primary shadow-xl">
                         <CalendarClock className="h-6 w-6 text-primary-foreground" />
@@ -339,7 +340,7 @@ export function AboutPage() {
               })}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Memberships & affiliations */}
         <section className="py-10 px-20">
