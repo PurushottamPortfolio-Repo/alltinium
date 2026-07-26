@@ -1,4 +1,4 @@
-import { BLOG_POSTS } from "@/data/blog/blog";
+import { BLOG_POSTS } from "@/components/blog/blog-posts";
 import { LatestBlogs } from "@/components/blog/latest-blogs";
 
 export const metadata = {

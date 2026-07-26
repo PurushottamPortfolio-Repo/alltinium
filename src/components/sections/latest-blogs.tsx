@@ -1,5 +1,5 @@
-import { BLOG_POSTS } from "@/data/mock";
-import { BlogCard } from "@/components/ui/blog-card";
+import { BLOG_POSTS } from "@/components/blog/blog-posts";
+import { BlogCard } from "@/components/blog/blog-card";
 import { Reveal } from "@/components/animations/reveal";
 import { motion } from "framer-motion";
 
