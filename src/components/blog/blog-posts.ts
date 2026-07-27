@@ -8,6 +8,7 @@ export const BLOG_POSTS = [
     excerpt:
       "The choice between 7050 and 7075 aluminum alloys for aerospace structures depends on the specific requirements of the application, including strength, corrosion resistance, and performance.",
     category: "Materials",
+    content: "Full blog content",
     tags: ["Next.js", "Architecture"],
     readingTime: 7,
     date: "2026-05-12",
@@ -20,6 +21,7 @@ export const BLOG_POSTS = [
     excerpt:
       "Ensuring the quality of materials and components in aerospace manufacturing requires a robust MTC (Material Test Certificate) chain. ",
     category: "Quality",
+    content: "Full blog content",
     tags: ["Design Systems", "Figma"],
     readingTime: 6,
     date: "2026-04-02",
@@ -32,6 +34,7 @@ export const BLOG_POSTS = [
     excerpt:
       "AS9120 is a quality management standard specifically for aerospace distributors. It ensures that suppliers meet stringent requirements. which is crucial for aerospace buyers in India.",
     category: "Certifications",
+    content: "Full blog content",
     tags: ["Freelance", "Process"],
     readingTime: 5,
     date: "2026-02-18",
