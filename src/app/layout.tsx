@@ -5,7 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/common/navbar";
 import Footer from "@/components/common/footer";
 import { RouteProgress } from "@/components/common/route-progress";
-import { QuoteProvider } from "@/providers/QuoteProvider";
+// import { QuoteProvider } from "@/providers/QuoteProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -42,12 +42,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <QuoteProvider>
-            <RouteProgress />
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </QuoteProvider>
+          {/* <QuoteProvider> */}
+          <RouteProgress />
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          {/* </QuoteProvider> */}
         </ThemeProvider>
       </body>
     </html>
