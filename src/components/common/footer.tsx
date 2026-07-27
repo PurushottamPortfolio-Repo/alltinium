@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, Mail } from "lucide-react";
-import { FaLinkedin } from "react-icons/fa";
+import { ArrowUpRight, Mail, Phone } from "lucide-react";
 
 const quickLinks = [
   { title: "About", href: "/about" },
   { title: "Materials", href: "/materials" },
-  { title: "Projects", href: "/projects" },
+  { title: "Services", href: "/services" },
+  { title: "Blogs", href: "/blog" },
   { title: "Contact", href: "/contact" },
 ];
 
@@ -73,22 +73,20 @@ export function Footer() {
             </h3>
 
             <div className="space-y-4 text-sm text-[var(--ink-muted)]">
-              <a
-                href="mailto:info@alltinium.com"
-                className="flex items-center gap-3 transition hover:text-[var(--ink)]"
-              >
+              <div className="flex items-center gap-3 transition hover:text-[var(--ink)]">
                 <Mail className="h-4 w-4" />
                 info@alltinium.com
-              </a>
-
-              <p>+91 9289080696</p>
-
-              <div>
-                <p>Mon &ndash; Fri</p>
-                <p>09:00 &ndash; 18:00 IST</p>
+              </div>
+              <div className="flex items-center gap-3 transition hover:text-[var(--ink)]">
+                <Phone className="h-4 w-4" />
+                +91 9289080696
+              </div>
+              <div className="flex items-center gap-3 transition hover:text-[var(--ink)]">
+                ALLTINIUM AEROMETRIX PRIVATE LIMITED No. 2504/1, E Block, Kodigehalli Main Road,
+                Sahakaranagar P.O, Bangalore North, Bangalore- 560092, Karnataka
               </div>
 
-              <div className="pt-2">
+              {/* <div className="pt-2">
                 <a
                   href="#"
                   className="inline-flex items-center gap-2 transition hover:text-primary"
@@ -96,7 +94,7 @@ export function Footer() {
                   <FaLinkedin className="h-4 w-4" />
                   LinkedIn
                 </a>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -105,7 +103,7 @@ export function Footer() {
         <div className="mt-14 border-t border-[var(--surface-border)] pt-6">
           <div className="flex flex-col items-center justify-between gap-5 text-sm text-[var(--ink-muted)] md:flex-row">
             <p>&copy; {new Date().getFullYear()} Alltinium Aerometrix. All rights reserved.</p>
-
+            {/* 
             <div className="flex items-center gap-6">
               <Link href="/privacy" className="transition hover:text-[var(--ink)]">
                 Privacy Policy
@@ -114,7 +112,7 @@ export function Footer() {
               <Link href="/terms" className="transition hover:text-[var(--ink)]">
                 Terms &amp; Conditions
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

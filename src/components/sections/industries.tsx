@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { IndustriesSectionData } from "@/data/mock";
 
 export function IndustriesSection() {
@@ -60,19 +59,11 @@ export function IndustriesSection() {
             Get the part — through our certified network.
           </h2>
 
-          <p className="mt-5 max-w-2xl text-muted-foreground">
+          {/* <p className="mt-5 text-muted-foreground">
             Pre-qualified AS9100/9120, EN9120 and NADCAP partners. You raise one PO; we consolidate
             QA, MTC and part traceability end-to-end.
-          </p>
+          </p> */}
         </div>
-
-        <Link
-          href="/networks"
-          className="group inline-flex items-center gap-2 font-semibold text-primary"
-        >
-          View All Networks
-          <ArrowRight size={18} className="transition group-hover:translate-x-2" />
-        </Link>
       </motion.div>
 
       {/* Cards */}
@@ -141,11 +132,11 @@ export function IndustriesSection() {
 
               <div className="relative z-10 flex h-full flex-col justify-between">
                 <div>
-                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
+                  {/* <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
                     Industry
-                  </p>
+                  </p> */}
 
-                  <h3 className="font-heading text-2xl font-semibold text-foreground transition-colors group-hover:text-primary">
+                  <h3 className="font-heading text-3xl font-semibold text-foreground transition-colors group-hover:text-primary">
                     {item.title}
                   </h3>
                 </div>

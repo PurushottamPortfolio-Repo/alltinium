@@ -1,9 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 
 import { Service } from "@/types/service";
 
@@ -50,21 +48,6 @@ export function ServiceCard({ service, index }: Props) {
         <h3 className="mb--2 text-xl font-heading transition-colors duration-300 group-hover:text-primary">
           {service.title}
         </h3>
-
-        {/* Description */}
-        {/* <p className="mb-4 text-muted-foreground">{service.description}</p> */}
-
-        {/* Button */}
-        <Link
-          href="/services"
-          className="inline-flex items-center gap-2 font-medium text-primary transition-all duration-300 group-hover:gap-4 text-[12px]"
-        >
-          Learn More
-          <ArrowUpRight
-            size={18}
-            className="transition-transform duration-300 group-hover:rotate-45"
-          />
-        </Link>
       </div>
     </motion.article>
   );

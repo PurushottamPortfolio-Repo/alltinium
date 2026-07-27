@@ -25,7 +25,7 @@ export function ServicesSection() {
           </span>
 
           <h2 className="mt-3 text-3xl font-bold font-heading tracking-tight">
-            One four supply chain and critical capabilities.
+            One supply chain and four critical capabilities.
             <br />
           </h2>
 

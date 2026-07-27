@@ -66,7 +66,7 @@ export default function ServiceStripe() {
                   </div>
                   <p className="mb-5 text-lg font-medium text-primary">{service.description}</p>
 
-                  <p className="leading-8 text-muted-foreground">{service.message}</p>
+                  <p className="leading-8 text-muted-foreground text-justify">{service.message}</p>
                 </div>
               </motion.div>
             );

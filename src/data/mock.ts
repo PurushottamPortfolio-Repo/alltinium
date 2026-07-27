@@ -73,7 +73,7 @@ export const IndustriesSectionData = [
   {
     id: 1,
     icon: "Building2",
-    title: "Civil Aerospace",
+    title: "Aerospace",
     href: "",
   },
   {
@@ -85,13 +85,13 @@ export const IndustriesSectionData = [
   {
     id: 3,
     icon: "Building2",
-    title: "Space",
+    title: "Automotive",
     href: "",
   },
   {
     id: 4,
     icon: "Building2",
-    title: "MRO",
+    title: "Oil & Gas",
     href: "",
   },
 ];

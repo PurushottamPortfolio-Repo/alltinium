@@ -4,6 +4,7 @@ import Image from "next/image";
 import QuoteButton from "@/components/quote/QuoteButton";
 import { motion } from "framer-motion";
 import { assets } from "@/assets";
+import Link from "next/link";
 
 export function HeroSection() {
   return (
@@ -67,47 +68,33 @@ export function HeroSection() {
             </a>
           </motion.div>
         </motion.div>
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-4 flex justify-center"
         >
-          <div className="w-full max-w-6xl rounded-md p-4 bg-background/80 shadow-2xl">
+          <div className="w-full max-w-6xl rounded-md bg-background/80 p-4 shadow-2xl">
             <div className="grid grid-cols-2 gap-4 md:grid-cols-6">
               {[
-                {
-                  alloy: "Aluminium",
-                },
-                {
-                  alloy: "Titanium",
-                },
-                {
-                  alloy: "Nickel",
-                },
-                {
-                  alloy: "Special Steel",
-                },
-                {
-                  alloy: "Tungsten",
-                },
-                {
-                  alloy: "Critical & Strategic",
-                },
+                { alloy: "Aluminium", href: "/materials" },
+                { alloy: "Titanium", href: "/materials" },
+                { alloy: "Nickel", href: "/materials" },
+                { alloy: "Special Steel", href: "/materials" },
+                { alloy: "Tungsten", href: "/materials" },
+                { alloy: "Critical & Strategic", href: "/materials" },
               ].map((item) => (
-                <motion.div
-                  key={item.alloy}
-                  whileHover={{
-                    y: -6,
-                    scale: 1.03,
-                  }}
-                  className="rounded-md border backdrop-blur-xl p-1 text-center transition"
-                >
-                  <h3 className="font-heading text-lg font-semibold text-foreground ">
-                    {item.alloy}
-                  </h3>
-                </motion.div>
+                <Link key={item.alloy} href={item.href} className="block">
+                  <motion.div
+                    whileHover={{ y: -6, scale: 1.03 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="flex h-full cursor-pointer items-center justify-center rounded-md border p-3 text-center backdrop-blur-xl transition-colors hover:bg-red-500/10"
+                  >
+                    <h3 className="font-heading text-lg font-semibold text-foreground">
+                      {item.alloy}
+                    </h3>
+                  </motion.div>
+                </Link>
               ))}
             </div>
           </div>

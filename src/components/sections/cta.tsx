@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion";
 import QuoteButton from "@/components/quote/QuoteButton";
-import { ArrowRight } from "lucide-react";
 import { CtaSectionData } from "@/data/mock";
+import Link from "next/link";
 
 export function CTASection() {
   return (
@@ -39,10 +39,11 @@ export function CTASection() {
 
             <div className="mt-10 flex flex-wrap gap-4">
               <QuoteButton className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-body font-semibold text-primary-foreground transition-all hover:cursor-pointer hover:scale-105 hover:bg-primary/90" />
-
-              <button className="inline-flex items-center rounded-full border border-border hover:cursor-pointer px-6 py-3 font-body font-semibold transition hover:bg-muted hover:cursor-pointer hover:scale-105">
-                Talk to Engineering
-              </button>
+              <Link href="contact">
+                <button className="inline-flex items-center rounded-full border border-border hover:cursor-pointer px-6 py-3 font-body font-semibold transition hover:bg-muted hover:cursor-pointer hover:scale-105">
+                  Talk to Engineering
+                </button>
+              </Link>
             </div>
           </motion.div>
 
