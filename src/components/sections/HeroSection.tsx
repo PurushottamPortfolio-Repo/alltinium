@@ -21,22 +21,16 @@ export function HeroSection() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto flex max-w-7xl flex-col gap-8 px-4 py-20 text-white sm:px-6 lg:px-8 lg:py-28">
+      <div className="relative z-10 mx-auto flex max-w-7xl flex-col gap-8 text-white px-4 py-6 md:px-6 md:py-8 lg:px-20 lg:py-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
           className="max-w-3xl"
         >
-          {/* <span className="mb-4 inline-flex rounded-full border-border bg-background px-3 py-1 text-sm font-medium text-foreground">
-            Tailored solutions for Aerospace, Automo ve and Energy Industries.
-          </span> */}
           <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
             India&apos;s integrated supply chain for aerospace-grade metals and alloys
           </h1>
-          {/* <p className="mt-5 max-w-2xl text-md">
-            From mill to line, one integrated metal supply chain.
-          </p> */}
         </motion.div>
 
         <motion.div

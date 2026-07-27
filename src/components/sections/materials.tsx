@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+
 import MaterialGrid from "@/components/material1/material-card";
 import { loadFeaturedMaterials } from "@/data/materials/loader";
 import type { Material } from "@/types/material";
@@ -26,122 +27,52 @@ export function MaterialsSection() {
   }, []);
 
   return (
-    <section className="relative px-6 py-5">
-      <div className="">
+    <section className="relative">
+      <div className="mx-auto max-w-7xl px-4 py-6 md:px-6 md:py-8 lg:px-20 lg:py-10">
         {/* Heading */}
-
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
+          className="mb-10 flex flex-col gap-6 md:mb-14 md:flex-row md:items-end md:justify-between lg:mb-16"
         >
-          <div>
-            <span className="mb-3 inline-block rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary font-heading">
+          <div className="max-w-3xl">
+            <span className="mb-3 inline-block rounded-md bg-primary/10 px-4 py-2 text-sm font-medium font-heading text-primary">
               Catalogue
             </span>
 
-            <h2 className="mt-3 text-4xl font-bold tracking-tight">Materials we stock</h2>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight font-heading sm:text-4xl lg:text-5xl">
+              Materials We Stock
+            </h2>
 
-            <p className="mt-5 max-w-2xl text-muted-foreground">
-              Aerospace-grade families with mill-traceable specifications.
+            <p className="mt-5 max-w-2xl text-base font-body text-muted-foreground sm:text-lg">
+              Aerospace-grade material families with mill-traceable specifications, ready for
+              machining and production.
             </p>
           </div>
 
           <Link
             href="/materials"
-            className="group inline-flex items-center gap-2 font-semibold text-primary"
+            className="group inline-flex w-fit items-center gap-2 font-semibold text-primary"
           >
-            Browse full catalogue
-            <ArrowRight size={18} className="transition group-hover:translate-x-2" />
+            Browse Full Catalogue
+            <ArrowRight
+              size={18}
+              className="transition-transform duration-300 group-hover:translate-x-2"
+            />
           </Link>
         </motion.div>
 
+        {/* Materials */}
         {materials.length > 0 ? (
-          <div>
-            <MaterialGrid />
-          </div>
+          <MaterialGrid />
         ) : (
-          <div className="rounded-3xl border border-border bg-card p-8 text-center text-muted-foreground">
-            Loading materials...
+          <div className="flex min-h-[300px] items-center justify-center rounded-xl border border-border bg-card">
+            <p className="text-muted-foreground">Loading materials...</p>
           </div>
         )}
       </div>
     </section>
   );
 }
-
-// "use client";
-
-// import { useEffect, useState } from "react";
-// import Link from "next/link";
-// import { motion } from "framer-motion";
-// import { ArrowRight } from "lucide-react";
-// import { MaterialGrid } from "@/components/material/material-grid";
-// import { loadFeaturedMaterials } from "@/data/materials/loader";
-// import type { Material } from "@/types/material";
-
-// export function MaterialsSection() {
-//   const [materials, setMaterials] = useState<Material[]>([]);
-
-//   useEffect(() => {
-//     let isMounted = true;
-
-//     loadFeaturedMaterials(3).then((loaded) => {
-//       if (isMounted) {
-//         setMaterials(loaded);
-//       }
-//     });
-
-//     return () => {
-//       isMounted = false;
-//     };
-//   }, []);
-
-//   return (
-//     <section className="relative p-4">
-//       <div className="">
-//         {/* Heading */}
-
-//         <motion.div
-//           initial={{ opacity: 0, y: 25 }}
-//           whileInView={{ opacity: 1, y: 0 }}
-//           viewport={{ once: true }}
-//           transition={{ duration: 0.6 }}
-//           className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
-//         >
-//           <div>
-//             <span className="mb-3 inline-block rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary font-heading">
-//               Catalogue
-//             </span>
-
-//             <h2 className="mt-3 text-4xl font-bold tracking-tight">Materials we stock</h2>
-
-//             <p className="mt-5 max-w-2xl text-muted-foreground">
-//               Aerospace-grade families with mill-traceable specifications.
-//             </p>
-//           </div>
-
-//           <Link
-//             href="/materials"
-//             className="group inline-flex items-center gap-2 font-semibold text-primary"
-//           >
-//             Browse full catalogue
-//             <ArrowRight size={18} className="transition group-hover:translate-x-2" />
-//           </Link>
-//         </motion.div>
-
-//         {materials.length > 0 ? (
-//           <div className="mb-8">
-//             <MaterialGrid materials={materials} />
-//           </div>
-//         ) : (
-//           <div className="rounded-3xl border border-border bg-card p-8 text-center text-muted-foreground">
-//             Loading materials...
-//           </div>
-//         )}
-//       </div>
-//     </section>
-//   );
-// }

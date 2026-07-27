@@ -43,7 +43,7 @@ export function AboutPage() {
         ]}
       />
 
-      <div className="flex flex-col item-center justify-center px-4 py-10">
+      <div className="flex flex-col item-center justify-center mx-auto max-w-7xl px-4 py-6 md:px-6 md:py-8 lg:px-20 lg:py-10 ">
         {/* Company Story */}
 
         <section className="bg-background py-10">
