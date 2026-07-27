@@ -2,13 +2,13 @@
 
 import React from "react";
 import { useQuote } from "@/providers/QuoteProvider";
-import { ArrowRight, FileText } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 interface QuoteButtonProps {
   children?: React.ReactNode;
   className?: string;
 }
 
-export function QuoteButton({ children = "Request a Quote", className = "" }: QuoteButtonProps) {
+export function QuoteButton({ children = "Raise Quote", className = "" }: QuoteButtonProps) {
   const { openModal } = useQuote();
 
   return (

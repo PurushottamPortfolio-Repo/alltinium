@@ -41,7 +41,7 @@ export function PageHero({
         <Image src={image} alt={title} fill priority className="object-cover" />
       </div>
 
-      <div className="relative container mx-auto flex min-h-[520px] max-w-7xl items-center px-6 py-28">
+      <div className="relative container flex min-h-[520px] max-w-7xl items-center mx-auto max-w-7xl px-4 py-6 md:px-6 md:py-8 lg:px-20 lg:py-10">
         <motion.div
           initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
