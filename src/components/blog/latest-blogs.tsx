@@ -1,5 +1,5 @@
 import { BlogCard } from "./blog-card";
-import { BlogPost } from "@/types/blog";
+import { BlogPost } from "@/components/blog/types";
 
 interface Props {
   posts: BlogPost[];

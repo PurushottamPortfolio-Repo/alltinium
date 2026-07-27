@@ -1,24 +1,9 @@
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { Clock } from "lucide-react";
-
 import { Badge } from "@/components/ui/badge";
 
-export interface BlogPost {
-  slug: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  readingTime: number;
-  date: string;
-  cover: StaticImageData;
-}
-
-interface BlogCardProps {
-  post: BlogPost;
-}
-
-export function BlogCard({ post }: BlogCardProps) {
+export function BlogCard({ post }) {
   return (
     <Link href={`/blog/${post.slug}`} className="group block">
       <article className="overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">

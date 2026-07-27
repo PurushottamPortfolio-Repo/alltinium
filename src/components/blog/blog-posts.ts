@@ -2,7 +2,8 @@ import { assets } from "@/assets";
 
 export const BLOG_POSTS = [
   {
-    slug: "/choosing-between-7050-and-7075-for-aero-structures",
+    id: 1,
+    slug: "choosing-between-7050-and-7075-for-aero-structures",
     title: "Choosing between 7050 and 7075 for aero-structures",
     excerpt:
       "The choice between 7050 and 7075 aluminum alloys for aerospace structures depends on the specific requirements of the application, including strength, corrosion resistance, and performance.",
@@ -13,6 +14,7 @@ export const BLOG_POSTS = [
     cover: assets.blog.b1,
   },
   {
+    id: 2,
     slug: "mtc-chain-what-your-qa-team-should-verify-on-every-consignment",
     title: "MTC chain: what your QA team should verify on every consignment",
     excerpt:
@@ -24,6 +26,7 @@ export const BLOG_POSTS = [
     cover: assets.blog.b1,
   },
   {
+    id: 3,
     slug: "as9120-what-it-really-means-for-aerospace-buyers-in-india",
     title: "AS9120 — what it really means for aerospace buyers in India",
     excerpt:
@@ -34,4 +37,13 @@ export const BLOG_POSTS = [
     date: "2026-02-18",
     cover: assets.blog.b1,
   },
+];
+
+import { BlogFilterCategory } from "@/components/blog/types";
+
+export const BLOG_CATEGORIES: BlogFilterCategory[] = [
+  "All",
+  "Materials",
+  "Quality",
+  "Certifications",
 ];
