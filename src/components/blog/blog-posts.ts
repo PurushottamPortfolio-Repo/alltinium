@@ -1,6 +1,7 @@
 import { assets } from "@/assets";
+import { BlogPost } from "./types";
 
-export const BLOG_POSTS = [
+export const BLOG_POSTS: BlogPost[] = [
   {
     id: 1,
     slug: "choosing-between-7050-and-7075-for-aero-structures",
