@@ -4,7 +4,7 @@ import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronRight, Home } from "lucide-react";
-import QuoteButton from "@/components/quote/QuoteButton";
+import QuoteButton from "@/components/quote/quote-button";
 
 interface BreadcrumbItem {
   label: string;

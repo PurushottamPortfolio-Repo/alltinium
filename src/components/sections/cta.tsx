@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import QuoteButton from "@/components/quote/QuoteButton";
+import QuoteButton from "@/components/quote/quote-button";
 import { CtaSectionData } from "@/data/mock";
 import Link from "next/link";
 

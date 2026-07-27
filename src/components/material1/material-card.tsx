@@ -6,7 +6,7 @@ import { FileText } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { MATERIALS } from "./materials-data";
-import QuoteButton from "../quote/QuoteButton";
+import QuoteButton from "../quote/quote-button";
 
 const containerVariants = {
   hidden: {},

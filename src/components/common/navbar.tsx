@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import QuoteButton from "@/components/quote/QuoteButton";
+import QuoteButton from "@/components/quote/quote-button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";

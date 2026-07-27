@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import QuoteButton from "@/components/quote/QuoteButton";
+import QuoteButton from "@/components/quote/quote-button";
 import { motion } from "framer-motion";
 import { assets } from "@/assets";
 import Link from "next/link";
