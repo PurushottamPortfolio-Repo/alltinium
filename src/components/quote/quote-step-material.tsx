@@ -1,5 +1,8 @@
-import type { FieldErrors, UseFormRegister } from "react-hook-form";
+import { getFormsByGrade, getGrades } from "@/lib/materials/utils";
+import type { Control, FieldErrors, UseFormRegister, UseFormSetValue } from "react-hook-form";
 
+import { useEffect, useMemo } from "react";
+import { useWatch } from "react-hook-form";
 import {
   MAX_LENGTHS,
   formTypes,
@@ -10,9 +13,33 @@ import {
 type QuoteStepMaterialProps = {
   register: UseFormRegister<RFQFormValues>;
   errors: FieldErrors<RFQFormValues>;
+  control: Control<RFQFormValues>;
+  setValue: UseFormSetValue<RFQFormValues>;
 };
 
-export function QuoteStepMaterial({ register, errors }: QuoteStepMaterialProps) {
+export function QuoteStepMaterial({ register, errors, control, setValue }: QuoteStepMaterialProps) {
+  const materialFamily = useWatch({
+    control,
+    name: "materialFamily",
+  });
+  const grade = useWatch({
+    control,
+    name: "grade",
+  });
+
+  const grades = useMemo(() => getGrades(materialFamily), [materialFamily]);
+
+  const forms = useMemo(() => getFormsByGrade(materialFamily, grade), [materialFamily, grade]);
+
+  useEffect(() => {
+    setValue("grade", "");
+    setValue("form", "");
+  }, [materialFamily]);
+
+  useEffect(() => {
+    setValue("form", "");
+  }, [grade]);
+
   return (
     <div className="grid gap-4 md:grid-cols-2">
       <label className="block">
@@ -35,12 +62,26 @@ export function QuoteStepMaterial({ register, errors }: QuoteStepMaterialProps) 
 
       <label className="block">
         <span className="text-sm font-medium text-foreground">Grade *</span>
-        <input
+        {/* <input
           {...register("grade")}
           maxLength={MAX_LENGTHS.grade}
           placeholder="e.g. Ti-6Al-4V"
           className="mt-2 w-full rounded-lg border border-border bg-background px-3 py-2 outline-none focus:border-primary"
-        />
+        /> */}
+        <select
+          {...register("grade")}
+          disabled={!materialFamily}
+          title={!materialFamily ? "Select Material Family first" : ""}
+          className="mt-2 w-full rounded-lg border border-border bg-background px-3 py-2 outline-none focus:border-primary"
+        >
+          <option value="">Select Grade</option>
+
+          {grades.map((grade) => (
+            <option key={grade.value} value={grade.value}>
+              {grade.label}
+            </option>
+          ))}
+        </select>
         {errors.grade && <p className="mt-1 text-sm text-red-600">{errors.grade.message}</p>}
       </label>
 
@@ -56,17 +97,23 @@ export function QuoteStepMaterial({ register, errors }: QuoteStepMaterialProps) 
 
       <label className="block">
         <span className="text-sm font-medium text-foreground">Form *</span>
+
         <select
           {...register("form")}
+          disabled={!grade}
+          title={!grade ? "Select Grade first" : ""}
+          // disabled={!materialFamily}
           className="mt-2 w-full rounded-lg border border-border bg-background px-3 py-2 outline-none focus:border-primary"
         >
-          <option value="">Select…</option>
-          {formTypes.map((type) => (
-            <option key={type.value} value={type.value}>
-              {type.label}
+          <option value="">Select Form</option>
+
+          {forms.map((form) => (
+            <option key={form.value} value={form.value}>
+              {form.label}
             </option>
           ))}
         </select>
+
         {errors.form && <p className="mt-1 text-sm text-red-600">{errors.form.message}</p>}
       </label>
 

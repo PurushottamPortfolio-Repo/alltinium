@@ -1,37 +1,79 @@
 import { z } from "zod";
+import { MATERIALS } from "@/components/material1/materials-data";
 
-export const rfqFormSchema = z.object({
-  // Material Step
-  materialFamily: z.string().min(1, "Material family is required"),
-  grade: z.string().min(1, "Grade is required"),
-  specification: z.string().optional(),
-  form: z.string().min(1, "Form is required"),
-  temper: z.string().optional(),
-  units: z.enum(["mm", "inch"]).default("mm"),
-  length: z.string().optional(),
-  width: z.string().optional(),
-  thickness: z.string().optional(),
-  diameter: z.string().optional(),
-  quantity: z.string().min(1, "Quantity is required"),
-  tolerance: z.string().optional(),
+export const rfqFormSchema = z
+  .object({
+    // Material Step
+    materialFamily: z.string().min(1, "Material family is required"),
+    grade: z.string().min(1, "Grade is required"),
+    specification: z.string().optional(),
+    form: z.string().min(1, "Form is required"),
+    temper: z.string().optional(),
+    units: z.enum(["mm", "inch"]).default("mm"),
+    length: z.string().optional(),
+    width: z.string().optional(),
+    thickness: z.string().optional(),
+    diameter: z.string().optional(),
+    quantity: z.string().min(1, "Quantity is required"),
+    tolerance: z.string().optional(),
 
-  // Requirements Step
-  surfaceFinish: z.string().optional(),
-  heatTreatment: z.string().optional(),
-  certification: z.string().optional(),
-  specialRequirements: z.string().optional(),
+    // Requirements
+    ndtrequirements: z.string().optional(),
+    heatTreatment: z.string().optional(),
+    packaging: z.string().optional(),
+    specialRequirements: z.string().optional(),
 
-  // Logistics Step
-  deliveryDate: z.string().min(1, "Delivery date is required"),
-  deliveryLocation: z.string().min(1, "Delivery location is required"),
-  shippingPreference: z.string().optional(),
+    // Logistics
+    deliveryDate: z.string().min(1, "Delivery date is required"),
+    deliveryLocation: z.string().min(1, "Delivery location is required"),
+    shippingPreference: z.string().optional(),
 
-  // Company Step
-  companyName: z.string().min(1, "Company name is required"),
-  contactName: z.string().min(1, "Contact name is required"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().min(1, "Phone number is required"),
-});
+    // Company
+    companyName: z.string().min(1, "Company name is required"),
+    contactName: z.string().min(1, "Contact name is required"),
+    email: z.string().email("Invalid email address"),
+    phone: z.string().min(1, "Phone number is required"),
+  })
+  .superRefine((data, ctx) => {
+    const material = MATERIALS.find((m) => m.id === data.materialFamily);
+
+    if (!material) return;
+
+    const validGrades = material.series.flatMap((series) => series.grades);
+
+    // const validForms = [
+    //   ...new Set(material.series.flatMap((series) => series.forms.map((form) => form.id))),
+    // ];
+
+    const selectedSeries = material.series.find((series) => series.grades.includes(data.grade));
+    if (!selectedSeries) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["grade"],
+        message: "Invalid grade for selected material.",
+      });
+
+      return;
+    }
+
+    const validForms = selectedSeries.forms.map((f) => f.id);
+
+    if (!validGrades.includes(data.grade)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["grade"],
+        message: "Please select a valid grade.",
+      });
+    }
+
+    if (!validForms.includes(data.form)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["form"],
+        message: "Selected form is not available for this grade.",
+      });
+    }
+  });
 
 export type RFQFormValues = z.infer<typeof rfqFormSchema>;
 
@@ -48,9 +90,9 @@ export const defaultValues: RFQFormValues = {
   diameter: "",
   quantity: "",
   tolerance: "",
-  surfaceFinish: "",
+  ndtrequirements: "",
   heatTreatment: "",
-  certification: "",
+  packaging: "",
   specialRequirements: "",
   deliveryDate: "",
   deliveryLocation: "",
@@ -73,9 +115,9 @@ export const MAX_LENGTHS = {
   diameter: 20,
   quantity: 100,
   tolerance: 50,
-  surfaceFinish: 200,
+  ndtrequirements: 200,
   heatTreatment: 200,
-  certification: 200,
+  packaging: 200,
   specialRequirements: 500,
   deliveryDate: 20,
   deliveryLocation: 200,
@@ -108,16 +150,18 @@ export const steps = [
 // Fields validated before moving on from each step (index-aligned with `steps`)
 export const fieldsByStep: Array<Array<keyof RFQFormValues>> = [
   ["materialFamily", "grade", "form", "quantity"],
-  ["surfaceFinish", "heatTreatment"],
+  ["ndtrequirements", "heatTreatment"],
   ["deliveryDate", "deliveryLocation"],
   ["companyName", "contactName", "email", "phone"],
 ];
 
 export const materialFamilies = [
-  { value: "aluminum", label: "Aluminum" },
+  { value: "aluminium", label: "Aluminium" },
   { value: "titanium", label: "Titanium" },
-  { value: "nickel-superalloys", label: "Nickel Superalloy" },
-  { value: "special-steels", label: "Special Steel" },
+  { value: "nickel", label: "Nickel Superalloys" },
+  { value: "steel", label: "Special Steel" },
+  { value: "tungsten", label: "Tungsten" },
+  { value: "cas", label: "Critical & Strategic" },
 ] as const;
 
 export const formTypes = [

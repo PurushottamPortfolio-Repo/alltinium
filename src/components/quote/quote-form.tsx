@@ -31,6 +31,7 @@ export function QuoteForm() {
   const {
     register,
     handleSubmit,
+    setValue,
     trigger,
     control,
     formState: { errors, isSubmitting },
@@ -98,7 +99,6 @@ export function QuoteForm() {
       setStatus("error");
       const errorMessage = error instanceof Error ? error.message : "Failed to submit";
       setMessage(errorMessage);
-      console.error("onSubmit error:", errorMessage);
     }
   }
 
@@ -140,9 +140,18 @@ export function QuoteForm() {
             exit={{ opacity: 0, x: -12 }}
             transition={{ duration: 0.2 }}
           >
-            {step === 0 && <QuoteStepMaterial register={register} errors={errors} />}
+            {step === 0 && (
+              <QuoteStepMaterial
+                register={register}
+                errors={errors}
+                control={control}
+                setValue={setValue}
+              />
+            )}
             {step === 1 && <QuoteStepRequirements register={register} errors={errors} />}
-            {step === 2 && <QuoteStepLogistics register={register} errors={errors} />}
+            {step === 2 && (
+              <QuoteStepLogistics register={register} errors={errors} control={control} />
+            )}
             {step === 3 && (
               <QuoteStepCompany
                 register={register}

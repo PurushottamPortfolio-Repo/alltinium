@@ -11,10 +11,10 @@ export function QuoteStepRequirements({ register }: QuoteStepRequirementsProps) 
   return (
     <div className="grid gap-4 md:grid-cols-2">
       <label className="block md:col-span-2">
-        <span className="text-sm font-medium text-foreground">Surface Finish</span>
+        <span className="text-sm font-medium text-foreground">NDT requirements</span>
         <input
-          {...register("surfaceFinish")}
-          maxLength={MAX_LENGTHS.surfaceFinish}
+          {...register("ndtrequirements")}
+          maxLength={MAX_LENGTHS.ndtrequirements}
           placeholder="e.g. Polished, Brushed, As-rolled"
           className="mt-2 w-full rounded-lg border border-border bg-background px-3 py-2 outline-none focus:border-primary"
         />
@@ -31,10 +31,10 @@ export function QuoteStepRequirements({ register }: QuoteStepRequirementsProps) 
       </label>
 
       <label className="block md:col-span-2">
-        <span className="text-sm font-medium text-foreground">Certification</span>
+        <span className="text-sm font-medium text-foreground">Packaging</span>
         <input
-          {...register("certification")}
-          maxLength={MAX_LENGTHS.certification}
+          {...register("packaging")}
+          maxLength={MAX_LENGTHS.packaging}
           placeholder="e.g. DIN 17200, ASTM E10, MIL Spec"
           className="mt-2 w-full rounded-lg border border-border bg-background px-3 py-2 outline-none focus:border-primary"
         />

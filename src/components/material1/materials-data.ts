@@ -1,5 +1,4 @@
 import { MaterialCategory } from "./types";
-import { assets } from "@/assets";
 export const MATERIALS: MaterialCategory[] = [
   {
     id: "aluminium",
