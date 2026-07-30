@@ -1,29 +1,23 @@
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
-
+import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import type { useOtpVerification } from "@/hooks/use-otp-verification";
 import { MAX_LENGTHS, type RFQFormValues } from "@/lib/forms/quote-schema";
 
 type QuoteStepCompanyProps = {
   register: UseFormRegister<RFQFormValues>;
   errors: FieldErrors<RFQFormValues>;
   emailReady: boolean;
-  otp: ReturnType<typeof useOtpVerification>;
+  isEmailVerified: boolean;
+  onRequestVerify: () => void;
 };
 
-export function QuoteStepCompany({ register, errors, emailReady, otp }: QuoteStepCompanyProps) {
-  const {
-    otpSent,
-    otpVerified,
-    otpCode,
-    setOtpCode,
-    otpLoading,
-    otpError,
-    resendCountdown,
-    sendOtp,
-    verifyOtp,
-  } = otp;
-
+export function QuoteStepCompany({
+  register,
+  errors,
+  emailReady,
+  isEmailVerified,
+  onRequestVerify,
+}: QuoteStepCompanyProps) {
   return (
     <div className="grid gap-4 md:grid-cols-2">
       <label className="block">
@@ -52,6 +46,7 @@ export function QuoteStepCompany({ register, errors, emailReady, otp }: QuoteSte
 
       <label className="block md:col-span-2">
         <span className="text-sm font-medium text-foreground">Email *</span>
+
         <input
           {...register("email")}
           maxLength={MAX_LENGTHS.email}
@@ -59,55 +54,27 @@ export function QuoteStepCompany({ register, errors, emailReady, otp }: QuoteSte
           inputMode="email"
           className="mt-2 w-full rounded-lg border border-border bg-background px-3 py-2 outline-none focus:border-primary"
         />
+
         {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
 
-        <div className="mt-3 rounded-lg border border-border/70 bg-muted/40 p-3">
-          <div className="flex flex-wrap items-center gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => void sendOtp()}
-              disabled={otpLoading || !emailReady || otpVerified || resendCountdown > 0}
-            >
-              {otpLoading
-                ? "Sending..."
-                : otpVerified
-                  ? "✓ Verified"
-                  : resendCountdown > 0
-                    ? `Resend in ${resendCountdown}s`
-                    : otpSent
-                      ? "Resend code"
-                      : "Send code"}
+        <div className="mt-3 flex flex-wrap items-center gap-3">
+          {!isEmailVerified && emailReady && (
+            <Button type="button" variant="outline" onClick={onRequestVerify}>
+              Verify Email
             </Button>
-            <p className="text-xs text-muted-foreground">
-              Verify your email before sending the RFQ.
-            </p>
-          </div>
+          )}
 
-          {(otpSent || otpVerified) && (
-            <div className="mt-3 flex flex-col gap-2 sm:flex-row">
-              <input
-                value={otpCode}
-                onChange={(event) => setOtpCode(event.target.value.replace(/\D/g, "").slice(0, 6))}
-                maxLength={6}
-                inputMode="numeric"
-                className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
-                placeholder="Enter 6-digit code"
-                disabled={otpVerified || otpLoading}
-              />
-              <Button
-                type="button"
-                onClick={() => void verifyOtp()}
-                disabled={otpLoading || otpVerified || otpCode.length !== 6}
-              >
-                {otpLoading ? "Checking..." : otpVerified ? "✓ Verified" : "Verify"}
-              </Button>
+          {isEmailVerified && (
+            <div className="flex items-center gap-2 text-sm text-green-600">
+              <CheckCircle2 size={16} />
+              Email verified
             </div>
           )}
 
-          {otpError && <p className="mt-2 text-sm text-red-600">{otpError}</p>}
-          {otpVerified && (
-            <p className="mt-2 text-sm text-green-600">✓ Email verified successfully</p>
+          {!emailReady && (
+            <p className="text-xs text-muted-foreground">
+              Enter a valid email address to verify it.
+            </p>
           )}
         </div>
       </label>

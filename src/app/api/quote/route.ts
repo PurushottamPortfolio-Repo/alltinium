@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { quoteFormSchema } from "@/lib/forms";
-import { verifyOtpToken } from "@/lib/otp";
+import { getVerificationSession } from "@/lib/auth/cookies";
 
 const TO_EMAIL = process.env.CONTACT_EMAIL || "purushottam.portfolio@gmail.com";
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL;
@@ -21,12 +21,15 @@ export async function POST(request: Request) {
     }
 
     const { projectName, industry, features, stack, budget, timeline, email, phone } = parsed.data;
-    const verificationToken =
-      typeof body.verificationToken === "string" ? body.verificationToken : "";
 
-    // Verify email token
-    if (!verifyOtpToken(email, verificationToken)) {
-      console.error("Token verification failed for email:", email);
+    // Verify email via cookie-based session
+    const session = await getVerificationSession();
+
+    if (!session || session.email.toLowerCase() !== email.toLowerCase()) {
+      console.error("Email verification failed:", {
+        sessionEmail: session?.email,
+        formEmail: email,
+      });
       return NextResponse.json(
         { error: "Email verification failed. Please verify your email and try again." },
         { status: 401 },
@@ -145,73 +148,3 @@ export async function POST(request: Request) {
     );
   }
 }
-
-// import { NextResponse } from "next/server";
-// import { quoteFormSchema } from "@/lib/forms";
-// import { verifyOtpToken } from "@/lib/otp";
-
-// const TO_EMAIL = "purushottam.portfolio@gmail.com";
-
-// export async function POST(request: Request) {
-//   try {
-//     const body = await request.json();
-//     const parsed = quoteFormSchema.safeParse(body);
-
-//     if (!parsed.success) {
-//       return NextResponse.json(
-//         {
-//           error: "Validation failed",
-//           issues: parsed.error.flatten().fieldErrors,
-//         },
-//         { status: 400 },
-//       );
-//     }
-
-//     const { projectName, industry, features, stack, budget, timeline, email, phone } = parsed.data;
-//     const verificationToken =
-//       typeof body.verificationToken === "string" ? body.verificationToken : "";
-
-//     if (!verifyOtpToken(email, verificationToken)) {
-//       return NextResponse.json({ error: "Email verification failed" }, { status: 401 });
-//     }
-
-//     const text = [
-//       `Project Name: ${projectName}`,
-//       `Industry: ${industry}`,
-//       `Features: ${features}`,
-//       `Stack: ${stack}`,
-//       `Budget: ${budget}`,
-//       `Timeline: ${timeline}`,
-//       `Email: ${email}`,
-//       phone ? `Phone: ${phone}` : null,
-//     ]
-//       .filter(Boolean)
-//       .join("\n");
-
-//     const response = await fetch("https://api.resend.com/emails", {
-//       method: "POST",
-//       headers: {
-//         Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//         from: process.env.RESEND_FROM_EMAIL ?? "Alltinium <onboarding@resend.dev>",
-//         to: [TO_EMAIL],
-//         subject: `New quote request from ${projectName}`,
-//         text,
-//       }),
-//     });
-
-//     if (!response.ok) {
-//       const errorBody = await response.text();
-//       return NextResponse.json(
-//         { error: "Email delivery failed", detail: errorBody },
-//         { status: 502 },
-//       );
-//     }
-
-//     return NextResponse.json({ success: true });
-//   } catch {
-//     return NextResponse.json({ error: "Unable to process request" }, { status: 500 });
-//   }
-// }

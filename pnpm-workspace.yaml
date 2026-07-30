@@ -1,3 +1,6 @@
 allowBuilds:
+  '@firebase/util': false
+  bcrypt: true
+  protobufjs: false
   sharp: set this to true or false
   unrs-resolver: set this to true or false

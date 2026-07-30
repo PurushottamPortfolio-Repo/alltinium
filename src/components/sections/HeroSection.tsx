@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export function HeroSection() {
   return (
-    <section className="relative max-h-[95vh] overflow-hidden bg-gradient-to-b from-background via-background to-muted/20">
+    <section className="relative max-h-[95vh] overflow-hidden bg-gradient-to-b from-background via-background to-muted/20 py-20">
       <div className="absolute inset-0 z-0">
         <Image
           src={assets.heroBg}

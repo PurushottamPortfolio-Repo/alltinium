@@ -2,12 +2,14 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { useState } from "react";
+import { ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
-import { useOtpVerification } from "@/hooks/use-otp-verification";
+import { OTPModal } from "@/components/auth";
+import { SubmissionDialog } from "@/components/common/submission-dialog";
+import { useEmailVerification } from "@/hooks/use-email-verification";
 import {
   defaultValues,
   fieldsByStep,
@@ -24,9 +26,30 @@ import { QuoteStepRequirements } from "./quote-step-requirements";
 
 export function QuoteForm() {
   const [step, setStep] = useState(0);
-  const [submitted, setSubmitted] = useState(false);
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [message, setMessage] = useState("");
+  const [resultDialog, setResultDialog] = useState<{
+    open: boolean;
+    status: "success" | "error";
+    message: string;
+  }>({ open: false, status: "success", message: "" });
+
+  const [verifyModalOpen, setVerifyModalOpen] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const {
+    verified,
+    verifiedEmail,
+    setEmail,
+    error,
+    loading,
+    sending,
+    verifying,
+    retryAfter,
+    remainingAttempts,
+    sendCode,
+    verifyCode,
+    reset: resetVerification,
+  } = useEmailVerification();
 
   const {
     register,
@@ -45,15 +68,24 @@ export function QuoteForm() {
   const emailValue = useWatch({ control, name: "email" });
   const emailReady = Boolean(emailValue && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue));
 
-  const otp = useOtpVerification(emailReady, emailValue);
+  // Keep the verification hook's email in sync with the RFQ form's email
+  // field. useEmailVerification's own `verified` flag already re-evaluates
+  // against `verifiedEmail === email`, so editing the address after a
+  // successful verification correctly flips it back to false.
+  useEffect(() => {
+    setEmail(emailValue ?? "");
+  }, [emailValue, setEmail]);
+
+  const isEmailVerified =
+    verified && verifiedEmail.trim().toLowerCase() === (emailValue ?? "").trim().toLowerCase();
 
   const resetAll = () => {
     reset(defaultValues);
     setStep(0);
-    setSubmitted(false);
-    setStatus("idle");
-    setMessage("");
-    otp.resetOtp();
+    setOtp("");
+    setSuccess("");
+    setVerifyModalOpen(false);
+    resetVerification();
   };
 
   const validateAndAdvance = async () => {
@@ -69,20 +101,20 @@ export function QuoteForm() {
   };
 
   async function onSubmit(values: RFQFormValues) {
-    if (!otp.otpVerified || !otp.verificationToken) {
-      setStatus("error");
-      setMessage("Please verify your email before submitting.");
+    if (!isEmailVerified) {
+      setResultDialog({
+        open: true,
+        status: "error",
+        message: "Please verify your email before submitting.",
+      });
       return;
     }
-
-    setStatus("loading");
-    setMessage("");
 
     try {
       const response = await fetch("/api/rfq", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, verificationToken: otp.verificationToken }),
+        body: JSON.stringify(values),
       });
 
       const data = (await response.json()) as { error?: string; success?: boolean };
@@ -91,35 +123,17 @@ export function QuoteForm() {
         throw new Error(data.error || "Failed to submit RFQ");
       }
 
-      setStatus("success");
-      setMessage("Thanks! We'll reach out to your inbox shortly with a quote.");
       resetAll();
-      setSubmitted(true);
+      setResultDialog({
+        open: true,
+        status: "success",
+        message:
+          "Thank you for your request. Our team will review your material specifications and send you a detailed quote within 48 hours.",
+      });
     } catch (error) {
-      setStatus("error");
       const errorMessage = error instanceof Error ? error.message : "Failed to submit";
-      setMessage(errorMessage);
+      setResultDialog({ open: true, status: "error", message: errorMessage });
     }
-  }
-
-  if (submitted) {
-    return (
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="rounded-2xl border border-green-200 bg-green-50 p-8 text-center sm:p-10"
-      >
-        <CheckCircle2 size={32} className="mx-auto mb-3 text-green-600" />
-        <h2 className="text-xl font-semibold text-foreground">RFQ Submitted Successfully!</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Thank you for your request. Our team will review your material specifications and send you
-          a detailed quote within 48 hours.
-        </p>
-        <Button className="mt-6" onClick={() => setSubmitted(false)}>
-          Submit another request
-        </Button>
-      </motion.div>
-    );
   }
 
   return (
@@ -157,7 +171,8 @@ export function QuoteForm() {
                 register={register}
                 errors={errors}
                 emailReady={emailReady}
-                otp={otp}
+                isEmailVerified={isEmailVerified}
+                onRequestVerify={() => setVerifyModalOpen(true)}
               />
             )}
           </motion.div>
@@ -178,17 +193,53 @@ export function QuoteForm() {
         </Button>
       </div>
 
-      {message ? (
-        <div
-          className={`mt-4 rounded-lg border px-3 py-3 text-sm ${
-            status === "success"
-              ? "border-green-200 bg-green-50 text-green-700"
-              : "border-red-200 bg-red-50 text-red-700"
-          }`}
-        >
-          {message}
-        </div>
-      ) : null}
+      <OTPModal
+        open={verifyModalOpen}
+        email={emailValue ?? ""}
+        otp={otp}
+        verified={isEmailVerified}
+        loading={loading}
+        sending={sending}
+        verifying={verifying}
+        retryAfter={retryAfter}
+        remainingAttempts={remainingAttempts}
+        error={error}
+        success={success}
+        onOTPChange={setOtp}
+        onClose={() => {
+          setVerifyModalOpen(false);
+          setOtp("");
+          setSuccess("");
+        }}
+        onResend={async () => {
+          const ok = await sendCode();
+
+          if (ok) {
+            setSuccess("Verification code sent.");
+          }
+        }}
+        onVerify={async () => {
+          const ok = await verifyCode(otp);
+
+          if (ok) {
+            setSuccess("Email verified successfully.");
+
+            setTimeout(() => {
+              setVerifyModalOpen(false);
+              setOtp("");
+              setSuccess("");
+            }, 700);
+          }
+        }}
+      />
+
+      <SubmissionDialog
+        open={resultDialog.open}
+        status={resultDialog.status}
+        title={resultDialog.status === "success" ? "RFQ submitted!" : "Something went wrong"}
+        message={resultDialog.message}
+        onClose={() => setResultDialog((current) => ({ ...current, open: false }))}
+      />
     </div>
   );
 }

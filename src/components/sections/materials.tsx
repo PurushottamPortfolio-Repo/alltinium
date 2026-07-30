@@ -1,31 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 import MaterialGrid from "@/components/material1/material-card";
-import { loadFeaturedMaterials } from "@/data/materials/loader";
-import type { Material } from "@/types/material";
 
 export function MaterialsSection() {
-  const [materials, setMaterials] = useState<Material[]>([]);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    loadFeaturedMaterials(3).then((loaded) => {
-      if (isMounted) {
-        setMaterials(loaded);
-      }
-    });
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
   return (
     <section className="relative">
       <div className="mx-auto max-w-7xl px-4 py-6 md:px-6 md:py-8 lg:px-20 lg:py-10">
@@ -64,14 +45,9 @@ export function MaterialsSection() {
           </Link>
         </motion.div>
 
-        {/* Materials */}
-        {materials.length > 0 ? (
+        <div>
           <MaterialGrid />
-        ) : (
-          <div className="flex min-h-[300px] items-center justify-center rounded-xl border border-border bg-card">
-            <p className="text-muted-foreground">Loading materials...</p>
-          </div>
-        )}
+        </div>
       </div>
     </section>
   );
