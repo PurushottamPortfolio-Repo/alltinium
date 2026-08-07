@@ -21,5 +21,8 @@ export function getResend(): Resend {
 
 export const resendConfig = {
   from: process.env.RESEND_FROM_EMAIL ?? "",
-  contactEmail: process.env.CONTACT_EMAIL ?? "purushottam.portfolio@gmail.com",
+  contactEmail: process.env.CONTACT_EMAIL ?? "",
 };
+
+console.log("FROM =", process.env.RESEND_FROM_EMAIL);
+console.log("API KEY =", !!process.env.RESEND_API_KEY);
