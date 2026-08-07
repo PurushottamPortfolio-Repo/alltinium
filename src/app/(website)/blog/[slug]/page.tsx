@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Clock, Heart, Share2 } from "lucide-react";
+import { ArrowLeft, Clock } from "lucide-react";
 
 import { BLOG_POSTS } from "@/components/blog/blog-posts";
 import { BlogCard } from "@/components/blog/blog-card";
@@ -136,7 +136,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           ))}
         </Reveal>
 
-        <Reveal
+        {/* <Reveal
           delay={0.25}
           className="mt-10 flex items-center gap-6 border-y border-[var(--surface-border)] py-5"
         >
@@ -155,11 +155,11 @@ export default async function BlogPostPage({ params }: PageProps) {
             <Share2 size={16} />
             Share
           </button>
-        </Reveal>
+        </Reveal> */}
 
-        <div className="mt-10 rounded-[var(--radius-card)] border border-dashed border-[var(--surface-border)] p-6 text-center text-sm text-[var(--ink-faint)]">
+        {/* <div className="mt-10 rounded-[var(--radius-card)] border border-dashed border-[var(--surface-border)] p-6 text-center text-sm text-[var(--ink-faint)]">
           Comments are coming soon. Stay tuned for community discussions.
-        </div>
+        </div> */}
       </div>
 
       {relatedPosts.length > 0 && (
