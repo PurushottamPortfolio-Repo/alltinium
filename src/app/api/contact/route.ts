@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { contactFormSchema } from "@/lib/forms";
 import { getVerificationSession } from "@/lib/auth/cookies";
-import { resend } from "@/lib/resend";
+import { getResend } from "@/lib/resend";
 
 const TO_EMAIL = process.env.CONTACT_EMAIL || "purushottam.portfolio@gmail.com";
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL;
@@ -85,7 +85,7 @@ export async function POST(request: Request) {
 
     // Send email using Resend
     try {
-      const response = await resend.emails.send({
+      const response = await getResend().emails.send({
         from: FROM_EMAIL,
         to: [TO_EMAIL],
         replyTo: email,
@@ -110,7 +110,7 @@ export async function POST(request: Request) {
 
       // Also send confirmation email to user
       try {
-        await resend.emails.send({
+        await getResend().emails.send({
           from: FROM_EMAIL,
           to: [email],
           subject: "We received your message - Alltinium",

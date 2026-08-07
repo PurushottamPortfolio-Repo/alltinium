@@ -13,16 +13,23 @@ export interface VerificationSession {
   expiresAt: number;
 }
 
-const rawSessionSecret = process.env.SESSION_SECRET;
-
-if (!rawSessionSecret) {
-  throw new Error("Missing SESSION_SECRET. Please add it to your .env.local file.");
+/**
+ * Read the session secret lazily (on first sign/verify) rather than at
+ * module import time, so a missing value surfaces as a normal thrown error
+ * inside a route handler's try/catch (-> proper JSON 500) instead of
+ * crashing module evaluation itself (-> opaque non-JSON 500 from the
+ * platform, seen when this used to throw at import time).
+ */
+function getSessionSecret(): string {
+  const secret = process.env.SESSION_SECRET;
+  if (!secret) {
+    throw new Error("Missing SESSION_SECRET environment variable.");
+  }
+  return secret;
 }
 
-const SESSION_SECRET: string = rawSessionSecret;
-
 function sign(payload: string): string {
-  return crypto.createHmac("sha256", SESSION_SECRET).update(payload).digest("hex");
+  return crypto.createHmac("sha256", getSessionSecret()).update(payload).digest("hex");
 }
 
 /**

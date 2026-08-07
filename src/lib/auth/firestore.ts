@@ -1,5 +1,5 @@
 import { Timestamp } from "firebase-admin/firestore";
-import { db } from "@/lib/firebase/admin";
+import { getDb } from "@/lib/firebase/admin";
 import { FIRESTORE_COLLECTIONS } from "./constants";
 
 export interface OTPDocument {
@@ -32,7 +32,7 @@ function toDate(value: Date | string | Timestamp): Date {
  */
 export async function saveOTPDocument(email: string, data: OTPDocument): Promise<void> {
   try {
-    const docRef = db.collection(FIRESTORE_COLLECTIONS.OTP).doc(email);
+    const docRef = getDb().collection(FIRESTORE_COLLECTIONS.OTP).doc(email);
 
     // Ensure Date objects are stored consistently (Firestore converts these to Timestamps)
     const dataToStore = {
@@ -57,7 +57,7 @@ export async function saveOTPDocument(email: string, data: OTPDocument): Promise
  */
 export async function getOTPDocument(email: string): Promise<OTPDocument | null> {
   try {
-    const docRef = db.collection(FIRESTORE_COLLECTIONS.OTP).doc(email);
+    const docRef = getDb().collection(FIRESTORE_COLLECTIONS.OTP).doc(email);
     const doc = await docRef.get();
 
     if (!doc.exists) {
@@ -84,7 +84,7 @@ export async function getOTPDocument(email: string): Promise<OTPDocument | null>
  */
 export async function deleteOTPDocument(email: string): Promise<void> {
   try {
-    const docRef = db.collection(FIRESTORE_COLLECTIONS.OTP).doc(email);
+    const docRef = getDb().collection(FIRESTORE_COLLECTIONS.OTP).doc(email);
     await docRef.delete();
     console.log(`OTP document deleted for email: ${email}`);
   } catch (error) {
@@ -101,11 +101,11 @@ export async function deleteOTPDocument(email: string): Promise<void> {
 export async function cleanupExpiredOTPs(): Promise<number> {
   try {
     const now = new Date();
-    const collectionRef = db.collection(FIRESTORE_COLLECTIONS.OTP);
+    const collectionRef = getDb().collection(FIRESTORE_COLLECTIONS.OTP);
     const snapshot = await collectionRef.where("expiresAt", "<", now).get();
 
     let deletedCount = 0;
-    const batch = db.batch();
+    const batch = getDb().batch();
 
     snapshot.docs.forEach((doc) => {
       batch.delete(doc.ref);

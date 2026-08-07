@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { resend } from "@/lib/resend";
+import { getResend } from "@/lib/resend";
 import { generateOTP } from "@/lib/auth";
 import { generateHash } from "@/lib/auth/hash";
 import { getOTPDocument, saveOTPDocument } from "@/lib/auth/firestore";
@@ -115,7 +115,7 @@ export async function POST(request: Request) {
 
     // Send OTP via Resend with proper error handling
     try {
-      const resendResponse = await resend.emails.send({
+      const resendResponse = await getResend().emails.send({
         from: process.env.RESEND_FROM_EMAIL || "noreply@alltinium.com",
         to: email,
         subject: "Your Verification Code",
