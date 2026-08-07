@@ -24,5 +24,5 @@ export const resendConfig = {
   contactEmail: process.env.CONTACT_EMAIL ?? "",
 };
 
-console.log("FROM =", process.env.RESEND_FROM_EMAIL);
-console.log("API KEY =", !!process.env.RESEND_API_KEY);
+// console.log("FROM =", process.env.RESEND_FROM_EMAIL);
+// console.log("API KEY =", !!process.env.RESEND_API_KEY);
