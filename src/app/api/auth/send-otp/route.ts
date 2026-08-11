@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getResend } from "@/lib/resend";
+import { sendOtpEmail } from "@/lib/otp-email";
 import { generateOTP } from "@/lib/auth";
 import { generateHash } from "@/lib/auth/hash";
 import { getOTPDocument, saveOTPDocument } from "@/lib/auth/firestore";
@@ -14,6 +14,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     const email = body.email?.trim().toLowerCase();
 
+    // Validate email
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json(
         {
@@ -28,10 +29,7 @@ export async function POST(request: Request) {
     const now = new Date();
     const existing = await getOTPDocument(email);
 
-    // Counters for the OTP document we're about to write. Default to a fresh
-    // cycle; only carry the existing counts forward if we're still inside the
-    // same hourly window, otherwise resendCount/requestCount would accumulate
-    // forever and permanently lock the email out.
+    // Default to a fresh hourly cycle.
     let resendCount = 1;
     let requestCount = 1;
     let createdAt = now;
@@ -39,14 +37,18 @@ export async function POST(request: Request) {
     if (existing) {
       const updatedAt = new Date(existing.updatedAt);
       const existingCreatedAt = new Date(existing.createdAt);
+
       const diffSeconds = (now.getTime() - updatedAt.getTime()) / 1000;
+
       const diffHours = (now.getTime() - existingCreatedAt.getTime()) / (1000 * 60 * 60);
+
       const windowElapsed = diffHours >= 1;
 
       if (!windowElapsed) {
         // Check resend cooldown
         if (diffSeconds < OTP_RESEND_COOLDOWN_SECONDS) {
           const remaining = Math.ceil(OTP_RESEND_COOLDOWN_SECONDS - diffSeconds);
+
           return NextResponse.json(
             {
               success: false,
@@ -57,7 +59,7 @@ export async function POST(request: Request) {
           );
         }
 
-        // Check hourly limit
+        // Check hourly request limit
         if (existing.requestCount >= OTP_MAX_REQUESTS_PER_HOUR) {
           return NextResponse.json(
             {
@@ -68,7 +70,7 @@ export async function POST(request: Request) {
           );
         }
 
-        // Check resend limit (scoped to the current hourly window)
+        // Check resend limit
         if (existing.resendCount >= OTP_MAX_RESENDS) {
           return NextResponse.json(
             {
@@ -87,7 +89,10 @@ export async function POST(request: Request) {
 
     // Generate OTP
     const { otp, expiresAt } = generateOTP();
+
+    // Hash OTP before storing it
     const otpHash = generateHash(otp);
+
     const resendAvailableAt = new Date(Date.now() + OTP_RESEND_COOLDOWN_SECONDS * 1000);
 
     // Save OTP to Firestore
@@ -104,6 +109,7 @@ export async function POST(request: Request) {
       });
     } catch (error) {
       console.error("Failed to save OTP document:", error);
+
       return NextResponse.json(
         {
           success: false,
@@ -113,52 +119,11 @@ export async function POST(request: Request) {
       );
     }
 
-    // Send OTP via Resend with proper error handling
+    // Send OTP using GoDaddy SMTP through Nodemailer
     try {
-      const resendResponse = await getResend().emails.send({
-        from: process.env.RESEND_FROM_EMAIL || "noreply@alltinium.com",
-        to: email,
-        subject: "Your Verification Code",
-        html: `
-          <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto;">
-            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 10px 10px 0 0; color: white;">
-              <h2 style="margin: 0; font-size: 24px;">Email Verification</h2>
-            </div>
-            <div style="background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px;">
-              <p style="color: #374151; font-size: 14px; margin: 0 0 20px 0;">
-                You requested to verify your email address. Use the code below to complete the verification:
-              </p>
-              <div style="background: white; border: 2px solid #e5e7eb; border-radius: 8px; padding: 20px; text-align: center; margin: 20px 0;">
-                <p style="margin: 0; font-size: 12px; color: #6b7280;">Verification Code</p>
-                <p style="margin: 10px 0 0 0; font-size: 32px; font-weight: bold; letter-spacing: 3px; color: #667eea;">
-                  ${otp}
-                </p>
-              </div>
-              <p style="color: #6b7280; font-size: 12px; margin: 20px 0 0 0;">
-                This code expires in <strong>5 minutes</strong>. Do not share this code with anyone.
-              </p>
-              <p style="color: #9ca3af; font-size: 11px; margin: 20px 0 0 0; border-top: 1px solid #e5e7eb; padding-top: 20px;">
-                If you didn't request this code, you can safely ignore this email.
-              </p>
-            </div>
-          </div>
-        `,
-        text: `Your verification code is: ${otp}\n\nThis code expires in 5 minutes. Do not share this code with anyone.`,
-      });
+      await sendOtpEmail(email, otp);
 
-      // Check if resend response has an error
-      if (resendResponse.error) {
-        console.error("Resend API error:", resendResponse.error);
-        return NextResponse.json(
-          {
-            success: false,
-            message: "Failed to send verification email. Please try again.",
-          },
-          { status: 500 },
-        );
-      }
-
-      console.log("OTP sent successfully to:", email, "Message ID:", resendResponse.data?.id);
+      console.log("OTP sent successfully to:", email);
 
       return NextResponse.json(
         {
@@ -171,8 +136,9 @@ export async function POST(request: Request) {
         },
         { status: 200 },
       );
-    } catch (resendError) {
-      console.error("Resend email error:", resendError);
+    } catch (emailError) {
+      console.error("SMTP email error:", emailError);
+
       return NextResponse.json(
         {
           success: false,
@@ -183,6 +149,7 @@ export async function POST(request: Request) {
     }
   } catch (error) {
     console.error("POST /api/auth/send-otp error:", error);
+
     return NextResponse.json(
       {
         success: false,

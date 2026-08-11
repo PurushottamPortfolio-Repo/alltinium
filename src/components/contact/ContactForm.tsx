@@ -170,7 +170,10 @@ export function ContactForm() {
                     className="mt-3"
                     onClick={async () => {
                       setVerifyModalOpen(true);
-                      await sendCode();
+                      const ok = await sendCode();
+                      if (ok) {
+                        setSuccess("Verification code sent.");
+                      }
                     }}
                     disabled={sending}
                   >

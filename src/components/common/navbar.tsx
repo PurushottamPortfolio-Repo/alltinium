@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import QuoteButton from "@/components/quote/quote-button";
+// import QuoteButton from "@/components/quote/quote-button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
@@ -59,7 +59,7 @@ export default function Navbar() {
 
           <div className="flex items-center gap-2">
             <ThemeToggle />
-            <QuoteButton className="hidden rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 sm:inline-flex" />
+            {/* <QuoteButton className="hidden rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 sm:inline-flex" /> */}
             <button
               type="button"
               onClick={() => setMobileOpen(true)}

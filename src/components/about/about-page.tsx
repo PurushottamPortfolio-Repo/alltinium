@@ -177,36 +177,26 @@ export function AboutPage() {
             >
               <div className="grid grid-cols-1 overflow-hidden lg:grid-cols-2">
                 {/* Left Image */}
-                <div className="relative">
-                  <Image
-                    src={founder.image}
-                    alt={founder.name}
+                <div>
+                  <div className="relative">
+                    <Image
+                      src={founder.image}
+                      alt={founder.name}
 
-                    className="object-cover transition duration-500 group-hover:scale-105"
-                  />
+                      className="object-cover transition duration-500 group-hover:scale-105"
+                    />
 
-                  {/* LinkedIn */}
-                  <Link
-                    href={founder.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute left-6 top-6 rounded-full bg-white/90 p-3 text-blue-700 shadow-lg backdrop-blur transition hover:bg-primary hover:text-white"
-                  >
-                    <FaLinkedin className="h-5 w-5" />
-                  </Link>
-                </div>
-
-                {/* Right Content */}
-                <div className="flex flex-col justify-center p-8 lg:p-12">
-                  <span className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
-                    {founder.role}
-                  </span>
-
-                  <h3 className="mt-3 text-4xl font-bold">{founder.name}</h3>
-
-                  <p className="mt-6 leading-8 text-muted-foreground">{founder.description}</p>
-
-                  <div className="mt-8">
+                    {/* LinkedIn */}
+                    <Link
+                      href={founder.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute left-6 top-6 rounded-full bg-white/90 p-3 text-blue-700 shadow-lg backdrop-blur transition hover:bg-primary hover:text-white"
+                    >
+                      <FaLinkedin className="h-5 w-5" />
+                    </Link>
+                  </div>
+                  <div className="mt-8 ml-5">
                     <h4 className="mb-4 text-lg font-semibold">Areas of Expertise</h4>
 
                     <div className="grid gap-4 sm:grid-cols-2">
@@ -224,6 +214,17 @@ export function AboutPage() {
                       ))}
                     </div>
                   </div>
+                </div>
+
+                {/* Right Content */}
+                <div className="flex flex-col justify-center p-8 lg:p-12">
+                  <span className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+                    {founder.role}
+                  </span>
+
+                  <h3 className="mt-3 text-4xl font-bold">{founder.name}</h3>
+
+                  <p className="mt-6 leading-8 text-muted-foreground">{founder.description}</p>
                 </div>
               </div>
             </motion.div>

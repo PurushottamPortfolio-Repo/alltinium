@@ -68,10 +68,6 @@ export function QuoteForm() {
   const emailValue = useWatch({ control, name: "email" });
   const emailReady = Boolean(emailValue && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue));
 
-  // Keep the verification hook's email in sync with the RFQ form's email
-  // field. useEmailVerification's own `verified` flag already re-evaluates
-  // against `verifiedEmail === email`, so editing the address after a
-  // successful verification correctly flips it back to false.
   useEffect(() => {
     setEmail(emailValue ?? "");
   }, [emailValue, setEmail]);
@@ -172,7 +168,15 @@ export function QuoteForm() {
                 errors={errors}
                 emailReady={emailReady}
                 isEmailVerified={isEmailVerified}
-                onRequestVerify={() => setVerifyModalOpen(true)}
+                onRequestVerify={async () => {
+                  setVerifyModalOpen(true);
+
+                  const ok = await sendCode();
+
+                  if (ok) {
+                    setSuccess("Verification code sent.");
+                  }
+                }}
               />
             )}
           </motion.div>

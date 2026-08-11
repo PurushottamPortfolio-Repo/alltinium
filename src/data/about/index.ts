@@ -19,7 +19,7 @@ export const founders = [
     role: "Founder & CEO",
     image: assets.profiles.profile2,
     description:
-      "With extensive experience in aerospace sourcing and engineering supply chains, Founder Name established Alltinium Aerometrix to deliver certified materials with complete traceability, uncompromising quality, and dependable global sourcing.",
+      "Wg Cdr Preetham Shetty (Retd) — Founder & CEO. Preetham Shetty served 21 years in the Indian Air Force's Engineering branch, specialising in surface-to-air missile systems — an environment where material provenance, process discipline and documentation decide airworthiness, not paperwork. Formally trained in quality management systems, he has held key roles in providing QA cover and supply chain solutions for high value projects like up-gradation a Fighter Aircraft Fleet, indigenous manufacture of ground support equipment and offensive weapon platforms under Make-in-India initiative to name a few. He holds a Bachelor's degree in Mechanical Engineering and a Diploma in Aeronautical Engineering. After the Air Force, he built commercial metals supply-chain experience at one of the India's first full stack vertical metals trading platform before founding Alltinium Aerometrix — on the conviction that India's independent Aerospace and Defence manufacturers deserve an open-market, certified materials and manufacturing partner of their own.",
     expertise: [
       "Aerospace Supply Chain",
       "Supplier Qualification",

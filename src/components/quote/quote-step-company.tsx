@@ -8,7 +8,7 @@ type QuoteStepCompanyProps = {
   errors: FieldErrors<RFQFormValues>;
   emailReady: boolean;
   isEmailVerified: boolean;
-  onRequestVerify: () => void;
+  onRequestVerify: () => void | Promise<void>;
 };
 
 export function QuoteStepCompany({

@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
 import { rfqFormSchema } from "@/lib/forms/quote-schema";
 import { getVerificationSession } from "@/lib/auth/cookies";
-import { getResend } from "@/lib/resend";
+import { sendEmail } from "@/lib/email/mailer";
 
-const TO_EMAIL = process.env.CONTACT_EMAIL || "purushottam.portfolio@gmail.com";
-const FROM_EMAIL = process.env.RESEND_FROM_EMAIL;
+const TO_EMAIL = process.env.CONTACT_NOTIFY_TO || process.env.CONTACT_EMAIL;
+
+const FROM_EMAIL = process.env.SMTP_FROM;
 
 export async function POST(request: Request) {
   try {
@@ -55,6 +56,7 @@ export async function POST(request: Request) {
         sessionEmail: session?.email,
         formEmail: email,
       });
+
       return NextResponse.json(
         {
           error: "Email verification failed. Please verify your email and try again.",
@@ -63,15 +65,10 @@ export async function POST(request: Request) {
       );
     }
 
-    // Validate Resend configuration
-    const apiKey = process.env.RESEND_API_KEY;
-    if (!apiKey) {
-      console.error("RESEND_API_KEY not configured");
-      return NextResponse.json({ error: "Email service is not configured" }, { status: 500 });
-    }
+    // Validate SMTP configuration
+    if (!FROM_EMAIL || !TO_EMAIL) {
+      console.error("SMTP email configuration is missing");
 
-    if (!FROM_EMAIL) {
-      console.error("RESEND_FROM_EMAIL not configured");
       return NextResponse.json({ error: "Email service is not configured" }, { status: 500 });
     }
 
@@ -112,39 +109,38 @@ export async function POST(request: Request) {
         <h2 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px;">
           New RFQ Request
         </h2>
+
         <div style="margin: 20px 0;">
           <p><strong>Company:</strong> ${companyName}</p>
           <p><strong>Contact:</strong> ${contactName}</p>
-          <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+          <p>
+            <strong>Email:</strong>
+            <a href="mailto:${email}">${email}</a>
+          </p>
           ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ""}
         </div>
+
         <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin: 20px 0;">
           <h3 style="margin-top: 0;">Material Details</h3>
-          <p style="white-space: pre-wrap; line-height: 1.6;">${emailText}</p>
+
+          <p style="white-space: pre-wrap; line-height: 1.6;">
+            ${emailText}
+          </p>
         </div>
       </div>
     `;
 
+    // Send email using GoDaddy SMTP
     try {
-      const response = await getResend().emails.send({
-        from: FROM_EMAIL,
-        to: [TO_EMAIL],
-        replyTo: email,
+      const response = await sendEmail({
+        to: TO_EMAIL,
         subject: `New RFQ from ${companyName}`,
         html: emailHtml,
-        text: emailText,
+        replyTo: email,
       });
 
-      if (response.error) {
-        console.error("Resend API error:", response.error);
-        return NextResponse.json(
-          { error: "Failed to send RFQ. Please try again later." },
-          { status: 502 },
-        );
-      }
-
       console.log("RFQ email sent:", {
-        messageId: response.data?.id,
+        messageId: response.messageId,
         fromEmail: email,
         toEmail: TO_EMAIL,
       });
@@ -156,8 +152,9 @@ export async function POST(request: Request) {
         },
         { status: 200 },
       );
-    } catch (resendError) {
-      console.error("Resend email error:", resendError);
+    } catch (smtpError) {
+      console.error("SMTP email error:", smtpError);
+
       return NextResponse.json(
         { error: "Failed to send RFQ. Please try again later." },
         { status: 502 },
@@ -165,10 +162,13 @@ export async function POST(request: Request) {
     }
   } catch (error) {
     const message = error instanceof Error ? error.message : "An unexpected error occurred";
+
     console.error("POST /api/rfq error:", message);
 
     return NextResponse.json(
-      { error: "An unexpected error occurred. Please try again later." },
+      {
+        error: "An unexpected error occurred. Please try again later.",
+      },
       { status: 500 },
     );
   }
