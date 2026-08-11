@@ -22,7 +22,7 @@ export async function sendEmail({
   to: string;
   subject: string;
   html: string;
-  text: string;
+  text?: string;
   replyTo?: string;
 }) {
   return transporter.sendMail({
@@ -31,6 +31,6 @@ export async function sendEmail({
     subject,
     html,
     ...(replyTo ? { replyTo } : {}),
-    text,
+    ...(text ? { text } : {}),
   });
 }
