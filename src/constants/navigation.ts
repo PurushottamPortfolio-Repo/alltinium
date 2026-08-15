@@ -18,6 +18,10 @@ export const NAV_LINKS: NavLink[] = [
     href: "/services",
   },
   {
+    label: "Manufactoring",
+    href: "/manufactoring",
+  },
+  {
     label: "Blogs",
     href: "/blog",
   },
