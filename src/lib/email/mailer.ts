@@ -18,12 +18,14 @@ export async function sendEmail({
   html,
   text,
   replyTo,
+  attachments,
 }: {
   to: string;
   subject: string;
   html: string;
   text?: string;
   replyTo?: string;
+  attachments?: { filename: string; content: Buffer; contentType?: string }[];
 }) {
   return transporter.sendMail({
     from: process.env.SMTP_FROM,
@@ -32,5 +34,6 @@ export async function sendEmail({
     html,
     ...(replyTo ? { replyTo } : {}),
     ...(text ? { text } : {}),
+    ...(attachments?.length ? { attachments } : {}),
   });
 }
