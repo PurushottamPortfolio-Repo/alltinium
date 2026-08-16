@@ -1,4 +1,4 @@
-import ManufactoringForm from "./forms/manufactor-form";
+import ManufactoringForm from "./forms/manufacture-form";
 import { PageHero } from "../ui/page-hero";
 import { assets } from "@/assets";
 import BuildSection from "./sections/buildfor";
@@ -8,7 +8,7 @@ import RouteSection from "./sections/route";
 import CtaSection from "./sections/cta";
 import FAQSection from "./sections/faq";
 
-export default function ManufactorPage() {
+export default function ManufacturePage() {
   return (
     <>
       <PageHero
@@ -23,7 +23,7 @@ export default function ManufactorPage() {
             href: "/",
           },
           {
-            label: "Manufactoring",
+            label: "Manufacturing",
           },
         ]}
       />

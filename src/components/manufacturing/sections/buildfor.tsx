@@ -1,4 +1,4 @@
-import { audienceItems } from "../manufactor-data";
+import { audienceItems } from "../manufacture-data";
 
 export default function WhoWeBuildFor() {
   return (

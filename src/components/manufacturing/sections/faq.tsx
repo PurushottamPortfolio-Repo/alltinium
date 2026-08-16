@@ -1,4 +1,4 @@
-import { faqData } from "../manufactor-data";
+import { faqData } from "../manufacture-data";
 
 export default function FAQSection() {
   return (

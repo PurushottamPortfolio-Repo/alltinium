@@ -1,4 +1,4 @@
-import { processSteps } from "../manufactor-data";
+import { processSteps } from "../manufacture-data";
 
 export default function WorkSection() {
   return (

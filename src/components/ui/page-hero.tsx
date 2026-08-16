@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronRight, Home } from "lucide-react";
 import QuoteButton from "@/components/quote/quote-button";
-import ManufactorButton from "../manufactoring/manufactor-button";
+import ManufactureButton from "../manufacturing/manufacture-button";
 
 interface BreadcrumbItem {
   label: string;
@@ -120,7 +120,7 @@ export function PageHero({
                   <div className="space-x-5">
                     <QuoteButton className="group inline-flex items-center gap-2 rounded-sm bg-primary px-7 py-3 font-body font-semibold text-primary-foreground transition-all duration-300 hover:-translate-y-1 hover:bg-primary/90 hover:shadow-xl hover:cursor-pointer" />
 
-                    <ManufactorButton className="group inline-flex items-center gap-2 rounded-sm bg-background border-border px-7 py-3 font-body font-semibold text-foreground transition-all duration-300 hover:-translate-y-1 ring-1 hover:shadow-xl hover:cursor-pointer" />
+                    <ManufactureButton className="group inline-flex items-center gap-2 rounded-sm bg-background border-border px-7 py-3 font-body font-semibold text-foreground transition-all duration-300 hover:-translate-y-1 ring-1 hover:shadow-xl hover:cursor-pointer" />
                   </div>
                 </>
               ) : (

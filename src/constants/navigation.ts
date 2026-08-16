@@ -18,8 +18,8 @@ export const NAV_LINKS: NavLink[] = [
     href: "/services",
   },
   {
-    label: "Manufactoring",
-    href: "/manufactoring",
+    label: "Manufacturing",
+    href: "/manufacturing",
   },
   {
     label: "Blogs",

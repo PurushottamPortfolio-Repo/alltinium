@@ -1,6 +1,6 @@
 import { CheckCircle2 } from "lucide-react";
 
-import { capabilityItems } from "../manufactor-data";
+import { capabilityItems } from "../manufacture-data";
 
 export default function NetworkSection() {
   return (

@@ -1,5 +1,5 @@
 import { Check } from "lucide-react";
-import { assuranceItems } from "../manufactor-data";
+import { assuranceItems } from "../manufacture-data";
 
 export default function WhyAlltinium() {
   return (
