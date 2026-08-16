@@ -30,4 +30,6 @@ export interface AudienceItem {
   icon: LucideIcon;
 }
 
-// export interface FormDataType {}
+export interface FormDataType {
+  title: string;
+}
