@@ -9,7 +9,7 @@ export const metadata = {
 export default function BlogPage() {
   return (
     <div className="px-6 mt-10 pb-24">
-      <div className="mx-auto max-w-3xl text-center">
+      {/* <div className="mx-auto max-w-3xl text-center">
         <p className="text-eyebrow">Writings</p>
         <h1 className="mt-3 font-[var(--font-display)] text-4xl font-semibold tracking-tight text-[var(--ink)]">
           Notes from the work
@@ -17,7 +17,7 @@ export default function BlogPage() {
         <p className="mt-4 text-[var(--ink-muted)]">
           Engineering decisions, design systems, and the realities of freelancing.
         </p>
-      </div>
+      </div> */}
       <div className="mx-auto mt-14 max-w-6xl">
         <BlogGrid />
       </div>

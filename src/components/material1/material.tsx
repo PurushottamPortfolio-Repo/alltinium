@@ -25,7 +25,7 @@ export default function MaterialList() {
       <section className="relative">
         <div className="mx-auto max-w-7xl px-4 py-6 md:px-6 md:py-8 lg:px-20 lg:py-10">
           <h1 className="flex item-center justify-center text-4xl font-heading mb-10 border rounded-md p-4 text-primary">
-            Following are the list of Materials
+            Materials we service
           </h1>
           <div>
             <MaterialGrid />

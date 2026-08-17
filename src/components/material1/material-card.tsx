@@ -58,7 +58,7 @@ export default function MaterialGrid() {
                 <Badge variant="custom">{material.title}</Badge>
               </motion.div>
 
-              <p className="text-sm leading-4 text-muted-foreground">{material.description}</p>
+              {/* <p className="text-sm leading-4 text-muted-foreground">{material.description}</p> */}
             </div>
 
             {/* Series */}

@@ -346,7 +346,7 @@ export const MATERIALS: MaterialCategory[] = [
         grades: ["Vanadium", "Rhenium", "Tantalum"],
 
         forms: [
-          { id: "cathode", name: "Cthode" },
+          { id: "cathode", name: "Cathode" },
           { id: "pellet", name: "Pellet" },
           { id: "powder", name: "Powder" },
         ],

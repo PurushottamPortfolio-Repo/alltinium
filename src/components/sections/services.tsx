@@ -29,7 +29,7 @@ export function ServicesSection() {
             </h2>
 
             <p className="mt-5 max-w-2xl text-base font-body text-muted-foreground sm:text-lg">
-              From the mill to the machined part — we close the loop so your QA, procurement and
+              From the mill to the machined part - we close the loop so your QA, procurement and
               engineering teams talk to a single partner.
             </p>
           </div>

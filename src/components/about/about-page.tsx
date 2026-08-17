@@ -177,7 +177,7 @@ export function AboutPage() {
             >
               <div className="grid grid-cols-1 overflow-hidden lg:grid-cols-2">
                 {/* Left Image */}
-                <div>
+                <div className="">
                   <div className="relative">
                     <Image
                       src={founder.image}
@@ -196,28 +196,10 @@ export function AboutPage() {
                       <FaLinkedin className="h-5 w-5" />
                     </Link>
                   </div>
-                  <div className="mt-8 ml-5">
-                    <h4 className="mb-4 text-lg font-semibold">Areas of Expertise</h4>
-
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      {founder.expertise.map((item) => (
-                        <div
-                          key={item}
-                          className="flex items-center gap-3 rounded-lg border bg-muted/40 p-3"
-                        >
-                          <div className="rounded-full bg-primary/10 p-1.5 text-primary">
-                            <Check className="h-4 w-4" />
-                          </div>
-
-                          <span className="text-sm font-medium">{item}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
                 </div>
 
                 {/* Right Content */}
-                <div className="flex flex-col justify-center p-8 lg:p-12">
+                <div className="flex flex-col justify-center p-8">
                   <span className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
                     {founder.role}
                   </span>
@@ -225,6 +207,24 @@ export function AboutPage() {
                   <h3 className="mt-3 text-4xl font-bold">{founder.name}</h3>
 
                   <p className="mt-6 leading-8 text-muted-foreground">{founder.description}</p>
+                </div>
+              </div>
+              <div className="p-4">
+                <h4 className="mb-4 text-lg text-primary font-semibold">Areas of Expertise</h4>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {founder.expertise.map((item) => (
+                    <div
+                      key={item}
+                      className="flex items-center gap-3 rounded-lg border bg-muted/40 p-3"
+                    >
+                      <div className="rounded-full bg-primary/10 p-1.5 text-primary">
+                        <Check className="h-4 w-4" />
+                      </div>
+
+                      <span className="text-sm font-medium">{item}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </motion.div>

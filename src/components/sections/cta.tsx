@@ -35,7 +35,7 @@ export function CTASection() {
 
               <p className="font-body mt-6 max-w-xl text-lg leading-8 text-muted-foreground">
                 Get a structured response with MTC certification, lead time, and landed cost within{" "}
-                <strong>48 business hours.</strong> No commodity-trader noise—only engineered
+                <strong>48 business hours.</strong> No commodity-trader noise - only engineered
                 answers.
               </p>
 

@@ -18,7 +18,7 @@ const REASONS = [
   {
     icon: MessageSquare,
     title: "100% MTC",
-    detail: "Full traceability — MTC chain, sample retention, NADCAP-aligned.",
+    detail: "Full traceability - MTC chain, sample retention, NADCAP-aligned.",
   },
   {
     icon: Layers,
@@ -71,7 +71,7 @@ export function WhyChooseMe() {
           </h2>
 
           <p className="font-body mt-5 text-md leading-6 text-muted-foreground">
-            We don&apos;t just build beautiful interfaces—we create scalable, performant, and
+            We don&apos;t just build beautiful interfaces, we create scalable, performant, and
             maintainable digital products designed for business growth.
           </p>
         </motion.div>
