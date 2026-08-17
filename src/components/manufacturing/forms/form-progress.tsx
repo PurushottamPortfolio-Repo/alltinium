@@ -15,7 +15,7 @@ export function FormProgress({ step }: FormProgressProps) {
   return (
     <div className="mb-6">
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div>
+        <div className="space-y-4">
           <p className="text-sm font-semibold uppercase tracking-[0.24em] text-primary">
             Manufacturing RFQ
           </p>

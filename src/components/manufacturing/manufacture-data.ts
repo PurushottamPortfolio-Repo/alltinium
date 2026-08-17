@@ -19,14 +19,14 @@ export const faqData: FAQItem[] = [
       "A facility from our qualified partner network, selected against your process, certification and volume requirement. Alltinium manages the job and remains your contractual counterparty; partner identity can be disclosed under NDA where your programme's quality system requires it.",
   },
   {
-    question: "Can you handle multi-process jobs — e.g. machining plus anodising plus assembly?",
+    question: "Can you handle multi-process jobs. e.g. machining plus anodising plus assembly?",
     answer:
       "Yes. That is precisely the use case: we sequence the routing across facilities, manage inter-process logistics and inspection, and deliver the finished part with a consolidated documentation package.",
   },
   {
     question: "Do you supply the raw material too?",
     answer:
-      "Yes — material supply is our core business. Parts can be quoted on Alltinium-supplied, fully certified material (MTC EN 10204 3.1) or on customer-supplied stock.",
+      "Yes, material supply is our core business. Parts can be quoted on Alltinium-supplied, fully certified material (MTC EN 10204 3.1) or on customer-supplied stock.",
   },
   {
     question: "What about IP and drawing confidentiality?",
@@ -49,17 +49,17 @@ export const assuranceItems: AssuranceItem[] = [
   {
     title: "Traceability by default",
     description:
-      "Material MTC chain, route cards and inspection records maintained across every process step — audit-ready documentation.",
+      "Material MTC chain, route cards and inspection records maintained across every process step, audit-ready documentation.",
   },
   {
     title: "Material + manufacturing",
     description:
-      "We stock the aerospace-grade material and coordinate its conversion — closing the loop from mill certificate to finished part.",
+      "We stock the aerospace-grade material and coordinate its conversion, closing the loop from mill certificate to finished part.",
   },
   {
     title: "Single commercial interface",
     description:
-      "One RFQ, one quotation, one purchase order, one invoice — Alltinium carries the coordination burden, not your team.",
+      "One RFQ, one quotation, one purchase order, one invoice. Alltinium carries the coordination burden, not your team.",
   },
 ];
 
@@ -135,13 +135,13 @@ export const processSteps: ProcessStep[] = [
     number: "02",
     title: "We match & quote",
     description:
-      "We select the right certified facility from our vetted network and return a single consolidated quotation — typically within 48 business hours.",
+      "We select the right certified facility from our vetted network and return a single consolidated quotation, typically within 48 business hours.",
   },
   {
     number: "03",
     title: "We manage the job",
     description:
-      "Alltinium coordinates the work order, material, inspection and special processes — with route-card and MTC traceability maintained throughout.",
+      "Alltinium coordinates the work order, material, inspection and special processes with route-card and MTC traceability maintained throughout.",
   },
   {
     number: "04",
@@ -162,14 +162,14 @@ export const audienceItems: AudienceItem[] = [
   {
     title: "OEMs & Tier-1s",
     description:
-      "Primes and integrators looking for pre-qualified sub-vendors for components and sub-assemblies — with consolidated QA, one commercial interface, and audit-ready traceability on every lot.",
+      "Primes and integrators looking for pre-qualified sub-vendors for components and sub-assemblies with consolidated QA, one commercial interface, and audit-ready traceability on every lot.",
     tags: ["Sub-assemblies", "Vendor development", "Serial supply"],
     icon: Building2,
   },
   {
     title: "MRO & R&D Programmes",
     description:
-      "Repair organisations and research programmes needing certified special processes — heat treatment, surface treatment, NDT — on aerospace-grade materials with full documentation.",
+      "Repair organisations and research programmes needing certified special processes, heat treatment, surface treatment, NDT on aerospace-grade materials with full documentation.",
     tags: ["Special processes", "Cert packages", "Material + process"],
     icon: Wrench,
   },

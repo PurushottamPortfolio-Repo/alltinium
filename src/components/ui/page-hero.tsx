@@ -117,7 +117,7 @@ export function PageHero({
             >
               {buttonText === "Request a Quote" ? (
                 <>
-                  <div className="space-x-5">
+                  <div className="space-x-5 space-y-5">
                     <QuoteButton className="group inline-flex items-center gap-2 rounded-sm bg-primary px-7 py-3 font-body font-semibold text-primary-foreground transition-all duration-300 hover:-translate-y-1 hover:bg-primary/90 hover:shadow-xl hover:cursor-pointer" />
 
                     <ManufactureButton className="group inline-flex items-center gap-2 rounded-sm bg-background border-border px-7 py-3 font-body font-semibold text-foreground transition-all duration-300 hover:-translate-y-1 ring-1 hover:shadow-xl hover:cursor-pointer" />

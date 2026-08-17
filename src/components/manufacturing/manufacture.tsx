@@ -32,8 +32,8 @@ export default function ManufacturePage() {
       <NetworkSection />
       <ManufactoringForm />
       <RouteSection />
-      <CtaSection />
       <FAQSection />
+      <CtaSection />
     </>
   );
 }

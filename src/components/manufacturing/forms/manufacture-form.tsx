@@ -161,7 +161,7 @@ export function ManufacturingForm() {
   }
 
   return (
-    <div>
+    <div className=" p-14 scroll-mt-16" id="manufacturing-form">
       <FormProgress step={step} />
 
       <div className="mb-6 rounded-2xl border border-border/80 bg-card/70 p-4 sm:p-6">
