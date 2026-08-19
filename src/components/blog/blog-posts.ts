@@ -14,7 +14,7 @@ export const BLOG_POSTS: BlogPost[] = [
     tags: ["7070", "7075"],
     readingTime: 7,
     date: "2026-05-12",
-    cover: assets.blog.b1,
+    cover: assets.blogCover.b1,
   },
   {
     id: 2,
@@ -28,7 +28,7 @@ export const BLOG_POSTS: BlogPost[] = [
     tags: ["MTC chain", "Quality"],
     readingTime: 6,
     date: "2026-04-02",
-    cover: assets.blog.b1,
+    cover: assets.blogCover.b2,
   },
   {
     id: 3,
@@ -42,7 +42,7 @@ export const BLOG_POSTS: BlogPost[] = [
     tags: ["AS9120", "Aerospace"],
     readingTime: 5,
     date: "2026-02-18",
-    cover: assets.blog.b1,
+    cover: assets.blogCover.b3,
   },
 ];
 
