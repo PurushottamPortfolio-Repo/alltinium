@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, ChevronRight, Home } from "lucide-react";
 import QuoteButton from "@/components/quote/quote-button";
 import ManufactureButton from "../manufacturing/manufacture-button";
+import { usePathname } from "next/navigation";
 
 interface BreadcrumbItem {
   label: string;
@@ -34,12 +35,25 @@ export function PageHero({
   buttonHref,
   breadcrumbs,
 }: PageHeroProps) {
+  const pathname = usePathname();
+  const showManufacturing = pathname !== "/materials";
+  const showQuote = pathname !== "/manufacturing";
+
   return (
-    <section className="relative isolate overflow-hidden">
+    <section className="relative isolate overflow-hidden h-[100vh]">
       {/* Background */}
 
       <div className="absolute inset-0">
-        <Image src={image} alt={title} fill priority className="object-cover" />
+        <Image
+          src={image}
+          alt={title}
+          // fill
+          priority
+          quality={100}
+          sizes="100vw"
+          height={800}
+          className="object-cover object-center"
+        />
       </div>
 
       <div className="relative container flex min-h-[520px] max-w-7xl items-center mx-auto max-w-7xl px-4 py-6 md:px-6 md:py-8 lg:px-20 lg:py-10">
@@ -115,24 +129,15 @@ export function PageHero({
               }}
               className="mt-10"
             >
-              {buttonText === "Request a Quote" ? (
-                <>
-                  <div className="space-x-5 space-y-5">
-                    <QuoteButton className="group inline-flex items-center gap-2 rounded-sm bg-primary px-7 py-3 font-body font-semibold text-primary-foreground transition-all duration-300 hover:-translate-y-1 hover:bg-primary/90 hover:shadow-xl hover:cursor-pointer" />
+              <div className="space-x-5 space-y-5 mt-10">
+                {showQuote && (
+                  <QuoteButton className="group inline-flex items-center gap-2 rounded-sm px-7 py-3 font-body font-semibold text-primary bg-background ring transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:cursor-pointer" />
+                )}
 
-                    <ManufactureButton className="group inline-flex items-center gap-2 rounded-sm bg-background border-border px-7 py-3 font-body font-semibold text-foreground transition-all duration-300 hover:-translate-y-1 ring-1 hover:shadow-xl hover:cursor-pointer" />
-                  </div>
-                </>
-              ) : (
-                <Link
-                  href={buttonHref}
-                  className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3 font-body font-semibold text-primary-foreground transition-all duration-300 hover:-translate-y-1 hover:bg-primary/90 hover:shadow-xl"
-                >
-                  {buttonText}
-
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              )}
+                {showManufacturing && (
+                  <ManufactureButton className="group inline-flex items-center gap-2 rounded-sm px-7 py-3 font-body font-semibold text-primary bg-background ring transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:cursor-pointer" />
+                )}
+              </div>
             </motion.div>
           )}
         </motion.div>

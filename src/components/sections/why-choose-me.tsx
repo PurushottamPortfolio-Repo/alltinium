@@ -67,12 +67,12 @@ export function WhyChooseMe() {
           </span>
 
           <h2 className="font-heading mt-6 text-3xl font-bold tracking-tight">
-            Engineering quality into every project.
+            Engineering quality into every project
           </h2>
 
           <p className="font-body mt-5 text-md leading-6 text-muted-foreground">
             We don&apos;t just build beautiful interfaces, we create scalable, performant, and
-            maintainable digital products designed for business growth.
+            maintainable digital products designed for business growth
           </p>
         </motion.div>
 

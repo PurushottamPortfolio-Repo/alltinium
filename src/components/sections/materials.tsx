@@ -29,7 +29,7 @@ export function MaterialsSection() {
 
             <p className="mt-5 max-w-2xl text-base font-body text-muted-foreground sm:text-lg">
               Aerospace-grade material families with mill-traceable specifications, ready for
-              machining and production.
+              machining and production
             </p>
           </div>
 

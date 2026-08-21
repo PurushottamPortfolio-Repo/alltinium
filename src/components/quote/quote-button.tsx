@@ -7,7 +7,7 @@ interface QuoteButtonProps {
   className?: string;
 }
 
-export function QuoteButton({ children = "Request Quote", className = "" }: QuoteButtonProps) {
+export function QuoteButton({ children = "Request Material", className = "" }: QuoteButtonProps) {
   return (
     <Link href="/quote" className={className}>
       {children}

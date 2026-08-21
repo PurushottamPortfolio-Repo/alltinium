@@ -12,7 +12,7 @@ export function LatestBlogs() {
           </span>
 
           <h2 className="font-heading mt-2 text-3xl font-bold tracking-tight">
-            Technical reading for procurement and QA.
+            Technical reading for procurement and QA
           </h2>
         </Reveal>
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3 mt-10">

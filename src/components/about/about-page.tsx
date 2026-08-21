@@ -28,7 +28,7 @@ export function AboutPage() {
     <>
       <PageHero
         image={assets.heroBg}
-        title="Engineering-led. Aerospace-grade."
+        title="Engineering-led Aerospace-grade"
         description="Materials built to the standard the mission demands. India's Aerospace, Defence and Advanced Manufacturing sectors are entering their most ambitious phase."
         buttonText="Request a Quote"
         buttonHref="/contact"
@@ -63,9 +63,9 @@ export function AboutPage() {
                 <Image
                   src={item.image}
                   alt={item.title}
-                  width={700}
-                  height={900}
-                  className="h-[420px] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  width={350}
+                  height={650}
+                  className="w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
               {/* Content */}
@@ -206,7 +206,9 @@ export function AboutPage() {
 
                   <h3 className="mt-3 text-4xl font-bold">{founder.name}</h3>
 
-                  <p className="mt-6 leading-8 text-muted-foreground">{founder.description}</p>
+                  <p className="mt-6 leading-8 text-muted-foreground text-justify">
+                    {founder.description}
+                  </p>
                 </div>
               </div>
               <div className="p-4">

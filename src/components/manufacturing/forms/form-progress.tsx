@@ -20,7 +20,7 @@ export function FormProgress({ step }: FormProgressProps) {
             Manufacturing RFQ
           </p>
           <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">
-            Tell us what you need built
+            Tell us what you need
           </h2>
         </div>
         <div className="w-full sm:w-56">
