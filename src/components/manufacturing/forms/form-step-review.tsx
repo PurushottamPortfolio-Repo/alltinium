@@ -90,18 +90,11 @@ export function FormStepReview({
           Send via WhatsApp
         </Button>
 
-        <Button type="button" variant="outline" onClick={handleCopy}>
+        {/* <Button type="button" variant="outline" onClick={handleCopy}>
           {copied ? <CheckCircle2 size={16} className="text-green-600" /> : <Copy size={16} />}
           {copied ? "Copied!" : "Copy RFQ text"}
-        </Button>
+        </Button> */}
       </div>
-
-      <p className="mt-5 text-xs text-muted-foreground">
-        Attach your drawing in the WhatsApp chat if it isn&apos;t already included — file uploads
-        don&apos;t travel over prefilled links. Your RFQ reaches{" "}
-        <span className="font-mono">+91 92890 80696</span> and{" "}
-        <span className="font-mono">{RFQ_NOTIFY_EMAIL}</span>.
-      </p>
     </div>
   );
 }

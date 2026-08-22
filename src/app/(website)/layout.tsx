@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import { ThemeProvider } from "next-themes";
-import "./globals.css";
+import "../globals.css";
+import Navbar from "@/components/common/navbar";
+import Footer from "@/components/common/footer";
 import { RouteProgress } from "@/components/common/route-progress";
 
 const inter = Inter({
@@ -35,7 +37,9 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-background text-foreground font-body">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <RouteProgress />
+          <Navbar />
           <main className="flex-1">{children}</main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

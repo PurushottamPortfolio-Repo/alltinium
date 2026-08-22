@@ -191,7 +191,7 @@ export function ContactForm() {
 
             <div className="grid gap-4 md:grid-cols-2">
               <label className="text-sm font-medium text-foreground">
-                Company
+                Company (optional)
                 <input
                   {...register("company")}
                   maxLength={MAX_LENGTHS.company}
@@ -204,7 +204,7 @@ export function ContactForm() {
               </label>
 
               <label className="text-sm font-medium text-foreground">
-                Phone
+                Phone (optional)
                 <input
                   {...register("phone")}
                   maxLength={MAX_LENGTHS.phone}

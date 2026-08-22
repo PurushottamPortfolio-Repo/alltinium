@@ -40,18 +40,17 @@ export function PageHero({
   const showQuote = pathname !== "/manufacturing";
 
   return (
-    <section className="relative isolate overflow-hidden h-[100vh]">
+    <section className="relative isolate overflow-hidden">
       {/* Background */}
 
       <div className="absolute inset-0">
         <Image
           src={image}
           alt={title}
-          // fill
+          fill
           priority
           quality={100}
           sizes="100vw"
-          height={800}
           className="object-cover object-center"
         />
       </div>

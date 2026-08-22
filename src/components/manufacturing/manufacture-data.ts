@@ -21,7 +21,7 @@ export const faqData: FAQItem[] = [
   {
     question: "Can you handle multi-process jobs. e.g. machining plus anodising plus assembly?",
     answer:
-      "Yes. That is precisely the use case: we sequence the routing across facilities, manage inter-process logistics and inspection, and deliver the finished part with a consolidated documentation package.",
+      "Yes. That is precisely the use case: we sequence the routing across facilities, manage inter-process logistics and inspection and deliver the finished part with a consolidated documentation package.",
   },
   {
     question: "Do you supply the raw material too?",
@@ -31,7 +31,7 @@ export const faqData: FAQItem[] = [
   {
     question: "What about IP and drawing confidentiality?",
     answer:
-      'We execute NDAs before receiving controlled drawings, and partner collaboration agreements carry confidentiality flow-down obligations. Tick "Request NDA" in the RFQ form and we send our mutual NDA first.',
+      'We execute NDAs before receiving controlled drawings and partner collaboration agreements carry confidentiality flow-down obligations. Tick "Request NDA" in the RFQ form and we send our mutual NDA first.',
   },
   {
     question: "What volumes do you take on?",
@@ -162,7 +162,7 @@ export const audienceItems: AudienceItem[] = [
   {
     title: "OEMs & Tier-1s",
     description:
-      "Primes and integrators looking for pre-qualified sub-vendors for components and sub-assemblies with consolidated QA, one commercial interface, and audit-ready traceability on every lot.",
+      "Primes and integrators looking for pre-qualified sub-vendors for components and sub-assemblies with consolidated QA, one commercial interface and audit-ready traceability on every lot.",
     tags: ["Sub-assemblies", "Vendor development", "Serial supply"],
     icon: Building2,
   },

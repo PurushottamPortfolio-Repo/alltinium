@@ -13,11 +13,10 @@ export function HeroSection() {
         <Image
           src={assets.heroBg}
           alt="Hero background"
-          // fill
+          fill
           priority
           quality={100}
           sizes="100vw"
-          height={800}
           className="object-cover object-center"
         />
       </div>

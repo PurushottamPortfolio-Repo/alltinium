@@ -11,7 +11,7 @@ export function QuoteStepRequirements({ register }: QuoteStepRequirementsProps) 
   return (
     <div className="grid gap-4 md:grid-cols-2">
       <label className="block md:col-span-2">
-        <span className="text-sm font-medium text-foreground">NDT requirements</span>
+        <span className="text-sm font-medium text-foreground">NDT requirements (optional)</span>
         <input
           {...register("ndtrequirements")}
           maxLength={MAX_LENGTHS.ndtrequirements}
@@ -21,7 +21,7 @@ export function QuoteStepRequirements({ register }: QuoteStepRequirementsProps) 
       </label>
 
       <label className="block md:col-span-2">
-        <span className="text-sm font-medium text-foreground">Heat Treatment</span>
+        <span className="text-sm font-medium text-foreground">Heat Treatment (optional)</span>
         <input
           {...register("heatTreatment")}
           maxLength={MAX_LENGTHS.heatTreatment}
@@ -31,7 +31,7 @@ export function QuoteStepRequirements({ register }: QuoteStepRequirementsProps) 
       </label>
 
       <label className="block md:col-span-2">
-        <span className="text-sm font-medium text-foreground">Packaging</span>
+        <span className="text-sm font-medium text-foreground">Packaging (optional)</span>
         <input
           {...register("packaging")}
           maxLength={MAX_LENGTHS.packaging}
@@ -41,7 +41,7 @@ export function QuoteStepRequirements({ register }: QuoteStepRequirementsProps) 
       </label>
 
       <label className="block md:col-span-2">
-        <span className="text-sm font-medium text-foreground">Special Requirements</span>
+        <span className="text-sm font-medium text-foreground">Special Requirements (optional)</span>
         <textarea
           {...register("specialRequirements")}
           maxLength={MAX_LENGTHS.specialRequirements}

@@ -23,7 +23,7 @@ export function ServiceCard({ service, index }: Props) {
       whileHover={{
         y: -10,
       }}
-      className="group relative overflow-hidden rounded-sm border bg-card transition-all duration-500 hover:border-primary/40 hover:shadow-2xl"
+      className="group relative overflow-hidden rounded-sm border bg-card transition-all duration-500 hover:border-primary/40 hover:shadow-2xl "
     >
       {/* Background Glow */}
       <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-primary/10 blur-3xl opacity-0 transition duration-500 group-hover:opacity-100" />
@@ -48,6 +48,7 @@ export function ServiceCard({ service, index }: Props) {
         <h3 className="mb--2 text-xl font-heading transition-colors duration-300 group-hover:text-primary">
           {service.title}
         </h3>
+        <p className="text-justify text-sm mt-1">{service.description}</p>
       </div>
     </motion.article>
   );

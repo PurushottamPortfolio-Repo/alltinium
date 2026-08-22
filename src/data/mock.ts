@@ -28,10 +28,13 @@ export const CtaSectionData = [
 ];
 
 export const TECH_STACK = [
+  "Integrated Material Hub",
+  "AS 9100 and NADCAP Certified Processing Partners",
+  "Low Lead Time",
+  "Full Traceability",
+  "NABL Certified Test Reports",
+  "Manufacturing Solutions",
   "MAKE-II · iDEX Aligned",
-  "DGR Registered",
-  "KIADB Aerospace Park · Bengaluru",
-  "AS9120 · Stage-1 Audit Q4 2026",
 ];
 
 export const NetworkSectionData = [

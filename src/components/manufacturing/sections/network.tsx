@@ -90,7 +90,7 @@ export default function NetworkSection() {
               <strong className="font-semibold text-card-foreground">
                 Certification-matched routing.
               </strong>{" "}
-              Need NADCAP heat treatment, an AS9100D machine shop, or NABL-witnessed test reports?
+              Need NADCAP heat treatment, an AS9100D machine shop or NABL-witnessed test reports?
               Specify it in the RFQ - facility selection is filtered against your certification
               requirement, not just capability. Partner identities are disclosed under NDA where
               programmes require it.

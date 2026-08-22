@@ -74,7 +74,7 @@ export function FormStepCompany({
         </label>
 
         <label className="block">
-          <span className="text-sm font-medium text-foreground">Designation</span>
+          <span className="text-sm font-medium text-foreground">Designation (optional)</span>
           <input
             {...register("designation")}
             maxLength={MAX_LENGTHS.designation}

@@ -9,7 +9,7 @@ interface ManufactureButtonProps {
 }
 
 export function ManufactureButton({
-  children = "Request Manufacturing",
+  children = "RFQ Manufacturing",
   className = "",
   targetId = "manufacturing-form",
 }: ManufactureButtonProps) {

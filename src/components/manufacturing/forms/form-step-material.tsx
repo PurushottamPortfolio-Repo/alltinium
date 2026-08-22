@@ -80,7 +80,9 @@ export function FormStepMaterial({
         </label>
 
         <label className="block">
-          <span className="text-sm font-medium text-foreground">Grade / specification</span>
+          <span className="text-sm font-medium text-foreground">
+            Grade / specification (optional)
+          </span>
           <input
             {...register("materialGrade")}
             maxLength={MAX_LENGTHS.materialGrade}
@@ -108,7 +110,9 @@ export function FormStepMaterial({
         </label>
 
         <label className="block">
-          <span className="text-sm font-medium text-foreground">Quantity (pcs / kg)</span>
+          <span className="text-sm font-medium text-foreground">
+            Quantity (pcs / kg) (optional)
+          </span>
           <input
             {...register("quantity")}
             maxLength={MAX_LENGTHS.quantity}
@@ -118,7 +122,7 @@ export function FormStepMaterial({
         </label>
 
         <label className="block">
-          <span className="text-sm font-medium text-foreground">Max part envelope</span>
+          <span className="text-sm font-medium text-foreground">Max part envelope (optional)</span>
           <input
             {...register("envelope")}
             maxLength={MAX_LENGTHS.envelope}
@@ -128,7 +132,7 @@ export function FormStepMaterial({
         </label>
 
         <label className="block">
-          <span className="text-sm font-medium text-foreground">Tolerance class</span>
+          <span className="text-sm font-medium text-foreground">Tolerance class (optional)</span>
           <select
             {...register("tolerance")}
             className="mt-2 w-full rounded-lg border border-border bg-background px-3 py-2 outline-none focus:border-primary"
@@ -158,7 +162,7 @@ export function FormStepMaterial({
 
         <div className="block md:col-span-2">
           <span className="text-sm font-medium text-foreground">
-            Drawing / schematic (PDF, STEP, DXF, image)
+            Drawing / schematic (PDF, STEP, DXF, image) (optional)
           </span>
 
           <input

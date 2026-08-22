@@ -8,4 +8,5 @@ export interface Service {
   message: string;
   icon: LucideIcon;
   image: StaticImageData;
+  href: string;
 }

@@ -86,7 +86,7 @@ export function QuoteStepMaterial({ register, errors, control, setValue }: Quote
       </label>
 
       <label className="block">
-        <span className="text-sm font-medium text-foreground">Specification</span>
+        <span className="text-sm font-medium text-foreground">Specification (optional)</span>
         <input
           {...register("specification")}
           maxLength={MAX_LENGTHS.specification}
@@ -118,7 +118,7 @@ export function QuoteStepMaterial({ register, errors, control, setValue }: Quote
       </label>
 
       <label className="block">
-        <span className="text-sm font-medium text-foreground">Temper / Condition</span>
+        <span className="text-sm font-medium text-foreground">Temper / Condition (optional)</span>
         <input
           {...register("temper")}
           maxLength={MAX_LENGTHS.temper}
@@ -139,7 +139,7 @@ export function QuoteStepMaterial({ register, errors, control, setValue }: Quote
       </label>
 
       <label className="block">
-        <span className="text-sm font-medium text-foreground">Length</span>
+        <span className="text-sm font-medium text-foreground">Length (optional)</span>
         <input
           {...register("length")}
           maxLength={MAX_LENGTHS.length}
@@ -148,7 +148,7 @@ export function QuoteStepMaterial({ register, errors, control, setValue }: Quote
       </label>
 
       <label className="block">
-        <span className="text-sm font-medium text-foreground">Width</span>
+        <span className="text-sm font-medium text-foreground">Width (optional)</span>
         <input
           {...register("width")}
           maxLength={MAX_LENGTHS.width}
@@ -157,7 +157,7 @@ export function QuoteStepMaterial({ register, errors, control, setValue }: Quote
       </label>
 
       <label className="block">
-        <span className="text-sm font-medium text-foreground">Thickness</span>
+        <span className="text-sm font-medium text-foreground">Thickness (optional)</span>
         <input
           {...register("thickness")}
           maxLength={MAX_LENGTHS.thickness}
@@ -166,7 +166,7 @@ export function QuoteStepMaterial({ register, errors, control, setValue }: Quote
       </label>
 
       <label className="block">
-        <span className="text-sm font-medium text-foreground">Diameter</span>
+        <span className="text-sm font-medium text-foreground">Diameter (optional)</span>
         <input
           {...register("diameter")}
           maxLength={MAX_LENGTHS.diameter}
@@ -186,7 +186,7 @@ export function QuoteStepMaterial({ register, errors, control, setValue }: Quote
       </label>
 
       <label className="block">
-        <span className="text-sm font-medium text-foreground">Required Tolerance</span>
+        <span className="text-sm font-medium text-foreground">Required Tolerance (optional)</span>
         <input
           {...register("tolerance")}
           maxLength={MAX_LENGTHS.tolerance}

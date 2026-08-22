@@ -39,7 +39,7 @@ export function FormStepCertification({ register, control, setValue }: FormStepC
 
       <div className="mt-5">
         <span className="text-sm font-medium text-foreground">
-          Required certifications / quality standards
+          Required certifications / quality standards (optional)
         </span>
 
         <div className="mt-3 flex flex-wrap gap-2">
@@ -68,7 +68,7 @@ export function FormStepCertification({ register, control, setValue }: FormStepC
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         <label className="block">
           <span className="mb-2 block text-sm font-medium text-foreground">
-            Target delivery date
+            Target delivery date (optional)
           </span>
 
           <Controller
@@ -111,7 +111,7 @@ export function FormStepCertification({ register, control, setValue }: FormStepC
 
         <label className="block">
           <span className="text-sm font-medium text-foreground">
-            Delivery location (city / PIN)
+            Delivery location (city / PIN) (optional)
           </span>
           <input
             {...register("deliveryLocation")}

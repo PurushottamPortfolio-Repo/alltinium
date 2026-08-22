@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+// import { ArrowRight } from "lucide-react";
 
 import { services } from "@/data/services";
 import { ServiceCard } from "@/components/common/cards/service-card";
 
 export function ServicesSection() {
   return (
-    <section className="relative bg-servicebg">
+    <section id="services" className="relative bg-servicebg">
       <div className="mx-auto max-w-7xl px-4 py-6 md:px-6 md:py-8 lg:px-20 lg:py-10">
         {/* Heading */}
         <motion.div
@@ -51,9 +51,11 @@ export function ServicesSection() {
         </motion.div>
 
         {/* Cards */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 hover:cursor-pointer">
           {services.map((service, index) => (
-            <ServiceCard key={service.id} service={service} index={index} />
+            <Link key={service.id} href={service.href}>
+              <ServiceCard key={service.id} service={service} index={index} />
+            </Link>
           ))}
         </div>
       </div>

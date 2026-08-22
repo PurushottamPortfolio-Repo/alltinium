@@ -109,7 +109,7 @@ export function QuoteStepLogistics({ register, errors, control }: QuoteStepLogis
       </label>
 
       <label className="block md:col-span-2">
-        <span className="text-sm font-medium text-foreground">Shipping Preference</span>
+        <span className="text-sm font-medium text-foreground">Shipping Preference (optional)</span>
         <input
           {...register("shippingPreference")}
           maxLength={MAX_LENGTHS.shippingPreference}
