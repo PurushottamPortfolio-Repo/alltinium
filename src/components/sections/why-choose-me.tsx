@@ -13,17 +13,20 @@ const REASONS = [
   {
     icon: ShieldCheck,
     title: "Mill-Direct",
-    detail: "Authorised distribution partnerships with leading mills.",
+    detail:
+      "Multi-mill sourcing relationships across the UK, EU and Asia; no single source dependency, no undisclosed intermediaries",
   },
   {
     icon: MessageSquare,
-    title: "100% MTC",
-    detail: "Full traceability - MTC chain, sample retention, NADCAP-aligned.",
+    title: "Traceability by default",
+    detail:
+      "EN 10204 3.1/3.2 certification, unbroken MTC chain, heat-number mapping and sample retention on every order",
   },
   {
     icon: Layers,
-    title: "Made-in-India",
-    detail: "Aligned with MAKE-II, iDEX and offset obligations.",
+    title: "Aligned with Make-in-India",
+    detail:
+      "Structured to support Make-II, iDEX and offset obligations, with indigenous content documented from day one",
   },
 ];
 
@@ -63,16 +66,18 @@ export function WhyChooseMe() {
           className="mx-auto text-center"
         >
           <span className="font-heading inline-flex rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
-            Why Choose Us
+            Why Alltinium
           </span>
 
           <h2 className="font-heading mt-6 text-3xl font-bold tracking-tight">
-            Engineering quality into every project
+            Built by people who have signed off on paperwork
           </h2>
 
-          <p className="font-body mt-5 text-md leading-6 text-muted-foreground mx-auto max-w-2xl">
-            From strategic guidance to precision manufacturing, we deliver tailored solutions for
-            your business. Contact our specialists to begin.
+          <p className="font-body mt-5 text-md leading-6 text-muted-foreground mx-auto max-w-4xl">
+            We are a materials supplier run by Aerospace and Defence engineers, not commodity
+            traders. Every consignment is built to answer the questions your QA team will ask. From
+            strategic guidance to precision manufacturing, we deliver tailored solutions for your
+            business. Contact our specialists to begin.
           </p>
         </motion.div>
 

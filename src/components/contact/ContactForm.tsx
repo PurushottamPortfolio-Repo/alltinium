@@ -137,7 +137,7 @@ export function ContactForm() {
                   {...register("name")}
                   maxLength={MAX_LENGTHS.name}
                   className="mt-2 w-full rounded-xl border border-border bg-background px-3 py-2 outline-none ring-0 focus:border-primary focus:ring-2 focus:ring-primary/20"
-                  placeholder="Alex Morgan"
+                  placeholder="Preetham Shetty"
                 />
                 {errors.name ? (
                   <p className="mt-1 text-sm text-destructive">{errors.name.message}</p>
@@ -211,7 +211,7 @@ export function ContactForm() {
                   inputMode="tel"
                   autoComplete="tel"
                   className="mt-2 w-full rounded-xl border border-border bg-background px-3 py-2 outline-none ring-0 focus:border-primary focus:ring-2 focus:ring-primary/20"
-                  placeholder="+1 555 000 0000"
+                  placeholder="Include country-code"
                 />
                 {errors.phone ? (
                   <p className="mt-1 text-sm text-destructive">{errors.phone.message}</p>

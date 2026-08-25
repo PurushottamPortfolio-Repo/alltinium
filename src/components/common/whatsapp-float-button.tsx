@@ -20,11 +20,11 @@ export function WhatsAppFloatButton() {
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Ask Shetty on WhatsApp"
+      aria-label="Ask al on WhatsApp"
       className="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-[#25D366] py-3 pl-3 pr-4 text-white shadow-lg shadow-black/20 transition-transform duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2"
     >
       <WhatsAppIcon />
-      <span className="whitespace-nowrap text-sm font-semibold">Ask Shetty</span>
+      <span className="whitespace-nowrap text-sm font-semibold">Ask ALLEN</span>
     </a>
   );
 }
