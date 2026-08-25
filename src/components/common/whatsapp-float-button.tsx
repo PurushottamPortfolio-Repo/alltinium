@@ -2,7 +2,7 @@
 
 import { RFQ_WHATSAPP_NUMBER } from "@/components/manufacturing/forms/form-data";
 
-const ENQUIRY_MESSAGE = "Hi Shetty, I have a quick enquiry about Alltinium Aerometrix.";
+const ENQUIRY_MESSAGE = "Hi ALLEN, I have a quick enquiry about Alltinium Services.";
 
 function WhatsAppIcon() {
   return (
