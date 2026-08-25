@@ -35,7 +35,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-background text-foreground font-body">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <RouteProgress />
-          <main className="flex-1">{children}</main>
+          {children}
         </ThemeProvider>
       </body>
     </html>

@@ -23,9 +23,12 @@ import { QuoteStepCompany } from "./quote-step-company";
 import { QuoteStepLogistics } from "./quote-step-logistics";
 import { QuoteStepMaterial } from "./quote-step-material";
 import { QuoteStepRequirements } from "./quote-step-requirements";
+import { QuoteStepReview } from "./quote-step-review";
+import { generateReferenceNumber } from "./summary";
 
 export function QuoteForm() {
   const [step, setStep] = useState(0);
+  const [referenceNumber, setReferenceNumber] = useState(() => generateReferenceNumber());
   const [resultDialog, setResultDialog] = useState<{
     open: boolean;
     status: "success" | "error";
@@ -65,6 +68,7 @@ export function QuoteForm() {
     defaultValues,
   });
 
+  const values = useWatch({ control });
   const emailValue = useWatch({ control, name: "email" });
   const emailReady = Boolean(emailValue && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue));
 
@@ -81,6 +85,7 @@ export function QuoteForm() {
     setOtp("");
     setSuccess("");
     setVerifyModalOpen(false);
+    setReferenceNumber(generateReferenceNumber());
     resetVerification();
   };
 
@@ -90,13 +95,10 @@ export function QuoteForm() {
 
     if (step < steps.length - 1) {
       setStep((current) => current + 1);
-      return;
     }
-
-    await handleSubmit(onSubmit)();
   };
 
-  async function onSubmit(values: RFQFormValues) {
+  async function onSubmit(formValues: RFQFormValues) {
     if (!isEmailVerified) {
       setResultDialog({
         open: true,
@@ -110,7 +112,7 @@ export function QuoteForm() {
       const response = await fetch("/api/rfq", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...formValues, referenceNumber }),
       });
 
       const data = (await response.json()) as { error?: string; success?: boolean };
@@ -179,6 +181,15 @@ export function QuoteForm() {
                 }}
               />
             )}
+            {step === 4 && (
+              <QuoteStepReview
+                values={values as RFQFormValues}
+                referenceNumber={referenceNumber}
+                isEmailVerified={isEmailVerified}
+                submitting={isSubmitting}
+                onSendEmail={() => handleSubmit(onSubmit)()}
+              />
+            )}
           </motion.div>
         </AnimatePresence>
       </div>
@@ -191,10 +202,13 @@ export function QuoteForm() {
         >
           Back
         </Button>
-        <Button onClick={() => void validateAndAdvance()} disabled={isSubmitting}>
-          {step === steps.length - 1 ? "Submit RFQ" : "Next"}
-          <ArrowRight size={16} />
-        </Button>
+
+        {step < steps.length - 1 && (
+          <Button onClick={() => void validateAndAdvance()}>
+            Next
+            <ArrowRight size={16} />
+          </Button>
+        )}
       </div>
 
       <OTPModal

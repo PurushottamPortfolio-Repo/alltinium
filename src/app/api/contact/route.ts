@@ -2,13 +2,46 @@ import { NextResponse } from "next/server";
 import { contactFormSchema } from "@/lib/forms";
 import { getVerificationSession } from "@/lib/auth/cookies";
 import { sendEmail } from "@/lib/email/mailer";
+import { escapeHtml } from "@/lib/security/escape-html";
+import { isTrustedOrigin } from "@/lib/security/origin";
+import { checkRateLimit, getClientIp, rateLimitResponse } from "@/lib/security/rate-limit";
+import { PayloadTooLargeError, readJsonWithLimit } from "@/lib/security/read-json";
 
 const TO_EMAIL = process.env.CONTACT_EMAIL;
 const FROM_EMAIL = process.env.SMTP_FROM;
 
+const MAX_BODY_BYTES = 20 * 1024;
+const IP_RATE_LIMIT = 10;
+const IP_RATE_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
+
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    if (!isTrustedOrigin(request)) {
+      return NextResponse.json({ error: "Request rejected." }, { status: 403 });
+    }
+
+    const ipLimit = checkRateLimit(
+      `contact:${getClientIp(request)}`,
+      IP_RATE_LIMIT,
+      IP_RATE_WINDOW_MS,
+    );
+    if (!ipLimit.allowed) {
+      return rateLimitResponse(
+        ipLimit.retryAfterSeconds,
+        "Too many requests. Please try again later.",
+      );
+    }
+
+    let body: unknown;
+    try {
+      body = await readJsonWithLimit(request, MAX_BODY_BYTES);
+    } catch (error) {
+      if (error instanceof PayloadTooLargeError) {
+        return NextResponse.json({ error: "Request too large." }, { status: 413 });
+      }
+      throw error;
+    }
+
     const parsed = contactFormSchema.safeParse(body);
 
     if (!parsed.success) {
@@ -58,6 +91,12 @@ export async function POST(request: Request) {
       message,
     ].join("\n");
 
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
+    const safeCompany = company ? escapeHtml(company) : "";
+    const safePhone = phone ? escapeHtml(phone) : "";
+    const safeMessage = escapeHtml(message);
+
     const emailHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px;">
@@ -65,18 +104,18 @@ export async function POST(request: Request) {
         </h2>
 
         <div style="margin: 20px 0;">
-          <p><strong>From:</strong> ${name}</p>
+          <p><strong>From:</strong> ${safeName}</p>
           <p>
             <strong>Email:</strong>
-            <a href="mailto:${email}">${email}</a>
+            <a href="mailto:${safeEmail}">${safeEmail}</a>
           </p>
-          ${company ? `<p><strong>Company:</strong> ${company}</p>` : ""}
-          ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ""}
+          ${safeCompany ? `<p><strong>Company:</strong> ${safeCompany}</p>` : ""}
+          ${safePhone ? `<p><strong>Phone:</strong> ${safePhone}</p>` : ""}
         </div>
 
         <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin: 20px 0;">
           <h3 style="margin-top: 0;">Message:</h3>
-          <p style="white-space: pre-wrap; line-height: 1.6;">${message}</p>
+          <p style="white-space: pre-wrap; line-height: 1.6;">${safeMessage}</p>
         </div>
 
         <p style="color: #999; font-size: 12px; margin-top: 20px;">
@@ -117,7 +156,7 @@ export async function POST(request: Request) {
                 <p style="margin: 0;"><strong>Your message:</strong></p>
 
                 <p style="white-space: pre-wrap; line-height: 1.6; margin: 10px 0 0 0;">
-                  ${message}
+                  ${safeMessage}
                 </p>
               </div>
 

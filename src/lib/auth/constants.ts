@@ -8,6 +8,7 @@ export const SESSION_EXPIRY_MINUTES = 30;
 export const OTP_MAX_REQUESTS_PER_HOUR = 5;
 export const OTP_MAX_RESENDS = 3;
 export const OTP_RESEND_COOLDOWN_SECONDS = 60; // 1 minute
+export const OTP_MAX_ATTEMPTS = 5;
 
 // Cookie Configuration
 export const VERIFICATION_COOKIE_NAME = "verification_session";

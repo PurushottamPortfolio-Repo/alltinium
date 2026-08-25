@@ -230,8 +230,8 @@ export const MATERIALS: MaterialCategory[] = [
         ],
       },
       {
-        id: "Austenetic",
-        title: "Austenetic / Martensitic",
+        id: "Austenitic",
+        title: "Austenitic / Martensitic",
 
         grades: ["316L", "321", "410", "440C"],
 
@@ -331,7 +331,7 @@ export const MATERIALS: MaterialCategory[] = [
         id: "rs",
         title: "Refractory / Strategic",
 
-        grades: ["Niobiun/FeNb", "Cobalt", "Hafnium"],
+        grades: ["Niobium/FeNb", "Cobalt", "Hafnium"],
 
         forms: [
           { id: "bar", name: "Bar" },

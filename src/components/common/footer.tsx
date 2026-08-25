@@ -29,8 +29,8 @@ export function Footer() {
             </Link>
 
             <p className="max-w-lg leading-7 text-[15px] text-[var(--ink-muted)]">
-              Aerospace &ndash; grade metals, precision sourcing, and engineering solutions built
-              around complete material traceability, quality, and long &ndash; term manufacturing
+              Aerospace grade metals, precision sourcing, and engineering solutions built around
+              complete material traceability, quality, and long &ndash; term manufacturing
               partnerships.
             </p>
 

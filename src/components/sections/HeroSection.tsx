@@ -5,6 +5,7 @@ import QuoteButton from "@/components/quote/quote-button";
 import { motion } from "framer-motion";
 import { assets } from "@/assets";
 import Link from "next/link";
+import ManufactureButton from "../manufacturing/manufacture-button";
 
 export function HeroSection() {
   return (
@@ -46,7 +47,7 @@ export function HeroSection() {
               scale: 1.03,
             }}
           >
-            <QuoteButton className="inline-flex items-center rounded-sm px-5 py-3 text-sm font-semibold text-primary ring bg-background transition hover:cursor-pointer" />
+            <QuoteButton className="group inline-flex items-center gap-2 rounded-sm px-7 py-3 font-body font-semibold text-primary bg-background ring transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:cursor-pointer" />
           </motion.div>
           <motion.div
             whileHover={{
@@ -54,12 +55,7 @@ export function HeroSection() {
               scale: 1.03,
             }}
           >
-            <a
-              href="/services"
-              className="inline-flex items-center rounded-sm border border-border ring-1 bg-background px-5 py-3 text-sm font-semibold text-foreground transition"
-            >
-              Explore Services
-            </a>
+            <ManufactureButton className="group inline-flex items-center gap-2 rounded-sm px-7 py-3 font-body font-semibold text-primary bg-background ring transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:cursor-pointer" />
           </motion.div>
         </motion.div>
         <motion.div

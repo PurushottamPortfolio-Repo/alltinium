@@ -1,10 +1,11 @@
+import { randomInt } from "node:crypto";
 import { OTP_LENGTH, OTP_EXPIRY_SECONDS } from "./constants";
 
 /**
- * Generate a random 6-digit OTP
+ * Generate a cryptographically secure random 6-digit OTP.
  */
 export function generateOTP(): { otp: string; expiresAt: Date } {
-  const otp = Math.floor(Math.random() * 1000000)
+  const otp = randomInt(0, 10 ** OTP_LENGTH)
     .toString()
     .padStart(OTP_LENGTH, "0");
 

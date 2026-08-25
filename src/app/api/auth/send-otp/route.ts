@@ -8,10 +8,49 @@ import {
   OTP_MAX_RESENDS,
   OTP_RESEND_COOLDOWN_SECONDS,
 } from "@/lib/auth/constants";
+import { isTrustedOrigin } from "@/lib/security/origin";
+import { checkRateLimit, getClientIp, rateLimitResponse } from "@/lib/security/rate-limit";
+import { PayloadTooLargeError, readJsonWithLimit } from "@/lib/security/read-json";
+
+const MAX_BODY_BYTES = 2 * 1024; // small JSON payload — just an email address
+const IP_RATE_LIMIT = 10;
+const IP_RATE_WINDOW_MS = 60 * 60 * 1000; // 1 hour
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    if (!isTrustedOrigin(request)) {
+      return NextResponse.json({ success: false, message: "Request rejected." }, { status: 403 });
+    }
+
+    // Per-email limits below stop one target inbox being flooded, but say
+    // nothing about an attacker spraying OTPs at many different addresses
+    // (an email-bombing / SMTP-reputation abuse vector). This per-IP limit
+    // closes that gap.
+    const ipLimit = checkRateLimit(
+      `send-otp:${getClientIp(request)}`,
+      IP_RATE_LIMIT,
+      IP_RATE_WINDOW_MS,
+    );
+    if (!ipLimit.allowed) {
+      return rateLimitResponse(
+        ipLimit.retryAfterSeconds,
+        "Too many verification requests from this connection. Please try again later.",
+      );
+    }
+
+    let body: { email?: string };
+    try {
+      body = await readJsonWithLimit(request, MAX_BODY_BYTES);
+    } catch (error) {
+      if (error instanceof PayloadTooLargeError) {
+        return NextResponse.json(
+          { success: false, message: "Request too large." },
+          { status: 413 },
+        );
+      }
+      throw error;
+    }
+
     const email = body.email?.trim().toLowerCase();
 
     // Validate email
@@ -102,6 +141,7 @@ export async function POST(request: Request) {
         otpHash,
         expiresAt,
         verified: false,
+        attempts: 0,
         resendCount,
         requestCount,
         createdAt,

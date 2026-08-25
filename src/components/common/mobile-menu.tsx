@@ -4,7 +4,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
 import { X } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import { assets } from "@/assets";
 import { NAV_LINKS } from "@/constants/navigation";
@@ -19,6 +21,19 @@ type MobileMenuProps = {
 
 export default function MobileMenu({ open, onClose }: MobileMenuProps) {
   const pathname = usePathname();
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setMounted(true);
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  const logoSrc =
+    mounted && resolvedTheme === "dark" ? assets.logo1.darkLogo : assets.logo1.lightLogo;
 
   return (
     <AnimatePresence>
@@ -50,19 +65,13 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
             <div className="flex items-center justify-between border-b border-border px-6 py-5">
               <Link href="/" onClick={onClose} className="flex items-center gap-3">
                 <Image
-                  src={assets.logo}
-                  alt="Alltinium Logo"
-                  width={42}
-                  height={42}
-                  className="h-10 w-10 object-contain"
+                  src={logoSrc}
+                  alt="Alltinium Aerometrix"
+                  width={170}
+                  height={50}
+                  className="h-9 w-auto object-contain"
                   priority
                 />
-
-                <div>
-                  <h2 className="font-heading text-lg font-bold text-foreground">Alltinium</h2>
-
-                  <p className="font-body text-xs text-muted-foreground">Aerometrix</p>
-                </div>
               </Link>
 
               <button

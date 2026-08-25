@@ -33,6 +33,9 @@ export const rfqFormSchema = z
     contactName: z.string().min(1, "Contact name is required"),
     email: z.string().email("Invalid email address"),
     phone: z.string().min(1, "Phone number is required"),
+
+    // Review (cosmetic, generated client-side)
+    referenceNumber: z.string().max(40).optional().or(z.literal("")),
   })
   .superRefine((data, ctx) => {
     const material = MATERIALS.find((m) => m.id === data.materialFamily);
@@ -101,6 +104,7 @@ export const defaultValues: RFQFormValues = {
   contactName: "",
   email: "",
   phone: "",
+  referenceNumber: "",
 };
 
 export const MAX_LENGTHS = {
@@ -126,6 +130,7 @@ export const MAX_LENGTHS = {
   contactName: 100,
   email: 100,
   phone: 20,
+  referenceNumber: 40,
 } as const;
 
 export const steps = [
@@ -145,6 +150,10 @@ export const steps = [
     title: "Company",
     description: "Your contact information",
   },
+  {
+    title: "Review",
+    description: "Confirm & send",
+  },
 ] as const;
 
 // Fields validated before moving on from each step (index-aligned with `steps`)
@@ -153,6 +162,7 @@ export const fieldsByStep: Array<Array<keyof RFQFormValues>> = [
   ["ndtrequirements", "heatTreatment"],
   ["deliveryDate", "deliveryLocation"],
   ["companyName", "contactName", "email", "phone"],
+  [],
 ];
 
 export const materialFamilies = [

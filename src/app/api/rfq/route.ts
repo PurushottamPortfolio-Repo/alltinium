@@ -1,15 +1,45 @@
 import { NextResponse } from "next/server";
+import { buildQuoteSummaryText } from "@/components/quote/summary";
 import { rfqFormSchema } from "@/lib/forms/quote-schema";
 import { getVerificationSession } from "@/lib/auth/cookies";
 import { sendEmail } from "@/lib/email/mailer";
+import { escapeHtml } from "@/lib/security/escape-html";
+import { isTrustedOrigin } from "@/lib/security/origin";
+import { checkRateLimit, getClientIp, rateLimitResponse } from "@/lib/security/rate-limit";
+import { PayloadTooLargeError, readJsonWithLimit } from "@/lib/security/read-json";
 
 const TO_EMAIL = process.env.CONTACT_NOTIFY_TO || process.env.CONTACT_EMAIL;
 
 const FROM_EMAIL = process.env.SMTP_FROM;
 
+const MAX_BODY_BYTES = 50 * 1024; // form fields only, no attachment
+const IP_RATE_LIMIT = 10;
+const IP_RATE_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
+
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    if (!isTrustedOrigin(request)) {
+      return NextResponse.json({ error: "Request rejected." }, { status: 403 });
+    }
+
+    const ipLimit = checkRateLimit(`rfq:${getClientIp(request)}`, IP_RATE_LIMIT, IP_RATE_WINDOW_MS);
+    if (!ipLimit.allowed) {
+      return rateLimitResponse(
+        ipLimit.retryAfterSeconds,
+        "Too many requests. Please try again later.",
+      );
+    }
+
+    let body: unknown;
+    try {
+      body = await readJsonWithLimit(request, MAX_BODY_BYTES);
+    } catch (error) {
+      if (error instanceof PayloadTooLargeError) {
+        return NextResponse.json({ error: "Request too large." }, { status: 413 });
+      }
+      throw error;
+    }
+
     const parsed = rfqFormSchema.safeParse(body);
 
     if (!parsed.success) {
@@ -22,31 +52,8 @@ export async function POST(request: Request) {
       );
     }
 
-    const {
-      materialFamily,
-      grade,
-      specification,
-      form,
-      temper,
-      units,
-      length,
-      width,
-      thickness,
-      diameter,
-      quantity,
-      tolerance,
-      ndtrequirements,
-      heatTreatment,
-      packaging,
-      specialRequirements,
-      deliveryDate,
-      deliveryLocation,
-      shippingPreference,
-      companyName,
-      contactName,
-      email,
-      phone,
-    } = parsed.data;
+    const values = parsed.data;
+    const { companyName, contactName, email, phone, referenceNumber } = values;
 
     // Verify email via cookie-based session
     const session = await getVerificationSession();
@@ -72,59 +79,36 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Email service is not configured" }, { status: 500 });
     }
 
-    const dimensions = [
-      length ? `Length: ${length} ${units}` : null,
-      width ? `Width: ${width} ${units}` : null,
-      thickness ? `Thickness: ${thickness} ${units}` : null,
-      diameter ? `Diameter: ${diameter} ${units}` : null,
-    ]
-      .filter(Boolean)
-      .join(", ");
+    const summaryText = buildQuoteSummaryText(values, referenceNumber);
 
-    const emailText = [
-      `Company: ${companyName}`,
-      `Contact: ${contactName}`,
-      `Email: ${email}`,
-      ...(phone ? [`Phone: ${phone}`] : []),
-      "",
-      `Material: ${materialFamily} (${grade})`,
-      ...(specification ? [`Specification: ${specification}`] : []),
-      `Form: ${form}`,
-      ...(temper ? [`Temper: ${temper}`] : []),
-      ...(dimensions ? [`Dimensions: ${dimensions}`] : []),
-      `Quantity: ${quantity}`,
-      ...(tolerance ? [`Tolerance: ${tolerance}`] : []),
-      ...(ndtrequirements ? [`NDT requirements: ${ndtrequirements}`] : []),
-      ...(heatTreatment ? [`Heat treatment: ${heatTreatment}`] : []),
-      ...(packaging ? [`Packaging: ${packaging}`] : []),
-      ...(specialRequirements ? [`Special requirements: ${specialRequirements}`] : []),
-      "",
-      `Delivery date: ${deliveryDate}`,
-      `Delivery location: ${deliveryLocation}`,
-      ...(shippingPreference ? [`Shipping preference: ${shippingPreference}`] : []),
-    ].join("\n");
+    const safeCompanyName = escapeHtml(companyName);
+    const safeContactName = escapeHtml(contactName);
+    const safeEmail = escapeHtml(email);
+    const safePhone = phone ? escapeHtml(phone) : "";
+    const safeReferenceNumber = referenceNumber ? escapeHtml(referenceNumber) : "";
+    const safeSummaryText = escapeHtml(summaryText);
 
     const emailHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px;">
-          New RFQ Request
+          New RFQ Request${safeReferenceNumber ? ` — ${safeReferenceNumber}` : ""}
         </h2>
 
         <div style="margin: 20px 0;">
-          <p><strong>Company:</strong> ${companyName}</p>
-          <p><strong>Contact:</strong> ${contactName}</p>
+          <p><strong>Company:</strong> ${safeCompanyName}</p>
+          <p><strong>Contact:</strong> ${safeContactName}</p>
           <p>
             <strong>Email:</strong>
-            <a href="mailto:${email}">${email}</a>
+            <a href="mailto:${safeEmail}">${safeEmail}</a>
           </p>
-          ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ""}
+          ${safePhone ? `<p><strong>Phone:</strong> ${safePhone}</p>` : ""}
         </div>
 
         <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin: 20px 0;">
           <h3 style="margin-top: 0;">Material Details</h3>
 
           <p style="white-space: pre-wrap; line-height: 1.6;">
-            ${emailText}
+            ${safeSummaryText}
           </p>
         </div>
       </div>
@@ -136,6 +120,7 @@ export async function POST(request: Request) {
         to: TO_EMAIL,
         subject: `New RFQ from ${companyName}`,
         html: emailHtml,
+        text: summaryText,
         replyTo: email,
       });
 
@@ -144,6 +129,31 @@ export async function POST(request: Request) {
         fromEmail: email,
         toEmail: TO_EMAIL,
       });
+
+      try {
+        await sendEmail({
+          to: email,
+          subject: `We received your RFQ${referenceNumber ? ` — ${referenceNumber}` : ""}`,
+          html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+              <h2 style="color: #333;">Thank you for your request</h2>
+              <p style="color: #666;">
+                We've received your material quote request and our team will review it and send
+                you a detailed quote within 48 business hours.
+              </p>
+              <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                <p style="white-space: pre-wrap; line-height: 1.6; margin: 0;">${safeSummaryText}</p>
+              </div>
+              <p style="color: #999; font-size: 12px; margin-top: 20px;">
+                This is an automated confirmation email.
+              </p>
+            </div>
+          `,
+        });
+      } catch (confirmationError) {
+        console.warn("Failed to send RFQ confirmation email:", confirmationError);
+        // Do not fail the request if the confirmation email fails.
+      }
 
       return NextResponse.json(
         {

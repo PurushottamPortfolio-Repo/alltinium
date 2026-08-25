@@ -59,11 +59,6 @@ export function IndustriesSection() {
             <h2 className="mt-3 text-4xl font-bold tracking-tight">
               Get the part - through our certified network
             </h2>
-
-            {/* <p className="mt-5 text-muted-foreground">
-            Pre-qualified AS9100/9120, EN9120 and NADCAP partners. You raise one PO; we consolidate
-            QA, MTC and part traceability end-to-end.
-          </p> */}
           </div>
         </motion.div>
 

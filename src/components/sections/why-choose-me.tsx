@@ -70,9 +70,9 @@ export function WhyChooseMe() {
             Engineering quality into every project
           </h2>
 
-          <p className="font-body mt-5 text-md leading-6 text-muted-foreground">
-            We don&apos;t just build beautiful interfaces, we create scalable, performant, and
-            maintainable digital products designed for business growth
+          <p className="font-body mt-5 text-md leading-6 text-muted-foreground mx-auto max-w-2xl">
+            From strategic guidance to precision manufacturing, we deliver tailored solutions for
+            your business. Contact our specialists to begin.
           </p>
         </motion.div>
 

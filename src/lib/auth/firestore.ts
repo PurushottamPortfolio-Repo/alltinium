@@ -7,6 +7,7 @@ export interface OTPDocument {
   otpHash: string;
   expiresAt: Date | string;
   verified: boolean;
+  attempts: number;
   resendCount: number;
   requestCount: number;
   createdAt: Date | string;

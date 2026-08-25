@@ -97,6 +97,12 @@ export const IndustriesSectionData = [
     title: "Oil & Gas",
     href: "",
   },
+  {
+    id: 5,
+    icon: "Building2",
+    title: "Energy",
+    href: "",
+  },
 ];
 
 export const TrustSectionData = [

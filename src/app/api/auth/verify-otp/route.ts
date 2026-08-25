@@ -1,13 +1,50 @@
 import { NextResponse } from "next/server";
 import { compareHash } from "@/lib/auth/hash";
-import { getOTPDocument, deleteOTPDocument } from "@/lib/auth/firestore";
+import { getOTPDocument, deleteOTPDocument, saveOTPDocument } from "@/lib/auth/firestore";
 import { setVerificationCookie } from "@/lib/auth/cookies";
+import { OTP_MAX_ATTEMPTS } from "@/lib/auth/constants";
+import { isTrustedOrigin } from "@/lib/security/origin";
+import { checkRateLimit, getClientIp, rateLimitResponse } from "@/lib/security/rate-limit";
+import { PayloadTooLargeError, readJsonWithLimit } from "@/lib/security/read-json";
 
 const OTP_EXPIRY_MINUTES = 5;
+const MAX_BODY_BYTES = 2 * 1024;
+const IP_RATE_LIMIT = 20;
+const IP_RATE_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    if (!isTrustedOrigin(request)) {
+      return NextResponse.json({ success: false, message: "Request rejected." }, { status: 403 });
+    }
+
+    // Network-level throttle on top of the per-email attempt counter below —
+    // two independent layers so neither alone is a single point of failure
+    // against brute-forcing the 6-digit code.
+    const ipLimit = checkRateLimit(
+      `verify-otp:${getClientIp(request)}`,
+      IP_RATE_LIMIT,
+      IP_RATE_WINDOW_MS,
+    );
+    if (!ipLimit.allowed) {
+      return rateLimitResponse(
+        ipLimit.retryAfterSeconds,
+        "Too many verification attempts from this connection. Please try again later.",
+      );
+    }
+
+    let body: { email?: string; otp?: string };
+    try {
+      body = await readJsonWithLimit(request, MAX_BODY_BYTES);
+    } catch (error) {
+      if (error instanceof PayloadTooLargeError) {
+        return NextResponse.json(
+          { success: false, message: "Request too large." },
+          { status: 413 },
+        );
+      }
+      throw error;
+    }
 
     const email = body.email?.trim().toLowerCase();
     const otp = body.otp?.trim();
@@ -88,6 +125,25 @@ export async function POST(request: Request) {
       );
     }
 
+    // Check attempt lockout before spending another guess
+    const attemptsSoFar = document.attempts ?? 0;
+
+    if (attemptsSoFar >= OTP_MAX_ATTEMPTS) {
+      try {
+        await deleteOTPDocument(email);
+      } catch (error) {
+        console.error("Failed to delete OTP after max attempts:", error);
+      }
+
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Too many incorrect attempts. Please request a new verification code.",
+        },
+        { status: 429 },
+      );
+    }
+
     // Verify OTP
     let isValid = false;
     try {
@@ -104,10 +160,27 @@ export async function POST(request: Request) {
     }
 
     if (!isValid) {
+      const nextAttempts = attemptsSoFar + 1;
+
+      try {
+        if (nextAttempts >= OTP_MAX_ATTEMPTS) {
+          await deleteOTPDocument(email);
+        } else {
+          await saveOTPDocument(email, { ...document, attempts: nextAttempts, updatedAt: now });
+        }
+      } catch (error) {
+        console.error("Failed to record failed OTP attempt:", error);
+      }
+
+      const remaining = Math.max(OTP_MAX_ATTEMPTS - nextAttempts, 0);
+
       return NextResponse.json(
         {
           success: false,
-          message: "Incorrect verification code. Please check and try again.",
+          message:
+            remaining > 0
+              ? `Incorrect verification code. ${remaining} attempt${remaining === 1 ? "" : "s"} remaining.`
+              : "Too many incorrect attempts. Please request a new verification code.",
         },
         { status: 401 },
       );
