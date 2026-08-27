@@ -17,8 +17,9 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Alltinium | Professional Digital Studio",
-  description: "Modern portfolio and company website with polished branding and adaptable themes.",
+  title: "Alltinium | Aerospace-Grade Metals & Manufacturing",
+  description:
+    "Alltinium supplies aerospace-grade metals, precision sourcing, testing, and manufacturing solutions with complete material traceability.",
 };
 
 export default function RootLayout({

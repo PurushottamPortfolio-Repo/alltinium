@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import Image from "next/image";
-import { useTheme } from "next-themes";
 import { assets } from "@/assets";
 import { ThemeToggle } from "@/components/common/theme-toggle";
 import { NAV_LINKS } from "@/constants/navigation";
@@ -14,29 +13,17 @@ import MobileMenu from "@/components/common/mobile-menu";
 
 export default function Navbar() {
   const pathname = usePathname();
-  const { resolvedTheme } = useTheme();
 
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const targetId = "services";
 
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      setMounted(true);
-    }, 0);
-
-    return () => window.clearTimeout(timer);
-  }, []);
-
-  const logoSrc =
-    mounted && resolvedTheme === "dark" ? assets.logo1.darkLogo : assets.logo1.lightLogo;
   return (
     <>
       <header className="sticky top-0 z-50 border-b border-border/70 bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           <Link href="/" className="flex items-center gap-3">
             <Image
-              src={logoSrc}
+              src={assets.logo1.deflogo}
               alt="Alltinium Aerometrix"
               width={170}
               height={50}
