@@ -7,31 +7,38 @@ function labelFor(options: ReadonlyArray<LabeledOption>, value?: string) {
 }
 
 export function buildQuoteSummaryLines(values: RFQFormValues, referenceNumber?: string): string[] {
-  const dimensions = [
-    values.length ? `Length: ${values.length} ${values.units}` : null,
-    values.width ? `Width: ${values.width} ${values.units}` : null,
-    values.thickness ? `Thickness: ${values.thickness} ${values.units}` : null,
-    values.diameter ? `Diameter: ${values.diameter} ${values.units}` : null,
-  ]
-    .filter(Boolean)
-    .join(", ");
-
   const lines: string[] = [];
 
   if (referenceNumber) lines.push(`RFQ Reference: ${referenceNumber}`);
 
-  lines.push(`Material: ${labelFor(materialFamilies, values.materialFamily)} (${values.grade})`);
-  if (values.specification) lines.push(`Specification: ${values.specification}`);
-  lines.push(`Form: ${labelFor(formTypes, values.form)}`);
-  if (values.temper) lines.push(`Temper: ${values.temper}`);
-  if (dimensions) lines.push(`Dimensions: ${dimensions}`);
-  lines.push(`Quantity: ${values.quantity}`);
-  if (values.tolerance) lines.push(`Tolerance: ${values.tolerance}`);
+  (values.materials ?? []).forEach((material, index) => {
+    const dimensions = [
+      material.length ? `Length: ${material.length} ${material.units}` : null,
+      material.width ? `Width: ${material.width} ${material.units}` : null,
+      material.thickness ? `Thickness: ${material.thickness} ${material.units}` : null,
+      material.diameter ? `Diameter: ${material.diameter} ${material.units}` : null,
+    ]
+      .filter(Boolean)
+      .join(", ");
 
-  if (values.ndtrequirements) lines.push(`NDT requirements: ${values.ndtrequirements}`);
-  if (values.heatTreatment) lines.push(`Heat treatment: ${values.heatTreatment}`);
-  if (values.packaging) lines.push(`Packaging: ${values.packaging}`);
-  if (values.specialRequirements) lines.push(`Special requirements: ${values.specialRequirements}`);
+    lines.push(
+      "",
+      `Material ${index + 1}: ${labelFor(materialFamilies, material.materialFamily)} (${material.grade})`,
+    );
+    if (material.specification) lines.push(`  Specification: ${material.specification}`);
+    lines.push(`  Form: ${labelFor(formTypes, material.form)}`);
+    if (material.temper) lines.push(`  Temper: ${material.temper}`);
+    if (dimensions) lines.push(`  Dimensions: ${dimensions}`);
+    lines.push(`  Quantity: ${material.quantity}`);
+    if (material.tolerance) lines.push(`  Tolerance: ${material.tolerance}`);
+
+    if (material.surfaceFinish) lines.push(`  Surface finish: ${material.surfaceFinish}`);
+    if (material.ndtrequirements) lines.push(`  NDT requirements: ${material.ndtrequirements}`);
+    if (material.heatTreatment) lines.push(`  Heat treatment: ${material.heatTreatment}`);
+    if (material.packaging) lines.push(`  Packaging: ${material.packaging}`);
+    if (material.specialRequirements)
+      lines.push(`  Special requirements: ${material.specialRequirements}`);
+  });
 
   lines.push(
     "",

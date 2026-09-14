@@ -1,9 +1,9 @@
 import { z } from "zod";
 import { MATERIALS } from "@/components/material1/materials-data";
 
-export const rfqFormSchema = z
+export const materialLineSchema = z
   .object({
-    // Material Step
+    // Material identity
     materialFamily: z.string().min(1, "Material family is required"),
     grade: z.string().min(1, "Grade is required"),
     specification: z.string().optional(),
@@ -17,25 +17,12 @@ export const rfqFormSchema = z
     quantity: z.string().min(1, "Quantity is required"),
     tolerance: z.string().optional(),
 
-    // Requirements
+    // Per-material requirements (all optional)
+    surfaceFinish: z.string().optional(),
     ndtrequirements: z.string().optional(),
     heatTreatment: z.string().optional(),
     packaging: z.string().optional(),
     specialRequirements: z.string().optional(),
-
-    // Logistics
-    deliveryDate: z.string().min(1, "Delivery date is required"),
-    deliveryLocation: z.string().min(1, "Delivery location is required"),
-    shippingPreference: z.string().optional(),
-
-    // Company
-    companyName: z.string().min(1, "Company name is required"),
-    contactName: z.string().min(1, "Contact name is required"),
-    email: z.string().email("Invalid email address"),
-    phone: z.string().min(1, "Phone number is required"),
-
-    // Review (cosmetic, generated client-side)
-    referenceNumber: z.string().max(40).optional().or(z.literal("")),
   })
   .superRefine((data, ctx) => {
     const material = MATERIALS.find((m) => m.id === data.materialFamily);
@@ -43,10 +30,6 @@ export const rfqFormSchema = z
     if (!material) return;
 
     const validGrades = material.series.flatMap((series) => series.grades);
-
-    // const validForms = [
-    //   ...new Set(material.series.flatMap((series) => series.forms.map((form) => form.id))),
-    // ];
 
     const selectedSeries = material.series.find((series) => series.grades.includes(data.grade));
     if (!selectedSeries) {
@@ -78,9 +61,30 @@ export const rfqFormSchema = z
     }
   });
 
+export type MaterialLine = z.infer<typeof materialLineSchema>;
+
+export const rfqFormSchema = z.object({
+  // Material Step
+  materials: z.array(materialLineSchema).min(1, "Select at least one material family"),
+
+  // Logistics
+  deliveryDate: z.string().min(1, "Delivery date is required"),
+  deliveryLocation: z.string().min(1, "Delivery location is required"),
+  shippingPreference: z.string().optional(),
+
+  // Company
+  companyName: z.string().min(1, "Company name is required"),
+  contactName: z.string().min(1, "Contact name is required"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().min(1, "Phone number is required"),
+
+  // Review (cosmetic, generated client-side)
+  referenceNumber: z.string().max(40).optional().or(z.literal("")),
+});
+
 export type RFQFormValues = z.infer<typeof rfqFormSchema>;
 
-export const defaultValues: RFQFormValues = {
+export const emptyMaterialLine: MaterialLine = {
   materialFamily: "",
   grade: "",
   specification: "",
@@ -93,10 +97,15 @@ export const defaultValues: RFQFormValues = {
   diameter: "",
   quantity: "",
   tolerance: "",
+  surfaceFinish: "",
   ndtrequirements: "",
   heatTreatment: "",
   packaging: "",
   specialRequirements: "",
+};
+
+export const defaultValues: RFQFormValues = {
+  materials: [],
   deliveryDate: "",
   deliveryLocation: "",
   shippingPreference: "",
@@ -107,7 +116,7 @@ export const defaultValues: RFQFormValues = {
   referenceNumber: "",
 };
 
-export const MAX_LENGTHS = {
+export const MATERIAL_LINE_MAX_LENGTHS = {
   materialFamily: 50,
   grade: 100,
   specification: 100,
@@ -119,10 +128,14 @@ export const MAX_LENGTHS = {
   diameter: 20,
   quantity: 100,
   tolerance: 50,
+  surfaceFinish: 200,
   ndtrequirements: 200,
   heatTreatment: 200,
   packaging: 200,
   specialRequirements: 500,
+} as const;
+
+export const MAX_LENGTHS = {
   deliveryDate: 20,
   deliveryLocation: 200,
   shippingPreference: 100,
@@ -136,7 +149,7 @@ export const MAX_LENGTHS = {
 export const steps = [
   {
     title: "Material",
-    description: "Specify material type and dimensions",
+    description: "Specify material types and dimensions",
   },
   {
     title: "Requirements",
@@ -158,8 +171,8 @@ export const steps = [
 
 // Fields validated before moving on from each step (index-aligned with `steps`)
 export const fieldsByStep: Array<Array<keyof RFQFormValues>> = [
-  ["materialFamily", "grade", "form", "quantity"],
-  ["ndtrequirements", "heatTreatment"],
+  ["materials"],
+  [],
   ["deliveryDate", "deliveryLocation"],
   ["companyName", "contactName", "email", "phone"],
   [],

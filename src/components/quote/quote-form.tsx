@@ -160,7 +160,9 @@ export function QuoteForm() {
                 setValue={setValue}
               />
             )}
-            {step === 1 && <QuoteStepRequirements register={register} errors={errors} />}
+            {step === 1 && (
+              <QuoteStepRequirements register={register} errors={errors} control={control} />
+            )}
             {step === 2 && (
               <QuoteStepLogistics register={register} errors={errors} control={control} />
             )}

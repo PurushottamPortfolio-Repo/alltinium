@@ -1,10 +1,12 @@
 "use client";
 
+import type { ReactNode } from "react";
+
 import { Loader2, Mail } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { RFQ_NOTIFY_EMAIL, RFQ_WHATSAPP_NUMBER } from "@/components/manufacturing/forms/form-data";
-import type { RFQFormValues } from "@/lib/forms/quote-schema";
+import { formTypes, materialFamilies, type RFQFormValues } from "@/lib/forms/quote-schema";
 
 import { buildQuoteSummaryText } from "./summary";
 
@@ -24,6 +26,30 @@ type QuoteStepReviewProps = {
   onSendEmail: () => void | Promise<void>;
 };
 
+function labelFor(options: ReadonlyArray<{ value: string; label: string }>, value?: string) {
+  return options.find((option) => option.value === value)?.label ?? value ?? "";
+}
+
+function ReviewRow({ label, value }: { label: string; value?: string }) {
+  if (!value) return null;
+
+  return (
+    <div className="flex justify-between gap-4 py-1 text-sm">
+      <span className="text-muted-foreground">{label}</span>
+      <span className="text-right font-medium text-foreground">{value}</span>
+    </div>
+  );
+}
+
+function ReviewSection({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <div className="rounded-xl border border-border bg-muted/20 p-4">
+      <h5 className="mb-2 text-sm font-semibold text-foreground">{title}</h5>
+      {children}
+    </div>
+  );
+}
+
 export function QuoteStepReview({
   values,
   referenceNumber,
@@ -33,6 +59,7 @@ export function QuoteStepReview({
 }: QuoteStepReviewProps) {
   const summaryText = buildQuoteSummaryText(values, referenceNumber);
   const actionsDisabled = !isEmailVerified || submitting;
+  const materials = values.materials ?? [];
 
   function handleWhatsapp() {
     const url = `https://wa.me/${RFQ_WHATSAPP_NUMBER}?text=${encodeURIComponent(summaryText)}`;
@@ -51,9 +78,73 @@ export function QuoteStepReview({
         {referenceNumber}
       </div>
 
-      <pre className="mt-4 max-h-72 overflow-auto whitespace-pre-wrap rounded-lg border border-border bg-muted/40 p-4 font-mono text-xs leading-relaxed text-foreground">
-        {summaryText}
-      </pre>
+      <div className="mt-4 space-y-4">
+        <div>
+          <h5 className="mb-2 text-sm font-semibold text-foreground">
+            Materials ({materials.length})
+          </h5>
+          <div className="space-y-3">
+            {materials.map((material, index) => {
+              const dimensions = [
+                material.length ? `${material.length} ${material.units}` : null,
+                material.width ? `${material.width} ${material.units}` : null,
+                material.thickness ? `${material.thickness} ${material.units}` : null,
+                material.diameter ? `${material.diameter} ${material.units}` : null,
+              ]
+                .filter(Boolean)
+                .join(" × ");
+
+              const hasRequirements = Boolean(
+                material.surfaceFinish ||
+                material.ndtrequirements ||
+                material.heatTreatment ||
+                material.packaging ||
+                material.specialRequirements,
+              );
+
+              return (
+                <ReviewSection
+                  key={`${material.materialFamily}-${index}`}
+                  title={`${index + 1}. ${labelFor(materialFamilies, material.materialFamily)} — ${material.grade}`}
+                >
+                  <ReviewRow label="Specification" value={material.specification} />
+                  <ReviewRow label="Form" value={labelFor(formTypes, material.form)} />
+                  <ReviewRow label="Temper / Condition" value={material.temper} />
+                  <ReviewRow label="Dimensions" value={dimensions} />
+                  <ReviewRow label="Quantity" value={material.quantity} />
+                  <ReviewRow label="Tolerance" value={material.tolerance} />
+
+                  {hasRequirements && (
+                    <div className="mt-2 border-t border-border pt-2">
+                      <ReviewRow label="Surface Finish" value={material.surfaceFinish} />
+                      <ReviewRow label="NDT requirements" value={material.ndtrequirements} />
+                      <ReviewRow label="Heat treatment" value={material.heatTreatment} />
+                      <ReviewRow label="Packaging" value={material.packaging} />
+                      <ReviewRow
+                        label="Special requirements"
+                        value={material.specialRequirements}
+                      />
+                    </div>
+                  )}
+                </ReviewSection>
+              );
+            })}
+          </div>
+        </div>
+
+        <ReviewSection title="Delivery & Logistics">
+          <ReviewRow label="Delivery date" value={values.deliveryDate} />
+          <ReviewRow label="Delivery location" value={values.deliveryLocation} />
+          <ReviewRow label="Shipping preference" value={values.shippingPreference} />
+        </ReviewSection>
+
+        <ReviewSection title="Company & Contact">
+          <ReviewRow label="Company" value={values.companyName} />
+          <ReviewRow label="Contact" value={values.contactName} />
+          <ReviewRow label="Email" value={values.email} />
+          <ReviewRow label="Phone" value={values.phone} />
+        </ReviewSection>
+      </div>
 
       {!isEmailVerified && (
         <p className="mt-4 text-sm text-amber-600">
